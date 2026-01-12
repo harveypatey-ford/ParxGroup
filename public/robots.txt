@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://parxgroup.co.uk/sitemap.xml
+
+# Disallow admin and auth pages
+User-agent: *
+Disallow: /admin/
+Disallow: /login
+Disallow: /dashboard
+Disallow: /kyc
+Disallow: /toba
+Disallow: /create-casefile
+Disallow: /create-pip-application
+Disallow: /create-pbsa-application

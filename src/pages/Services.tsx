@@ -167,12 +167,10 @@ function Services() {
               <AnimatedSection key={category.id} direction="up" delay={0.1 * index}>
                 <article className="bg-white rounded-2xl shadow-lg border border-neutral-200 overflow-hidden h-full flex flex-col">
                   <div className="p-8 flex-grow">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md flex-shrink-0">
-                        <category.icon className="h-7 w-7 text-white" aria-hidden="true" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-neutral-900">{category.title}</h3>
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md mb-6">
+                      <category.icon className="h-7 w-7 text-white" aria-hidden="true" />
                     </div>
+                    <h3 className="text-2xl font-bold text-neutral-900 mb-3">{category.title}</h3>
                     <p className="text-neutral-600 mb-6">{category.description}</p>
 
                     <ul className="space-y-3">
