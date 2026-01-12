@@ -1,0 +1,147 @@
+[build]
+command = "npx vite build"
+publish = "dist"
+
+[build.environment]
+NODE_VERSION = "20"
+SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_SUPABASE_URL"
+
+[[redirects]]
+from = "http://www.parxgroup.co.uk/*"
+to = "https://parxgroup.co.uk/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "https://www.parxgroup.co.uk/*"
+to = "https://parxgroup.co.uk/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "http://parxgroup.co.uk/*"
+to = "https://parxgroup.co.uk/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "/*/index.html"
+to = "/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "/*/"
+to = "/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+[[edge_functions]]
+function = "sitemap"
+path = "/sitemap.xml"
+
+[[edge_functions]]
+function = "robots"
+path = "/robots.txt"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/insights"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/insights/*"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/terms"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/privacy"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/services"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/portfolio-investor-protection"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/title-insurance"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/environmental-insurance"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/rights-to-light"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/development"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/acquisition-disposal"
+
+[[edge_functions]]
+function = "social-meta"
+path = "/contact"
+
+[[headers]]
+for = "/sitemap.xml"
+
+[headers.values]
+Content-Type = "application/xml"
+Cache-Control = "public, max-age=3600"
+
+[[headers]]
+for = "/robots.txt"
+
+[headers.values]
+Content-Type = "text/plain"
+Cache-Control = "public, max-age=3600"
+
+[[headers]]
+for = "/insights/*"
+
+[headers.values]
+Cache-Control = "public, max-age=0, must-revalidate"
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Content-Security-Policy = "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https:;"
+
+[[headers]]
+for = "/assets/*.css"
+
+[headers.values]
+Content-Type = "text/css; charset=utf-8"
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/assets/*.js"
+
+[headers.values]
+Content-Type = "application/javascript; charset=utf-8"
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Content-Security-Policy = "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https:;"
