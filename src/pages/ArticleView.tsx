@@ -557,7 +557,7 @@ const ArticleView = () => {
                         <div className="absolute bottom-0 left-0 -mb-4 -ml-4 h-32 w-32 rounded-full bg-white/5 blur-3xl"></div>
 
                         <div className="relative z-10">
-                          <h3 className="text-xl font-bold text-white mb-3 leading-tight">
+                          <h3 className="text-base font-bold text-white mb-3 leading-tight underline">
                             {(article as any).cta_type === 'custom' && (article as any).cta_title
                               ? (article as any).cta_title
                               : (article as any).cta_type === 'services'
