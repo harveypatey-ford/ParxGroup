@@ -734,7 +734,7 @@ function PortfolioInvestorProtection() {
                 className="w-full h-full"
                 controls
                 autoPlay
-                src="/pip_explainer_video_hb.mp4"
+                src="/portfolio_investment_portection.mp4"
               >
                 Your browser does not support the video tag.
               </video>
