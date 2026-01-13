@@ -35,8 +35,8 @@ const routes = [
     content: 'Insurance solutions for efficient property transaction execution, managing time constraints and legacy issues.'
   },
   {
-    path: '/portfolio-investor-protection',
-    title: 'Rental Income Protection Insurance | Portfolio Investor Protection',
+    path: '/portfolio-investment-protection',
+    title: 'Rental Income Protection Insurance | Portfolio Investment Protection',
     description: 'We structure insurance-led risk transfer solutions that protect income, strengthen funding terms and enhance long-term asset value.',
     h1: 'Rental Income Protection Insurance',
     content: 'Secure your property investment portfolio returns with comprehensive rental income insurance.'

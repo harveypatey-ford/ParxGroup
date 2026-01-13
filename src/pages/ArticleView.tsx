@@ -455,7 +455,7 @@ const ArticleView = () => {
                   </Link>
                 ) : (article as any).cta_type === 'pip' ? (
                   <Link
-                    to="/portfolio-investor-protection"
+                    to="/portfolio-investment-protection"
                     className="group inline-flex items-center justify-center space-x-2 bg-white text-primary-700 px-8 py-4 rounded-xl font-semibold hover:bg-primary-50 transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 whitespace-nowrap"
                   >
                     <span>Learn More</span>
@@ -607,7 +607,7 @@ const ArticleView = () => {
                             </Link>
                           ) : (article as any).cta_type === 'pip' ? (
                             <Link
-                              to="/portfolio-investor-protection"
+                              to="/portfolio-investment-protection"
                               className="group inline-flex items-center justify-center space-x-2 bg-white text-primary-700 px-6 py-3 rounded-xl font-semibold hover:bg-primary-50 transition-all duration-200 text-sm w-full shadow-lg hover:shadow-xl hover:scale-105 whitespace-nowrap"
                             >
                               <span>Learn More</span>

@@ -49,7 +49,7 @@ const servicePages: { [key: string]: { title: string; description: string } } = 
     title: 'Property Insurance Services | Real Estate Insurance Solutions',
     description: 'Comprehensive insurance solutions for property development, acquisition, disposal, and portfolio investment. Title insurance, environmental coverage, and rights to light protection.'
   },
-  '/portfolio-investor-protection': {
+  '/portfolio-investment-protection': {
     title: 'Portfolio Investment Protection Insurance | Rental Income Protection for Property Investors',
     description: 'Portfolio Investment Protection (PIP) insurance protects rental income for property investors and lenders. Cover against tenant defaults, voids and counterparty risks with A-rated covenant protection. Lower cost of capital and higher LTV ratios.'
   },

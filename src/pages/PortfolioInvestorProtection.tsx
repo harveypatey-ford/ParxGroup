@@ -90,7 +90,7 @@ function PortfolioInvestorProtection() {
         "@type": "ListItem",
         "position": 3,
         "name": "Portfolio Investment Protection",
-        "item": "https://parxgroup.co.uk/portfolio-investor-protection"
+        "item": "https://parxgroup.co.uk/portfolio-investment-protection"
       }
     ]
   };
@@ -196,7 +196,7 @@ function PortfolioInvestorProtection() {
         title="Portfolio Investment Protection Insurance | Rental Income Protection for Property Investors"
         description="We structure insurance-led risk transfer solutions that protect income, strengthen funding terms and enhance long-term asset value."
         keywords="portfolio investment protection, PIP insurance, rental income protection, rent protection, rent guarantee, property investment insurance, tenant default insurance, portfolio lending protection, real estate investment protection, rental income guarantee, property portfolio insurance, investor protection insurance, lease income insurance, rental cashflow protection, property lender insurance, A-rated covenant protection, LTV ratio insurance, social housing insurance, PBSA insurance, build to rent insurance, property funders insurance"
-        canonical="https://parxgroup.co.uk/portfolio-investor-protection"
+        canonical="https://parxgroup.co.uk/portfolio-investment-protection"
       />
       <StructuredData data={structuredData} />
       <StructuredData data={serviceSchema} />

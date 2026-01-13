@@ -194,7 +194,7 @@ function HomePage() {
             </AnimatedSection>
 
             <AnimatedSection direction="up" delay={0.3}>
-              <Link to="/portfolio-investor-protection" className="card p-4 sm:p-8 h-full flex flex-col text-center group cursor-pointer hover:shadow-xl hover:-translate-y-2 hover:border-primary-300 transition-all duration-300">
+              <Link to="/portfolio-investment-protection" className="card p-4 sm:p-8 h-full flex flex-col text-center group cursor-pointer hover:shadow-xl hover:-translate-y-2 hover:border-primary-300 transition-all duration-300">
                 <div className="mx-auto p-2 sm:p-3 bg-primary-50 rounded-lg w-fit mb-3 sm:mb-6 group-hover:bg-primary-100 group-hover:scale-110 transition-all duration-300">
                   <TrendingUp className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600 group-hover:text-primary-700 transition-colors duration-300" />
                 </div>
@@ -617,7 +617,7 @@ function AppContent() {
                     Services
                     <span className={linkUnderlineClasses}></span>
                   </Link>
-                  <Link to="/portfolio-investor-protection" className={linkClasses}>
+                  <Link to="/portfolio-investment-protection" className={linkClasses}>
                     PIP
                     <span className={linkUnderlineClasses}></span>
                   </Link>
@@ -652,7 +652,7 @@ function AppContent() {
                   Services
                 </Link>
                 <Link
-                  to="/portfolio-investor-protection"
+                  to="/portfolio-investment-protection"
                   className={mobileLinkClasses}
                   onClick={closeMobileMenu}
                 >
@@ -689,7 +689,7 @@ function AppContent() {
               <Route path="/" element={<HomePage />} />
               <Route path="/development" element={<Development />} />
               <Route path="/acquisition-disposal" element={<AcquisitionDisposal />} />
-              <Route path="/portfolio-investor-protection" element={<PortfolioInvestorProtection />} />
+              <Route path="/portfolio-investment-protection" element={<PortfolioInvestorProtection />} />
               <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
@@ -753,7 +753,7 @@ function AppContent() {
                 <div>
                   <h3 className="text-white font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Services</h3>
                   <ul className="space-y-2 text-sm sm:text-base">
-                    <li><Link to="/portfolio-investor-protection" className="text-primary-200 hover:text-white transition-colors">Portfolio Investment Protection</Link></li>
+                    <li><Link to="/portfolio-investment-protection" className="text-primary-200 hover:text-white transition-colors">Portfolio Investment Protection</Link></li>
                     <li><Link to="/acquisition-disposal" className="text-primary-200 hover:text-white transition-colors">Acquisition and Disposal</Link></li>
                     <li><Link to="/development" className="text-primary-200 hover:text-white transition-colors">Development</Link></li>
                   </ul>

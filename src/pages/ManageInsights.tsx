@@ -659,11 +659,11 @@ const ManageInsights = () => {
                           type="text"
                           value={formData.cta_link}
                           onChange={(e) => setFormData({ ...formData, cta_link: e.target.value })}
-                          placeholder="/services/portfolio-investor-protection"
+                          placeholder="/portfolio-investment-protection"
                           className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
                         />
                         <p className="mt-1 text-xs text-slate-500">
-                          Use relative URLs for internal pages (e.g., /services/portfolio-investor-protection) or full URLs for external links
+                          Use relative URLs for internal pages (e.g., /portfolio-investment-protection) or full URLs for external links
                         </p>
                       </div>
 

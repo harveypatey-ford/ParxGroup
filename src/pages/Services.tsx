@@ -32,11 +32,11 @@ function Services() {
       ]
     },
     {
-      id: 'portfolio-investor-protection',
+      id: 'portfolio-investment-protection',
       title: 'Portfolio Investment Protection',
       description: 'Portfolio Investment Protection (PIP) insurance is a specialist rental income protection policy that safeguards the lenders or investors net rental income for the duration of the lease or lending agreement.',
       icon: PoundSterling,
-      link: '/portfolio-investor-protection',
+      link: '/portfolio-investment-protection',
       features: [
         'Rental Income Guarantee',
         'Long Income Protection',

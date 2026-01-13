@@ -4,7 +4,7 @@ const baseUrl = 'https://parxgroup.co.uk';
 
 const staticPages = [
   { url: '/', priority: '1.0', changefreq: 'weekly' },
-  { url: '/portfolio-investor-protection', priority: '0.90', changefreq: 'monthly' },
+  { url: '/portfolio-investment-protection', priority: '0.90', changefreq: 'monthly' },
   { url: '/services', priority: '0.80', changefreq: 'monthly' },
   { url: '/development', priority: '0.75', changefreq: 'monthly' },
   { url: '/acquisition-disposal', priority: '0.75', changefreq: 'monthly' },

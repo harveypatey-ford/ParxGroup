@@ -71,7 +71,7 @@ path = "/services"
 
 [[edge_functions]]
 function = "social-meta"
-path = "/portfolio-investor-protection"
+path = "/portfolio-investment-protection"
 
 [[edge_functions]]
 function = "social-meta"

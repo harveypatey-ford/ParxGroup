@@ -90,7 +90,7 @@ export const siteNavigationSchema = {
       "position": 2,
       "name": "Portfolio Investment Protection",
       "description": "Rental income protection insurance for property investors and lenders",
-      "url": "https://parxgroup.co.uk/portfolio-investor-protection"
+      "url": "https://parxgroup.co.uk/portfolio-investment-protection"
     },
     {
       "@type": "SiteNavigationElement",
