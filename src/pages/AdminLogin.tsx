@@ -54,7 +54,7 @@ function AdminLogin() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1497215842964-222b430dc094?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
+          src="/office-workspace.jpg"
           alt="Office building"
           className="w-full h-full object-cover"
         />

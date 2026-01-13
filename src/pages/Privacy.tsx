@@ -11,7 +11,7 @@ function Privacy() {
         <div className="absolute inset-0 overflow-hidden">
           <img
             className="w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+            src="/tech-abstract.jpg"
             alt="Legal background"
           />
           <div className="absolute inset-0 bg-primary-900/80 backdrop-blur-sm"></div>

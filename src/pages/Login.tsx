@@ -64,7 +64,7 @@ function Login() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://pixeldrain.com/api/file/rVMsQyDA"
+          src="/login-hero.webp"
           alt="People working in an office"
           className="w-full h-full object-cover"
         />
