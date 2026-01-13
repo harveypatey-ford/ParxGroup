@@ -132,7 +132,7 @@ function Services() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             aria-label="London cityscape skyline featuring modern commercial buildings"
           />
         </div>

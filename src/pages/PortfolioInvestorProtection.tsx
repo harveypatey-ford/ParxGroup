@@ -213,7 +213,7 @@ function PortfolioInvestorProtection() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
           />
           <div className="absolute inset-0 bg-neutral-900/20"></div>
         </div>
@@ -734,7 +734,8 @@ function PortfolioInvestorProtection() {
                 className="w-full h-full"
                 controls
                 autoPlay
-                src="/portfolio_investment_portection.mp4"
+                preload="none"
+                src={isVideoModalOpen ? "/portfolio_investment_portection.mp4" : undefined}
               >
                 Your browser does not support the video tag.
               </video>

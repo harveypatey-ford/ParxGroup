@@ -24,7 +24,7 @@ function AcquisitionDisposal() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
           />
           <div className="absolute inset-0 bg-neutral-900/20"></div>
         </div>

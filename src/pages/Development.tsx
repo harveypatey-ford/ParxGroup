@@ -24,6 +24,7 @@ function Development() {
             muted
             loop
             playsInline
+            preload="metadata"
           />
           <div className="absolute inset-0 bg-neutral-900/20"></div>
         </div>

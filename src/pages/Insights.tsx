@@ -141,6 +141,7 @@ const Insights = () => {
             muted
             loop
             playsInline
+            preload="metadata"
           />
         </div>
         <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
