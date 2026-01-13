@@ -138,6 +138,13 @@
   .touch-target {
     @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
   }
+
+  /* Article prose link styles */
+  .prose a {
+    @apply text-primary-600 underline decoration-1 underline-offset-2;
+    @apply hover:text-primary-700 hover:decoration-2;
+    @apply transition-all duration-150;
+  }
 }
 
 /* Custom utilities */
