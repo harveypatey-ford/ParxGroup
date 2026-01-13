@@ -207,7 +207,7 @@ function PortfolioInvestorProtection() {
         <div className="absolute inset-0 overflow-hidden">
           <video
             className="w-full h-full object-cover"
-            src="/pip-hero_2.webm"
+            src="/pip_hero_4_-_trim.webm"
             poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='white'/%3E%3C/svg%3E"
             autoPlay
             loop
