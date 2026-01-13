@@ -735,7 +735,7 @@ function PortfolioInvestorProtection() {
                 controls
                 autoPlay
                 preload="none"
-                src={isVideoModalOpen ? "/pip_explainer_video_hb.mp4" : undefined}
+                src={isVideoModalOpen ? "/portfolio_investment_portection.mp4" : undefined}
               >
                 Your browser does not support the video tag.
               </video>
