@@ -537,7 +537,7 @@ function AppContent() {
     shouldUseScrolledStyle ? 'bg-white shadow-soft' : 'bg-transparent'
   }`;
 
-  const linkClasses = `text-lg font-semibold tracking-wide transition-all duration-200 relative group ${
+  const linkClasses = `text-lg font-medium tracking-wide transition-all duration-200 relative group ${
     shouldUseScrolledStyle ? 'text-neutral-800 hover:text-primary-600' : 'text-white hover:text-primary-100'
   }`;
 
