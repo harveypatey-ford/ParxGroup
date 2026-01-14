@@ -143,7 +143,14 @@ function HomePage() {
           onClick={() => {
             const servicesSection = document.getElementById('services');
             if (servicesSection) {
-              servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              const navbarHeight = 80;
+              const elementPosition = servicesSection.getBoundingClientRect().top + window.pageYOffset;
+              const offsetPosition = elementPosition - navbarHeight;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
             }
           }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 hover:scale-110 transition-transform duration-300 cursor-pointer"
