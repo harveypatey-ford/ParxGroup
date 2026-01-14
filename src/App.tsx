@@ -139,9 +139,18 @@ function HomePage() {
             </AnimatedSection>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-          <ChevronDown className="h-12 w-12 text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]" />
-        </div>
+        <button
+          onClick={() => {
+            const servicesSection = document.getElementById('services');
+            if (servicesSection) {
+              servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 hover:scale-110 transition-transform duration-300 cursor-pointer"
+          aria-label="Scroll to services section"
+        >
+          <ChevronDown className="h-12 w-12 text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] animate-bounce" />
+        </button>
       </div>
 
       {/* Services Section */}
