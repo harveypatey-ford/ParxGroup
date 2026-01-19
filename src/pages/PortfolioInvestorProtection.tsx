@@ -270,7 +270,7 @@ function PortfolioInvestorProtection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-white text-base sm:text-lg font-medium text-center sm:text-left">
-              Watch our comprehensive overview of Portfolio Investment Protection
+              Watch our comprehensive overview of Portfolio Investment Protection:
             </p>
             <button
               onClick={() => setIsVideoModalOpen(true)}
