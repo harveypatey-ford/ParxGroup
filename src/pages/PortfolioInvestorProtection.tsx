@@ -260,18 +260,24 @@ function PortfolioInvestorProtection() {
                   </li>
                 </ul>
               </div>
-              <div className="mt-8 text-center sm:text-left">
-                <button
-                  onClick={() => setIsVideoModalOpen(true)}
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-600 via-primary-700 to-primary-600 hover:from-primary-700 hover:via-primary-800 hover:to-primary-700 text-white font-bold rounded-full shadow-2xl hover:shadow-primary-500/50 transition-all duration-300 group relative overflow-hidden ring-2 ring-primary-400 ring-offset-2 hover:ring-4 hover:ring-primary-300"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                  <Play className="h-6 w-6 mr-3 group-hover:scale-125 transition-transform relative z-10" />
-                  <span className="relative z-10 text-lg">Explainer Video</span>
-                </button>
-              </div>
             </article>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Explainer Video Section */}
+      <section className="py-8 bg-gradient-to-r from-green-600 via-green-700 to-green-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center sm:justify-start">
+            <button
+              onClick={() => setIsVideoModalOpen(true)}
+              className="inline-flex items-center px-6 py-3 bg-white hover:bg-gray-50 text-green-700 font-bold rounded-full shadow-2xl hover:shadow-green-900/50 transition-all duration-300 group relative overflow-hidden ring-2 ring-white ring-offset-2 ring-offset-green-700 hover:ring-4 hover:ring-white/90"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-100/30 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              <Play className="h-6 w-6 mr-3 group-hover:scale-125 transition-transform relative z-10" />
+              <span className="relative z-10 text-lg">Explainer Video</span>
+            </button>
+          </div>
         </div>
       </section>
 
