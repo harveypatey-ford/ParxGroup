@@ -135,7 +135,7 @@ function Services() {
             preload="metadata"
             aria-label="London cityscape skyline featuring modern commercial buildings"
           />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/60 to-transparent pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/80 via-white/30 to-transparent pointer-events-none"></div>
         </div>
         <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
