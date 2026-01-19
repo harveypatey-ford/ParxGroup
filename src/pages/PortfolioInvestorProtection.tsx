@@ -238,11 +238,10 @@ function PortfolioInvestorProtection() {
             </p>
             <button
               onClick={() => setIsVideoModalOpen(true)}
-              className="inline-flex items-center px-6 py-3 bg-white hover:bg-gray-50 text-primary-700 font-bold rounded-full shadow-2xl hover:shadow-primary-900/50 transition-all duration-300 group relative overflow-hidden ring-2 ring-white ring-offset-2 ring-offset-primary-700 hover:ring-4 hover:ring-white/90 flex-shrink-0"
+              className="inline-flex items-center px-5 py-2 bg-white/90 hover:bg-white text-primary-700 font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 group border border-white/50 flex-shrink-0"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-100/30 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-              <Play className="h-6 w-6 mr-3 group-hover:scale-125 transition-transform relative z-10" />
-              <span className="relative z-10 text-lg">Explainer Video</span>
+              <Play className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+              <span className="text-base">Explainer Video</span>
             </button>
           </div>
         </div>
