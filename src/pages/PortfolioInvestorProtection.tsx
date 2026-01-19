@@ -229,6 +229,25 @@ function PortfolioInvestorProtection() {
         </div>
       </header>
 
+      {/* Explainer Video Section */}
+      <section className="py-4 bg-gradient-to-r from-primary-600 via-primary-700 to-primary-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <p className="text-white text-base sm:text-lg font-medium text-center">
+              Watch our comprehensive overview of Portfolio Investment Protection:
+            </p>
+            <button
+              onClick={() => setIsVideoModalOpen(true)}
+              className="inline-flex items-center px-6 py-3 bg-white hover:bg-gray-50 text-primary-700 font-bold rounded-full shadow-2xl hover:shadow-primary-900/50 transition-all duration-300 group relative overflow-hidden ring-2 ring-white ring-offset-2 ring-offset-primary-700 hover:ring-4 hover:ring-white/90 flex-shrink-0"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-100/30 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              <Play className="h-6 w-6 mr-3 group-hover:scale-125 transition-transform relative z-10" />
+              <span className="relative z-10 text-lg">Explainer Video</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Product Summary Section */}
       <section className="section bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -262,25 +281,6 @@ function PortfolioInvestorProtection() {
               </div>
             </article>
           </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Explainer Video Section */}
-      <section className="py-8 bg-gradient-to-r from-primary-600 via-primary-700 to-primary-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <p className="text-white text-base sm:text-lg font-medium text-center">
-              Watch our comprehensive overview of Portfolio Investment Protection:
-            </p>
-            <button
-              onClick={() => setIsVideoModalOpen(true)}
-              className="inline-flex items-center px-6 py-3 bg-white hover:bg-gray-50 text-primary-700 font-bold rounded-full shadow-2xl hover:shadow-primary-900/50 transition-all duration-300 group relative overflow-hidden ring-2 ring-white ring-offset-2 ring-offset-primary-700 hover:ring-4 hover:ring-white/90 flex-shrink-0"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-100/30 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-              <Play className="h-6 w-6 mr-3 group-hover:scale-125 transition-transform relative z-10" />
-              <span className="relative z-10 text-lg">Explainer Video</span>
-            </button>
-          </div>
         </div>
       </section>
 
