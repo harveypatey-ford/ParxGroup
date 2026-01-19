@@ -230,7 +230,7 @@ function PortfolioInvestorProtection() {
       </header>
 
       {/* Product Summary Section */}
-      <section className="pt-8 md:pt-16 lg:pt-24 pb-4 bg-neutral-50">
+      <section className="section bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection delay={0.3} distance={30} duration={0.5} direction="up">
             <article className="prose prose-lg max-w-none">
