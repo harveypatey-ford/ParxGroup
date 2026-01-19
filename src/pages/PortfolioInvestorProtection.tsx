@@ -268,8 +268,8 @@ function PortfolioInvestorProtection() {
       {/* Explainer Video Section */}
       <section className="py-8 bg-gradient-to-r from-primary-600 via-primary-700 to-primary-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white text-base sm:text-lg font-medium text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <p className="text-white text-base sm:text-lg font-medium text-center">
               Watch our comprehensive overview of Portfolio Investment Protection:
             </p>
             <button
