@@ -7,36 +7,6 @@ NODE_VERSION = "20"
 SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_SUPABASE_URL"
 
 [[redirects]]
-from = "http://www.parxgroup.co.uk/*"
-to = "https://parxgroup.co.uk/:splat"
-status = 301
-force = true
-
-[[redirects]]
-from = "https://www.parxgroup.co.uk/*"
-to = "https://parxgroup.co.uk/:splat"
-status = 301
-force = true
-
-[[redirects]]
-from = "http://parxgroup.co.uk/*"
-to = "https://parxgroup.co.uk/:splat"
-status = 301
-force = true
-
-[[redirects]]
-from = "/*/index.html"
-to = "/:splat"
-status = 301
-force = true
-
-[[redirects]]
-from = "/*/"
-to = "/:splat"
-status = 301
-force = true
-
-[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200
