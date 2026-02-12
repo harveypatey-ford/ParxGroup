@@ -31,8 +31,8 @@ status = 301
 force = true
 
 [[redirects]]
-from = "/*/"
-to = "/:splat"
+from = "/:path/"
+to = "/:path"
 status = 301
 force = true
 
