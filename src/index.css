@@ -307,6 +307,31 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* ===== Article View - Quill List Rendering ===== */
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose ul li,
+.prose ol li {
+  display: list-item;
+  padding-left: 0.375em;
+  margin-bottom: 0.5em;
+}
+
+.prose ul ul { list-style-type: circle; }
+.prose ul ul ul { list-style-type: square; }
+
 /* ===== Article View - Quill Content Rendering ===== */
 .prose img {
   max-width: 100%;
