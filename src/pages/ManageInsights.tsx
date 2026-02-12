@@ -499,27 +499,19 @@ const ManageInsights = () => {
                   modules={{
                     toolbar: [
                       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                      [{ 'size': ['small', false, 'large', 'huge'] }],
-                      [{ 'font': [] }],
                       ['bold', 'italic', 'underline', 'strike'],
-                      [{ 'color': [] }, { 'background': [] }],
-                      [{ 'script': 'sub'}, { 'script': 'super' }],
-                      [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
+                      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                       [{ 'align': [] }],
-                      ['blockquote', 'code-block'],
-                      ['link', 'image'],
+                      ['link'],
                       ['clean']
                     ]
                   }}
                   formats={[
-                    'header', 'size', 'font',
+                    'header',
                     'bold', 'italic', 'underline', 'strike',
-                    'color', 'background',
-                    'script',
-                    'list', 'bullet', 'indent',
+                    'list', 'bullet',
                     'align',
-                    'blockquote', 'code-block',
-                    'link', 'image'
+                    'link'
                   ]}
                   className="bg-white rounded-lg"
                   theme="snow"
