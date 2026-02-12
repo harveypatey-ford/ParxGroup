@@ -153,3 +153,204 @@
     touch-action: manipulation;
   }
 }
+
+/* ===== Quill Editor - Font Family Classes (for editor + article rendering) ===== */
+.ql-font-arial { font-family: 'Arial', Helvetica, sans-serif !important; }
+.ql-font-georgia { font-family: 'Georgia', serif !important; }
+.ql-font-verdana { font-family: 'Verdana', Geneva, sans-serif !important; }
+.ql-font-tahoma { font-family: 'Tahoma', Geneva, sans-serif !important; }
+.ql-font-trebuchet-ms { font-family: 'Trebuchet MS', Helvetica, sans-serif !important; }
+.ql-font-times-new-roman { font-family: 'Times New Roman', Times, serif !important; }
+.ql-font-courier-new { font-family: 'Courier New', Courier, monospace !important; }
+
+/* ===== Quill Editor - Font Picker Toolbar Labels ===== */
+.ql-snow .ql-picker.ql-font { width: 160px; }
+.ql-snow .ql-picker.ql-font .ql-picker-label::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item::before { content: 'Sans Serif' !important; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="serif"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before { content: 'Serif' !important; font-family: Georgia, serif; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before { content: 'Monospace' !important; font-family: 'Courier New', monospace; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="arial"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="arial"]::before { content: 'Arial' !important; font-family: Arial, sans-serif; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="georgia"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="georgia"]::before { content: 'Georgia' !important; font-family: Georgia, serif; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="verdana"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="verdana"]::before { content: 'Verdana' !important; font-family: Verdana, sans-serif; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="tahoma"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="tahoma"]::before { content: 'Tahoma' !important; font-family: Tahoma, sans-serif; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="trebuchet-ms"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="trebuchet-ms"]::before { content: 'Trebuchet MS' !important; font-family: 'Trebuchet MS', sans-serif; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="times-new-roman"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="times-new-roman"]::before { content: 'Times New Roman' !important; font-family: 'Times New Roman', serif; }
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="courier-new"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="courier-new"]::before { content: 'Courier New' !important; font-family: 'Courier New', monospace; }
+
+/* ===== Quill Editor - Size Picker Toolbar Labels ===== */
+.ql-snow .ql-picker.ql-size { width: 70px; }
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before { content: '16' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="8px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="8px"]::before { content: '8' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="10px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="10px"]::before { content: '10' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="12px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before { content: '12' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="14px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before { content: '14' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="16px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before { content: '16' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="18px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before { content: '18' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="20px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="20px"]::before { content: '20' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="24px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="24px"]::before { content: '24' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="28px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="28px"]::before { content: '28' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="36px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="36px"]::before { content: '36' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="48px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="48px"]::before { content: '48' !important; }
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="72px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="72px"]::before { content: '72' !important; }
+
+/* ===== Quill Editor - Enhanced Appearance ===== */
+.quill-editor-enhanced .ql-toolbar.ql-snow {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: #f8fafc;
+  padding: 8px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.quill-editor-enhanced .ql-container.ql-snow {
+  border: 1px solid #cbd5e1;
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+  min-height: 400px;
+  font-size: 16px;
+}
+
+.quill-editor-enhanced .ql-editor {
+  min-height: 400px;
+  line-height: 1.6;
+  padding: 16px 20px;
+}
+
+.quill-editor-enhanced .ql-toolbar .ql-formats {
+  margin-right: 8px;
+  padding-right: 8px;
+  border-right: 1px solid #e2e8f0;
+}
+
+.quill-editor-enhanced .ql-toolbar .ql-formats:last-child {
+  border-right: none;
+}
+
+.quill-editor-enhanced .ql-snow .ql-picker-label {
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.quill-editor-enhanced .ql-snow .ql-picker-label:hover {
+  background: #e2e8f0;
+}
+
+.quill-editor-enhanced .ql-snow .ql-color-picker .ql-picker-label,
+.quill-editor-enhanced .ql-snow .ql-icon-picker .ql-picker-label {
+  border: none;
+  padding: 0;
+}
+
+.quill-editor-enhanced .ql-toolbar button:hover {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.quill-editor-enhanced .ql-toolbar button.ql-active {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.quill-editor-enhanced .ql-editor blockquote {
+  border-left: 4px solid #0f172a;
+  padding-left: 16px;
+  margin: 16px 0;
+  color: #475569;
+  font-style: italic;
+}
+
+.quill-editor-enhanced .ql-editor pre.ql-syntax {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.quill-editor-enhanced .ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.quill-editor-enhanced .ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Article View - Quill Content Rendering ===== */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.prose blockquote {
+  border-left: 4px solid #0f172a;
+  padding-left: 16px;
+  color: #475569;
+  font-style: italic;
+}
+
+.prose pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.prose sub,
+.prose sup {
+  font-size: 0.75em;
+}
+
+.prose .ql-indent-1 { padding-left: 3em; }
+.prose .ql-indent-2 { padding-left: 6em; }
+.prose .ql-indent-3 { padding-left: 9em; }
+.prose .ql-indent-4 { padding-left: 12em; }
+.prose .ql-indent-5 { padding-left: 15em; }
+.prose .ql-indent-6 { padding-left: 18em; }
+.prose .ql-indent-7 { padding-left: 21em; }
+.prose .ql-indent-8 { padding-left: 24em; }
+
+.prose .ql-align-center { text-align: center; }
+.prose .ql-align-right { text-align: right; }
+.prose .ql-align-justify { text-align: justify; }
+
+.prose iframe.ql-video {
+  width: 100%;
+  max-width: 640px;
+  height: 360px;
+  border-radius: 8px;
+  margin: 16px 0;
+}

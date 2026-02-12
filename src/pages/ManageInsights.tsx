@@ -1,11 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Edit2, Trash2, Eye, EyeOff, ArrowLeft, X, Star } from 'lucide-react';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { supabase } from '../lib/supabase';
 import { Database } from '../types/database.types';
 import { useAuth } from '../contexts/AuthContext';
+
+const SizeStyle = Quill.import('attributors/style/size') as any;
+SizeStyle.whitelist = ['8px', '10px', '12px', '14px', '16px', '18px', '20px', '24px', '28px', '36px', '48px', '72px'];
+Quill.register(SizeStyle, true);
+
+const Font = Quill.import('formats/font') as any;
+Font.whitelist = ['serif', 'monospace', 'arial', 'georgia', 'verdana', 'tahoma', 'trebuchet-ms', 'times-new-roman', 'courier-new'];
+Quill.register(Font, true);
+
+function quillImageHandler(this: any) {
+  const url = prompt('Enter image URL:');
+  if (url) {
+    const range = this.quill.getSelection(true);
+    this.quill.insertEmbed(range.index, 'image', url);
+  }
+}
+
+const QUILL_MODULES = {
+  toolbar: {
+    container: [
+      [{ font: ['', 'serif', 'monospace', 'arial', 'georgia', 'verdana', 'tahoma', 'trebuchet-ms', 'times-new-roman', 'courier-new'] }],
+      [{ size: ['8px', '10px', '12px', '14px', false, '18px', '20px', '24px', '28px', '36px', '48px', '72px'] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ script: 'sub' }, { script: 'super' }],
+      [{ color: [] }, { background: [] }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ indent: '-1' }, { indent: '+1' }],
+      [{ align: [] }],
+      ['blockquote', 'code-block'],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+    handlers: {
+      image: quillImageHandler
+    }
+  }
+};
+
+const QUILL_FORMATS = [
+  'font', 'size', 'header',
+  'bold', 'italic', 'underline', 'strike',
+  'script',
+  'color', 'background',
+  'list', 'bullet',
+  'indent',
+  'align',
+  'blockquote', 'code-block',
+  'link', 'image', 'video'
+];
 
 type Article = Database['public']['Tables']['articles']['Row'];
 
@@ -496,24 +546,9 @@ const ManageInsights = () => {
                 <ReactQuill
                   value={formData.content}
                   onChange={(content) => setFormData({ ...formData, content })}
-                  modules={{
-                    toolbar: [
-                      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                      ['bold', 'italic', 'underline', 'strike'],
-                      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                      [{ 'align': [] }],
-                      ['link'],
-                      ['clean']
-                    ]
-                  }}
-                  formats={[
-                    'header',
-                    'bold', 'italic', 'underline', 'strike',
-                    'list', 'bullet',
-                    'align',
-                    'link'
-                  ]}
-                  className="bg-white rounded-lg"
+                  modules={QUILL_MODULES}
+                  formats={QUILL_FORMATS}
+                  className="bg-white rounded-lg quill-editor-enhanced"
                   theme="snow"
                 />
               </div>
