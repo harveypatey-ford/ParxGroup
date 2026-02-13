@@ -313,7 +313,7 @@ function HomePage() {
           </div>
 
           <AnimatedSection direction="up" delay={0.3}>
-            <div className="mt-16 pt-16 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+            <div className="mt-16 pt-16 border-t border-white/10 hidden sm:grid sm:grid-cols-3 gap-8 text-center">
               <div>
                 <div className="text-4xl md:text-5xl font-black text-white">50+</div>
                 <p className="text-primary-300 mt-2 text-sm font-medium">Years Combined Experience</p>
