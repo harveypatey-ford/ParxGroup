@@ -531,6 +531,39 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <section className="section bg-white" id="contact-info">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <span className="inline-block text-primary-600 font-semibold text-sm tracking-widest uppercase mb-3">Get In Touch</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">Contact Us</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <div className="bg-neutral-50 border border-neutral-100 rounded-2xl p-8 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div className="mx-auto p-3 bg-primary-50 rounded-lg w-fit mb-6">
+                <Phone className="h-8 w-8 text-primary-600" />
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 mb-2">Phone</h3>
+              <a href="tel:+442033707909" className="text-neutral-600 hover:text-primary-600 transition-colors">+44 (0) 20 3370 7909</a>
+            </div>
+            <div className="bg-neutral-50 border border-neutral-100 rounded-2xl p-8 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div className="mx-auto p-3 bg-primary-50 rounded-lg w-fit mb-6">
+                <Mail className="h-8 w-8 text-primary-600" />
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 mb-2">Email</h3>
+              <a href="mailto:connect@parxgroup.co.uk" className="text-neutral-600 hover:text-primary-600 transition-colors">connect@parxgroup.co.uk</a>
+            </div>
+            <div className="bg-neutral-50 border border-neutral-100 rounded-2xl p-8 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div className="mx-auto p-3 bg-primary-50 rounded-lg w-fit mb-6">
+                <MapPin className="h-8 w-8 text-primary-600" />
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 mb-2">Address</h3>
+              <p className="text-neutral-600">Preston Park House, South Road<br />Brighton, East Sussex, BN1 6SB</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
