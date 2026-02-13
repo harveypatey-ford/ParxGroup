@@ -547,7 +547,7 @@ function HomePage() {
                 </div>
                 <h3 className="text-lg font-bold text-neutral-900">Phone</h3>
               </div>
-              <a href="tel:+442033707909" className="text-neutral-600 hover:text-primary-600 transition-colors text-sm ml-12">+44 (0) 20 3370 7909</a>
+              <a href="tel:+442033707909" className="text-neutral-600 hover:text-primary-600 transition-colors text-base ml-12">+44 (0) 20 3370 7909</a>
             </div>
             <div className="bg-neutral-50 border border-neutral-100 rounded-xl px-6 py-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3 mb-2">
@@ -556,7 +556,7 @@ function HomePage() {
                 </div>
                 <h3 className="text-lg font-bold text-neutral-900">Email</h3>
               </div>
-              <a href="mailto:connect@parxgroup.co.uk" className="text-neutral-600 hover:text-primary-600 transition-colors text-sm ml-12">connect@parxgroup.co.uk</a>
+              <a href="mailto:connect@parxgroup.co.uk" className="text-neutral-600 hover:text-primary-600 transition-colors text-base ml-12">connect@parxgroup.co.uk</a>
             </div>
             <div className="bg-neutral-50 border border-neutral-100 rounded-xl px-6 py-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3 mb-2">
@@ -565,7 +565,7 @@ function HomePage() {
                 </div>
                 <h3 className="text-lg font-bold text-neutral-900">Address</h3>
               </div>
-              <p className="text-neutral-600 text-sm ml-12">Preston Park House, South Road, Brighton, East Sussex, BN1 6SB</p>
+              <p className="text-neutral-600 text-base ml-12">Preston Park House, South Road, Brighton, East Sussex, BN1 6SB</p>
             </div>
           </div>
         </div>
