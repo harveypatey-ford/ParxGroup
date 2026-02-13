@@ -311,7 +311,7 @@ function HomePage() {
                 <p className="text-primary-300 mt-2 text-sm font-medium">Years Combined Experience</p>
               </div>
               <div>
-                <div className="text-4xl md:text-5xl font-black text-white">A/AA</div>
+                <div className="text-4xl md:text-5xl font-black text-white">AA</div>
                 <p className="text-primary-300 mt-2 text-sm font-medium">Rated Insurer Partners</p>
               </div>
               <div>
