@@ -335,16 +335,16 @@ function HomePage() {
       <section className="section bg-neutral-50">
         <div className="container-custom">
           <AnimatedSection direction="up">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-neutral-900 mb-2">Client Testimonials</h2>
-              <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-              <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="inline-block text-primary-600 font-semibold text-sm tracking-widest uppercase mb-3">Testimonials</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight mb-4">What Our Clients Say</h2>
+              <p className="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
                 Hear what our clients have to say about our bespoke insurance solutions
               </p>
             </div>
           </AnimatedSection>
 
-          <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <AnimatedSection direction="left" delay={0.1}>
               <div className="card p-8 relative">
                 <div className="flex items-center mb-6">
