@@ -412,12 +412,16 @@ function HomePage() {
       </section>
 
       {/* Insights and News Section */}
-      <section className="section bg-white" id="insights">
-        <div className="container-custom">
+      <section className="relative py-20 lg:py-28 bg-primary-900 overflow-hidden" id="insights">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary-700 rounded-full blur-[160px] opacity-20 -translate-y-1/2 -translate-x-1/4" />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary-600 rounded-full blur-[120px] opacity-15 translate-y-1/2 translate-x-1/4" />
+        </div>
+        <div className="relative container-custom">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-neutral-900 mb-2">Real Estate Investment Insights</h2>
-            <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-            <p className="text-lg text-neutral-600">
+            <span className="inline-block text-primary-300 font-semibold text-sm tracking-widest uppercase mb-3">Latest Articles</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">Real Estate Investment Insights</h2>
+            <p className="text-lg text-primary-200 leading-relaxed max-w-2xl mx-auto">
               Stay informed with our latest articles and industry insights
             </p>
           </div>
@@ -431,7 +435,7 @@ function HomePage() {
                   className="block h-full group"
                 >
                   {/* Mobile card design */}
-                  <div className="md:hidden bg-white rounded-2xl border-2 border-neutral-100 overflow-hidden h-full flex flex-col shadow-md hover:shadow-xl hover:border-primary-200">
+                  <div className="md:hidden bg-white/[0.08] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden h-full flex flex-col hover:bg-white/[0.12] transition-all duration-300">
                     <div className="relative h-48 overflow-hidden flex-shrink-0 bg-neutral-50">
                       <img
                         src={article.featured_image}
@@ -446,10 +450,10 @@ function HomePage() {
                       </div>
                     </div>
                     <div className="p-6 flex-grow flex flex-col">
-                      <h3 className="text-xl font-bold text-neutral-900 mb-5 leading-tight line-clamp-3 group-hover:text-primary-600 flex-grow">
+                      <h3 className="text-xl font-bold text-white mb-5 leading-tight line-clamp-3 group-hover:text-primary-300 flex-grow">
                         {article.title}
                       </h3>
-                      <div className="flex items-center gap-4 text-sm font-semibold text-neutral-400 mt-auto pt-5 border-t-2 border-neutral-50">
+                      <div className="flex items-center gap-4 text-sm font-semibold text-primary-300 mt-auto pt-5 border-t border-white/10">
                         <span className="flex items-center gap-2">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -467,7 +471,7 @@ function HomePage() {
                   </div>
 
                   {/* Desktop card design */}
-                  <div className="hidden md:flex bg-white border-2 border-neutral-100 rounded-2xl overflow-hidden h-full flex-col group hover:border-primary-200 hover:shadow-2xl">
+                  <div className="hidden md:flex bg-white/[0.08] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden h-full flex-col group hover:bg-white/[0.12] transition-all duration-300">
                     <div className="relative h-56 overflow-hidden flex-shrink-0 bg-neutral-50">
                       <img
                         src={article.featured_image}
@@ -481,11 +485,11 @@ function HomePage() {
                         </span>
                       </div>
                     </div>
-                    <div className="p-7 flex-grow flex flex-col bg-gradient-to-b from-white to-neutral-50/50">
-                      <h3 className="text-xl font-bold text-neutral-900 mb-6 leading-tight group-hover:text-primary-600 flex-grow line-clamp-3">
+                    <div className="p-7 flex-grow flex flex-col">
+                      <h3 className="text-xl font-bold text-white mb-6 leading-tight group-hover:text-primary-300 flex-grow line-clamp-3">
                         {article.title}
                       </h3>
-                      <div className="flex items-center justify-between text-sm font-semibold text-neutral-400 mt-auto pt-5 border-t-2 border-neutral-100">
+                      <div className="flex items-center justify-between text-sm font-semibold text-primary-300 mt-auto pt-5 border-t border-white/10">
                         <span className="flex items-center gap-2">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
