@@ -152,15 +152,23 @@ function Services() {
 
       <section className="py-16 bg-neutral-50" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection direction="up">
-            <div className="text-center mb-12">
-              <h2 id="services-heading" className="text-3xl font-bold text-neutral-900 mb-2">Our Insurance Services</h2>
-              <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-              <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-                Three core service areas covering the full property investment lifecycle, from development through acquisition to long-term portfolio management.
-              </p>
-            </div>
-          </AnimatedSection>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-12">
+            <AnimatedSection direction="left">
+              <div>
+                <span className="inline-block text-primary-600 font-semibold text-sm tracking-widest uppercase mb-3">Our Insurance Services</span>
+                <h2 id="services-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
+                  Three Core Service Areas
+                </h2>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <div>
+                <p className="text-lg text-neutral-600 leading-relaxed">
+                  Three core service areas covering the full property investment lifecycle, from development through acquisition to long-term portfolio management.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {serviceCategories.map((category, index) => (
