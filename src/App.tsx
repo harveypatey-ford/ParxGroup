@@ -352,7 +352,7 @@ function HomePage() {
                     <img
                       src="/jaspar.webp"
                       alt="Jaspar Group logo"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                   <div>
