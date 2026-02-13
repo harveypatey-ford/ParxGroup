@@ -150,52 +150,48 @@ function Services() {
         </div>
       </header>
 
-      <section className="py-16 bg-neutral-50" aria-labelledby="services-heading">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection direction="up">
-            <div className="text-center mb-12">
-              <h2 id="services-heading" className="text-3xl font-bold text-neutral-900 mb-2">Our Insurance Services</h2>
-              <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-              <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-                Three core service areas covering the full property investment lifecycle, from development through acquisition to long-term portfolio management.
-              </p>
-            </div>
-          </AnimatedSection>
+      <section className="section bg-neutral-50" aria-labelledby="services-heading">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+            <AnimatedSection direction="left">
+              <div>
+                <span className="inline-block text-primary-600 font-semibold text-sm tracking-widest uppercase mb-3">Our Insurance Services</span>
+                <h2 id="services-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
+                  Our Insurance Services
+                </h2>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <div>
+                <p className="text-lg text-neutral-600 leading-relaxed">
+                  Three core service areas covering the full property investment lifecycle, from development through acquisition to long-term portfolio management.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-16 grid grid-cols-1 gap-4 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {serviceCategories.map((category, index) => (
-              <AnimatedSection key={category.id} direction="up" delay={0.1 * index}>
-                <article className="bg-white rounded-2xl shadow-lg border border-neutral-200 overflow-hidden h-full flex flex-col">
-                  <div className="p-8 flex-grow">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md flex-shrink-0">
-                        <category.icon className="h-7 w-7 text-white" aria-hidden="true" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-neutral-900">{category.title}</h3>
-                    </div>
-                    <p className="text-neutral-600 mb-6">{category.description}</p>
-
-                    <ul className="space-y-3">
-                      {category.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-primary-500 mr-3 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                          <span className="text-neutral-700">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+              <AnimatedSection key={category.id} direction="up" delay={0.1 * (index + 1)}>
+                <Link to={category.link} className="card p-4 sm:p-8 h-full flex flex-col text-center group cursor-pointer hover:shadow-xl hover:-translate-y-2 hover:border-primary-300 transition-all duration-300">
+                  <div className="mx-auto p-2 sm:p-3 bg-primary-50 rounded-lg w-fit mb-3 sm:mb-6 group-hover:bg-primary-100 group-hover:scale-110 transition-all duration-300">
+                    <category.icon className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600 group-hover:text-primary-700 transition-colors duration-300" aria-hidden="true" />
                   </div>
-
-                  <div className="px-8 pb-8">
-                    <Link
-                      to={category.link}
-                      className="w-full inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200"
-                    >
-                      Learn more
-                      <ChevronRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                    </Link>
+                  <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors duration-300">{category.title}</h3>
+                  <p className="mt-2 sm:mt-4 text-sm sm:text-base text-neutral-600 flex-grow">{category.description}</p>
+                  <ul className="mt-4 space-y-2 text-left">
+                    {category.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start">
+                        <CheckCircle className="h-4 w-4 text-primary-500 mr-2 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                        <span className="text-sm text-neutral-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex items-center justify-center text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-medium mr-1">Learn more</span>
+                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
                   </div>
-                  <div className="h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600"></div>
-                </article>
+                </Link>
               </AnimatedSection>
             ))}
           </div>
