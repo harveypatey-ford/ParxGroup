@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Building, FileCheck, PoundSterling, ChevronRight, CheckCircle, Award } from 'lucide-react';
+import { Building, FileCheck, PoundSterling, ChevronRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedSection from '../components/AnimatedSection';
 import SEO from '../components/SEO';
@@ -202,49 +202,37 @@ function Services() {
         </div>
       </section>
 
-      <section className="py-20 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-white to-neutral-50/30"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section className="relative py-20 lg:py-28 bg-primary-900 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-700 rounded-full blur-[160px] opacity-20 -translate-y-1/2 translate-x-1/4" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary-600 rounded-full blur-[120px] opacity-15 translate-y-1/2 -translate-x-1/4" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-neutral-900 mb-2">Expert Real Estate Insurance Solutions</h2>
-              <div className="w-20 h-1 bg-primary-500 mx-auto"></div>
+            <div className="mb-12">
+              <span className="inline-block text-primary-300 font-semibold text-sm tracking-widest uppercase mb-3">About Parx</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">Expert Real Estate Insurance Solutions</h2>
             </div>
           </AnimatedSection>
 
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <AnimatedSection direction="left" delay={0.1}>
-              <div className="relative bg-gradient-to-br from-white to-neutral-50/50 rounded-3xl p-10 shadow-xl border border-neutral-200/60">
-                <div className="absolute -top-5 left-10 flex gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg shadow-lg flex items-center justify-center transform -rotate-3">
-                    <Shield className="h-5 w-5 text-white" />
-                  </div>
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg shadow-lg flex items-center justify-center transform rotate-3">
-                    <Building className="h-5 w-5 text-white" />
-                  </div>
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg shadow-lg flex items-center justify-center transform -rotate-3">
-                    <Award className="h-5 w-5 text-white" />
-                  </div>
-                </div>
-
-                <div className="prose prose-lg max-w-none mt-4">
-                  <p className="text-neutral-700 leading-relaxed mb-5">
-                    Parx Group provides insurance-led risk transfer structures for UK property development and transactional activity, tailored to the complexities of each deal. Our team has accumulated more than five decades of experience working alongside developers, investors, lenders and advisers across the breadth of the real estate market.
-                  </p>
-                  <p className="text-neutral-700 leading-relaxed mb-5">
-                    No two property transactions are the same. Whether navigating an acquisition or disposal, supporting development finance, reshaping capital structures or mitigating operational risk, we take a deal-specific approach, building insurance solutions that align precisely with your commercial priorities and longer-term objectives.
-                  </p>
-                  <p className="text-neutral-700 leading-relaxed">
-                    We partner with A- and AA rated insurers to deliver robust, institutional-quality protection at every stage of the property lifecycle, ensuring that risk transfer arrangements satisfy the requirements of lenders, funders and institutional investors active in UK real estate.
-                  </p>
-                </div>
-
-                <div className="absolute -bottom-3 -right-3 w-24 h-24 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full blur-2xl opacity-50"></div>
+              <div>
+                <p className="text-primary-200 text-lg leading-relaxed mb-5">
+                  Parx Group provides insurance-led risk transfer structures for UK property development and transactional activity, tailored to the complexities of each deal. Our team has accumulated more than five decades of experience working alongside developers, investors, lenders and advisers across the breadth of the real estate market.
+                </p>
+                <p className="text-primary-200 text-lg leading-relaxed mb-5">
+                  No two property transactions are the same. Whether navigating an acquisition or disposal, supporting development finance, reshaping capital structures or mitigating operational risk, we take a deal-specific approach, building insurance solutions that align precisely with your commercial priorities and longer-term objectives.
+                </p>
+                <p className="text-primary-200 text-lg leading-relaxed">
+                  We partner with A- and AA rated insurers to deliver robust, institutional-quality protection at every stage of the property lifecycle, ensuring that risk transfer arrangements satisfy the requirements of lenders, funders and institutional investors active in UK real estate.
+                </p>
               </div>
             </AnimatedSection>
 
             <AnimatedSection direction="right" delay={0.2}>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-neutral-200 bg-white p-8">
+              <div className="relative rounded-2xl overflow-hidden bg-white/[0.08] backdrop-blur-sm border border-white/10 p-8">
                 <img
                   src="/property_lifecycle_parx_4.webp"
                   alt="Diagram showing the property investment lifecycle stages: development, acquisition, disposal, and portfolio management with insurance coverage at each phase"
