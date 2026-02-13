@@ -161,78 +161,81 @@ function HomePage() {
       </div>
 
       {/* Services Section */}
-      <section className="relative py-20 lg:py-28 overflow-hidden bg-neutral-50" id="services">
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '32px 32px' }} />
-        <div className="relative container-custom">
+      <section className="section bg-neutral-50" id="services">
+        <div className="container-custom">
           <AnimatedSection direction="up">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
-              <div className="max-w-2xl">
-                <span className="inline-block text-primary-600 font-semibold text-sm tracking-widest uppercase mb-3">What We Do</span>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
-                  Property Insurance Services
-                </h2>
-                <p className="text-lg text-neutral-600 mt-5 leading-relaxed">
-                  Dedicated to protecting and enhancing real estate through bespoke risk transfer solutions that secure income, strengthen funding and safeguard long-term asset value.
-                </p>
-              </div>
-              <Link
-                to="/services"
-                className="btn btn-primary self-start lg:self-auto flex-shrink-0"
-              >
-                View All Services
-              </Link>
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-neutral-900 mb-2">Property Insurance Services</h2>
+              <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
+              <p className="text-lg text-neutral-600 max-w-3xl mx-auto mb-4">
+                Dedicted to protecting and enhancing real estate through bespoke risk transfer solutions that secure income, strengthen funding and safeguard long-term asset value.
+              </p>
+              <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+                Every project presents its own set of risks, and its risk management strategies must be tailored with the same level of precision. Parx Group provides the assurance that your requirements will be assessed in full and that the most effective approach will be identified to support your objectives.
+              </p>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 rounded-2xl overflow-hidden shadow-2xl">
+          <div className="mt-16 grid grid-cols-1 gap-4 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <AnimatedSection direction="up" delay={0.1}>
-              <Link to="/development" className="group relative block h-full bg-white p-8 lg:p-10 border-b md:border-b-0 md:border-r border-neutral-100 hover:bg-primary-50/50 transition-all duration-500">
-                <div className="text-6xl font-black text-neutral-100 group-hover:text-primary-100 transition-colors duration-500 leading-none mb-6">01</div>
-                <div className="p-3 bg-primary-600 rounded-xl w-fit mb-5 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary-600/20 transition-all duration-300">
-                  <Building className="h-7 w-7 text-white" />
+              <Link to="/development" className="card p-4 sm:p-8 h-full flex flex-col text-center group cursor-pointer hover:shadow-xl hover:-translate-y-2 hover:border-primary-300 transition-all duration-300">
+                <div className="mx-auto p-2 sm:p-3 bg-primary-50 rounded-lg w-fit mb-3 sm:mb-6 group-hover:bg-primary-100 group-hover:scale-110 transition-all duration-300">
+                  <Building className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600 group-hover:text-primary-700 transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-700 transition-colors">Development</h3>
-                <p className="text-neutral-600 leading-relaxed mb-8">
-                  Protect your development project from unexpected delays and financial losses with tailored insurance solutions.
+                <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors duration-300">Development</h3>
+                <p className="mt-2 sm:mt-4 text-sm sm:text-base text-neutral-600 flex-grow">
+                  Protect your development project from unexpected delays and financial Losses.
                 </p>
-                <div className="flex items-center text-primary-600 font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
-                  Learn more <ChevronRight className="h-4 w-4 ml-1" />
+                <div className="mt-4 flex items-center justify-center text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-sm font-medium mr-1">Learn more</span>
+                  <ChevronRight className="h-4 w-4" />
                 </div>
               </Link>
             </AnimatedSection>
 
             <AnimatedSection direction="up" delay={0.2}>
-              <Link to="/acquisition-disposal" className="group relative block h-full bg-white p-8 lg:p-10 border-b md:border-b-0 md:border-r border-neutral-100 hover:bg-primary-50/50 transition-all duration-500">
-                <div className="text-6xl font-black text-neutral-100 group-hover:text-primary-100 transition-colors duration-500 leading-none mb-6">02</div>
-                <div className="p-3 bg-primary-600 rounded-xl w-fit mb-5 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary-600/20 transition-all duration-300">
-                  <Home className="h-7 w-7 text-white" />
+              <Link to="/acquisition-disposal" className="card p-4 sm:p-8 h-full flex flex-col text-center group cursor-pointer hover:shadow-xl hover:-translate-y-2 hover:border-primary-300 transition-all duration-300">
+                <div className="mx-auto p-2 sm:p-3 bg-primary-50 rounded-lg w-fit mb-3 sm:mb-6 group-hover:bg-primary-100 group-hover:scale-110 transition-all duration-300">
+                  <Home className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600 group-hover:text-primary-700 transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-700 transition-colors">Acquisition & Disposal</h3>
-                <p className="text-neutral-600 leading-relaxed mb-8">
-                  Safeguard your transactions with specialised risk management solutions for property acquisitions and disposals.
+                <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors duration-300">Acquisition and Disposal</h3>
+                <p className="mt-2 sm:mt-4 text-sm sm:text-base text-neutral-600 flex-grow">
+                  Safeguard your transactions with our specialised risk management solutions.
                 </p>
-                <div className="flex items-center text-primary-600 font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
-                  Learn more <ChevronRight className="h-4 w-4 ml-1" />
+                <div className="mt-4 flex items-center justify-center text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-sm font-medium mr-1">Learn more</span>
+                  <ChevronRight className="h-4 w-4" />
                 </div>
               </Link>
             </AnimatedSection>
 
             <AnimatedSection direction="up" delay={0.3}>
-              <Link to="/portfolio-investment-protection" className="group relative block h-full bg-white p-8 lg:p-10 hover:bg-primary-50/50 transition-all duration-500">
-                <div className="text-6xl font-black text-neutral-100 group-hover:text-primary-100 transition-colors duration-500 leading-none mb-6">03</div>
-                <div className="p-3 bg-primary-600 rounded-xl w-fit mb-5 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary-600/20 transition-all duration-300">
-                  <TrendingUp className="h-7 w-7 text-white" />
+              <Link to="/portfolio-investment-protection" className="card p-4 sm:p-8 h-full flex flex-col text-center group cursor-pointer hover:shadow-xl hover:-translate-y-2 hover:border-primary-300 transition-all duration-300">
+                <div className="mx-auto p-2 sm:p-3 bg-primary-50 rounded-lg w-fit mb-3 sm:mb-6 group-hover:bg-primary-100 group-hover:scale-110 transition-all duration-300">
+                  <TrendingUp className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600 group-hover:text-primary-700 transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-700 transition-colors">Portfolio Investment Protection</h3>
-                <p className="text-neutral-600 leading-relaxed mb-8">
-                  Enhance your investment portfolio with comprehensive rental income protection and safeguards.
+                <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors duration-300">Portfolio Investment Protection</h3>
+                <p className="mt-2 sm:mt-4 text-sm sm:text-base text-neutral-600 flex-grow">
+                  Enhance your investment portfolio with comprehensive rental income protection.
                 </p>
-                <div className="flex items-center text-primary-600 font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
-                  Learn more <ChevronRight className="h-4 w-4 ml-1" />
+                <div className="mt-4 flex items-center justify-center text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-sm font-medium mr-1">Learn more</span>
+                  <ChevronRight className="h-4 w-4" />
                 </div>
               </Link>
             </AnimatedSection>
           </div>
+
+          <AnimatedSection direction="up" delay={0.4}>
+            <div className="mt-12 text-center">
+              <Link
+                to="/services"
+                className="btn btn-primary"
+              >
+                View All Services
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -321,105 +324,79 @@ function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="relative py-20 lg:py-28 bg-white overflow-hidden">
-        <div className="absolute top-0 right-0 w-72 h-72 bg-primary-50 rounded-full blur-[80px] opacity-60 -translate-y-1/2 translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-neutral-100 rounded-full blur-[60px] opacity-50 translate-y-1/2 -translate-x-1/4" />
-
-        <div className="relative container-custom">
+      <section className="section bg-neutral-50">
+        <div className="container-custom">
           <AnimatedSection direction="up">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="inline-block text-primary-600 font-semibold text-sm tracking-widest uppercase mb-3">Testimonials</span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
-                What Our Clients Say
-              </h2>
-              <p className="text-lg text-neutral-600 mt-4">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-neutral-900 mb-2">Client Testimonials</h2>
+              <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
+              <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
                 Hear what our clients have to say about our bespoke insurance solutions
               </p>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-            <AnimatedSection direction="up" delay={0.1}>
-              <div className="relative bg-gradient-to-br from-white to-neutral-50 rounded-2xl p-8 shadow-lg border border-neutral-100 h-full flex flex-col group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <svg className="absolute top-6 right-6 h-12 w-12 text-primary-100 group-hover:text-primary-200 transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-
-                <div className="flex items-center gap-1 mb-5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-
-                <blockquote className="text-neutral-700 leading-relaxed flex-grow relative z-10 mb-8">
-                  "Parx Group have superb expertise in their field. They quickly guide us through our exposures, before offering a neat solution that lets us continue to focus on developing our projects."
-                </blockquote>
-
-                <div className="flex items-center pt-6 border-t border-neutral-100">
-                  <div className="h-14 w-14 rounded-full overflow-hidden mr-4 ring-2 ring-neutral-100 flex-shrink-0">
-                    <img src="/jaspar.webp" alt="Jaspar Group logo" className="w-full h-full object-cover" />
+          <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3">
+            <AnimatedSection direction="left" delay={0.1}>
+              <div className="card p-8 relative">
+                <div className="flex items-center mb-6">
+                  <div className="h-16 w-16 rounded-full overflow-hidden mr-4">
+                    <img
+                      src="/jaspar.webp"
+                      alt="Jaspar Group logo"
+                      className="w-auto h-auto object-cover"
+                    />
                   </div>
                   <div>
-                    <h4 className="font-bold text-neutral-900">Sam Stickler</h4>
-                    <p className="text-neutral-500 text-sm">Acquisition Director</p>
+                    <h4 className="text-lg font-semibold text-neutral-900">Sam Stickler</h4>
+                    <p className="text-neutral-600">Acquisition Director</p>
                   </div>
                 </div>
+                <blockquote className="text-neutral-700 italic relative z-10">
+                  Parx Group have superb expertise in their field. They quickly guide us through our exposures, before offering a neat solution that lets us continue to focus on developing our projects.
+                </blockquote>
               </div>
             </AnimatedSection>
 
             <AnimatedSection direction="up" delay={0.2}>
-              <div className="relative bg-gradient-to-br from-white to-neutral-50 rounded-2xl p-8 shadow-lg border border-neutral-100 h-full flex flex-col group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 md:-translate-y-4">
-                <svg className="absolute top-6 right-6 h-12 w-12 text-primary-100 group-hover:text-primary-200 transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-
-                <div className="flex items-center gap-1 mb-5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-
-                <blockquote className="text-neutral-700 leading-relaxed flex-grow relative z-10 mb-8">
-                  "Parx offer tailored, practical advice and exceptional customer service, making them a trusted partner in managing our risks. They understand the unique challenges of social housing, and I always feel confident with their support."
-                </blockquote>
-
-                <div className="flex items-center pt-6 border-t border-neutral-100">
-                  <div className="h-14 w-14 rounded-full overflow-hidden mr-4 ring-2 ring-neutral-100 flex-shrink-0">
-                    <img src="/hspg.webp" alt="HSPG logo" className="w-full h-full object-cover" />
+              <div className="card p-8 relative">
+                <div className="flex items-center mb-6">
+                  <div className="h-16 w-16 rounded-full overflow-hidden mr-4">
+                    <img
+                      src="/hspg.webp"
+                      alt="HSPG logo"
+                      className="w-auto h-auto object-cover"
+                    />
                   </div>
                   <div>
-                    <h4 className="font-bold text-neutral-900">Stuart Brightmore</h4>
-                    <p className="text-neutral-500 text-sm">Senior Acquisitions Associate</p>
+                    <h4 className="text-lg font-semibold text-neutral-900">Stuart Brightmore</h4>
+                    <p className="text-neutral-600">Senior Acquisitions Associate</p>
                   </div>
                 </div>
+                <blockquote className="text-neutral-700 italic relative z-10">
+                  Parx offer tailored, practical advice and exceptional customer service, making them a trusted partner in managing our risks. They understands the unique challenges of social housing, and I always feel confident with their support.
+                </blockquote>
               </div>
             </AnimatedSection>
 
-            <AnimatedSection direction="up" delay={0.3}>
-              <div className="relative bg-gradient-to-br from-white to-neutral-50 rounded-2xl p-8 shadow-lg border border-neutral-100 h-full flex flex-col group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <svg className="absolute top-6 right-6 h-12 w-12 text-primary-100 group-hover:text-primary-200 transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-
-                <div className="flex items-center gap-1 mb-5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-
-                <blockquote className="text-neutral-700 leading-relaxed flex-grow relative z-10 mb-8">
-                  "Parx Group's bespoke insurance solutions and proactive approach give us confidence in navigating the challenges of the sector. Highly recommended for reliable risk management."
-                </blockquote>
-
-                <div className="flex items-center pt-6 border-t border-neutral-100">
-                  <div className="h-14 w-14 rounded-full overflow-hidden mr-4 ring-2 ring-neutral-100 flex-shrink-0">
-                    <img src="/westmede.webp" alt="Westmede logo" className="w-full h-full object-cover" />
+            <AnimatedSection direction="right" delay={0.3}>
+              <div className="card p-8 relative">
+                <div className="flex items-center mb-6">
+                  <div className="h-16 w-16 rounded-full overflow-hidden mr-4">
+                    <img
+                      src="/westmede.webp"
+                      alt="Westmede logo"
+                      className="w-auto h-auto object-cover"
+                    />
                   </div>
                   <div>
-                    <h4 className="font-bold text-neutral-900">George Wise</h4>
-                    <p className="text-neutral-500 text-sm">Head of Investment & Development</p>
+                    <h4 className="text-lg font-semibold text-neutral-900">George Wise</h4>
+                    <p className="text-neutral-600">Head of Investment & Development</p>
                   </div>
                 </div>
+                <blockquote className="text-neutral-700 italic relative z-10">
+                  Parx Group's bespoke insurance solutions and proactive approach give us confidence in navigating the challenges of the sector. Highly recommended for reliable risk management.
+                </blockquote>
               </div>
             </AnimatedSection>
           </div>
