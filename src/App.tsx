@@ -163,20 +163,26 @@ function HomePage() {
       {/* Services Section */}
       <section className="section bg-neutral-50" id="services">
         <div className="container-custom">
-          <AnimatedSection direction="up">
-            <div className="text-center max-w-3xl mx-auto">
-              <span className="inline-block text-primary-600 font-semibold text-sm tracking-widest uppercase mb-3">What We Do</span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight mb-6">
-                Property Insurance Services
-              </h2>
-              <p className="text-lg text-neutral-600 leading-relaxed mb-5">
-                Dedicated to protecting and enhancing real estate through bespoke risk transfer solutions that secure income, strengthen funding and safeguard long-term asset value.
-              </p>
-              <p className="text-lg text-neutral-600 leading-relaxed">
-                Every project presents its own set of risks, and its risk management strategies must be tailored with the same level of precision. Parx Group provides the assurance that your requirements will be assessed in full and that the most effective approach will be identified to support your objectives.
-              </p>
-            </div>
-          </AnimatedSection>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+            <AnimatedSection direction="left">
+              <div>
+                <span className="inline-block text-primary-600 font-semibold text-sm tracking-widest uppercase mb-3">What We Do</span>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
+                  Property Insurance Services
+                </h2>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <div>
+                <p className="text-lg text-neutral-600 leading-relaxed mb-5">
+                  Dedicated to protecting and enhancing real estate through bespoke risk transfer solutions that secure income, strengthen funding and safeguard long-term asset value.
+                </p>
+                <p className="text-lg text-neutral-600 leading-relaxed">
+                  Every project presents its own set of risks, and its risk management strategies must be tailored with the same level of precision. Parx Group provides the assurance that your requirements will be assessed in full and that the most effective approach will be identified to support your objectives.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
 
           <div className="mt-16 grid grid-cols-1 gap-4 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <AnimatedSection direction="up" delay={0.1}>
