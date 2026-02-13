@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Building, FileCheck, PoundSterling, ChevronRight, CheckCircle, Award } from 'lucide-react';
+import { Shield, Building, FileCheck, PoundSterling, ChevronRight, CheckCircle, Award, Layers, Users2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedSection from '../components/AnimatedSection';
 import SEO from '../components/SEO';
@@ -202,58 +202,86 @@ function Services() {
         </div>
       </section>
 
-      <section className="py-20 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-white to-neutral-50/30"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <AnimatedSection direction="up">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-neutral-900 mb-2">Expert Real Estate Insurance Solutions</h2>
-              <div className="w-20 h-1 bg-primary-500 mx-auto"></div>
-            </div>
-          </AnimatedSection>
+      <section className="relative py-20 lg:py-28 bg-primary-900 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-700 rounded-full blur-[160px] opacity-20 -translate-y-1/2 translate-x-1/4" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary-600 rounded-full blur-[120px] opacity-15 translate-y-1/2 -translate-x-1/4" />
+        </div>
 
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <AnimatedSection direction="left" delay={0.1}>
-              <div className="relative bg-gradient-to-br from-white to-neutral-50/50 rounded-3xl p-10 shadow-xl border border-neutral-200/60">
-                <div className="absolute -top-5 left-10 flex gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg shadow-lg flex items-center justify-center transform -rotate-3">
-                    <Shield className="h-5 w-5 text-white" />
-                  </div>
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg shadow-lg flex items-center justify-center transform rotate-3">
-                    <Building className="h-5 w-5 text-white" />
-                  </div>
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg shadow-lg flex items-center justify-center transform -rotate-3">
-                    <Award className="h-5 w-5 text-white" />
-                  </div>
-                </div>
-
-                <div className="prose prose-lg max-w-none mt-4">
-                  <p className="text-neutral-700 leading-relaxed mb-5">
-                    Parx Group provides insurance-led risk transfer structures for UK property development and transactional activity, tailored to the complexities of each deal. Our team has accumulated more than five decades of experience working alongside developers, investors, lenders and advisers across the breadth of the real estate market.
-                  </p>
-                  <p className="text-neutral-700 leading-relaxed mb-5">
-                    No two property transactions are the same. Whether navigating an acquisition or disposal, supporting development finance, reshaping capital structures or mitigating operational risk, we take a deal-specific approach, building insurance solutions that align precisely with your commercial priorities and longer-term objectives.
-                  </p>
-                  <p className="text-neutral-700 leading-relaxed">
-                    We partner with A- and AA rated insurers to deliver robust, institutional-quality protection at every stage of the property lifecycle, ensuring that risk transfer arrangements satisfy the requirements of lenders, funders and institutional investors active in UK real estate.
-                  </p>
-                </div>
-
-                <div className="absolute -bottom-3 -right-3 w-24 h-24 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full blur-2xl opacity-50"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <AnimatedSection direction="left">
+              <div>
+                <span className="inline-block text-primary-300 font-semibold text-sm tracking-widest uppercase mb-3">Why Choose Parx</span>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+                  Expert Real Estate Insurance Solutions
+                </h2>
+                <p className="text-primary-200 text-lg leading-relaxed mb-5">
+                  Parx Group provides insurance-led risk transfer structures for UK property development and transactional activity, tailored to the complexities of each deal. Our team has accumulated more than five decades of experience working alongside developers, investors, lenders and advisers across the breadth of the real estate market.
+                </p>
+                <p className="text-primary-200 text-lg leading-relaxed">
+                  We partner with A- and AA rated insurers to deliver robust, institutional-quality protection at every stage of the property lifecycle, ensuring that risk transfer arrangements satisfy the requirements of lenders, funders and institutional investors active in UK real estate.
+                </p>
               </div>
             </AnimatedSection>
 
-            <AnimatedSection direction="right" delay={0.2}>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-neutral-200 bg-white p-8">
-                <img
-                  src="/property_lifecycle_parx_4.webp"
-                  alt="Diagram showing the property investment lifecycle stages: development, acquisition, disposal, and portfolio management with insurance coverage at each phase"
-                  className="w-full h-auto"
-                  loading="lazy"
-                />
+            <AnimatedSection direction="right">
+              <div className="grid grid-cols-1 gap-5">
+                <div className="bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/[0.1] transition-all duration-300 group">
+                  <div className="flex items-center gap-5">
+                    <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-primary-500/20 flex items-center justify-center group-hover:bg-primary-500/30 transition-colors">
+                      <Layers className="h-7 w-7 text-primary-300" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-lg">Bespoke Structuring</h3>
+                      <p className="text-primary-300 text-sm mt-1">Tailored solutions for every project</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/[0.1] transition-all duration-300 group">
+                  <div className="flex items-center gap-5">
+                    <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-primary-500/20 flex items-center justify-center group-hover:bg-primary-500/30 transition-colors">
+                      <Shield className="h-7 w-7 text-primary-300" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-lg">Comprehensive Coverage</h3>
+                      <p className="text-primary-300 text-sm mt-1">AA rated insurer partnerships</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/[0.1] transition-all duration-300 group">
+                  <div className="flex items-center gap-5">
+                    <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-primary-500/20 flex items-center justify-center group-hover:bg-primary-500/30 transition-colors">
+                      <Users2 className="h-7 w-7 text-primary-300" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-lg">Deal-Specific Approach</h3>
+                      <p className="text-primary-300 text-sm mt-1">No two transactions are the same</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </AnimatedSection>
           </div>
+
+          <AnimatedSection direction="up" delay={0.3}>
+            <div className="mt-16 pt-16 border-t border-white/10 hidden sm:grid sm:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-4xl md:text-5xl font-black text-white">50+</div>
+                <p className="text-primary-300 mt-2 text-sm font-medium">Years Combined Experience</p>
+              </div>
+              <div>
+                <div className="text-4xl md:text-5xl font-black text-white">AA</div>
+                <p className="text-primary-300 mt-2 text-sm font-medium">Rated Insurer Partners</p>
+              </div>
+              <div>
+                <div className="text-4xl md:text-5xl font-black text-white">360&deg;</div>
+                <p className="text-primary-300 mt-2 text-sm font-medium">Full Lifecycle Coverage</p>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
