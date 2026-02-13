@@ -352,7 +352,7 @@ function HomePage() {
                     <img
                       src="/jaspar.webp"
                       alt="Jaspar Group logo"
-                      className="w-auto h-auto object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div>
@@ -373,7 +373,7 @@ function HomePage() {
                     <img
                       src="/hspg.webp"
                       alt="HSPG logo"
-                      className="w-auto h-auto object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div>
@@ -394,7 +394,7 @@ function HomePage() {
                     <img
                       src="/westmede.webp"
                       alt="Westmede logo"
-                      className="w-auto h-auto object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div>
