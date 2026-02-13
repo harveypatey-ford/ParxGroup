@@ -292,7 +292,7 @@ function HomePage() {
                     </div>
                     <div>
                       <h3 className="text-white font-bold text-lg">Comprehensive Coverage</h3>
-                      <p className="text-primary-300 text-sm mt-1">A/AA-rated insurer partnerships</p>
+                      <p className="text-primary-300 text-sm mt-1">AA-rated insurer partnerships</p>
                     </div>
                   </div>
                 </div>
