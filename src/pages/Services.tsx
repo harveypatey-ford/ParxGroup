@@ -236,7 +236,7 @@ function Services() {
                 <img
                   src="/property_lifecycle_parx_4.webp"
                   alt="Diagram showing the property investment lifecycle stages: development, acquisition, disposal, and portfolio management with insurance coverage at each phase"
-                  className="w-full h-auto"
+                  className="w-full h-auto rounded-2xl"
                   loading="lazy"
                 />
               </div>
