@@ -263,7 +263,7 @@ function PortfolioInvestorProtection() {
                 <p className="text-base sm:text-xl text-gray-700 leading-relaxed mb-3">
                   The policy is designed to operate across a wide range of property asset classes, including:
                 </p>
-                <ul className="space-y-3 ml-2">
+                <ul className="space-y-3 ml-2 list-none">
                   <li className="flex items-center text-base sm:text-xl text-gray-700">
                     <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-3 flex-shrink-0" />
                     Social Housing
