@@ -259,25 +259,6 @@ function PortfolioInvestorProtection() {
               <p className="text-base sm:text-xl text-gray-700 leading-relaxed text-justify hyphens-auto">
                 The Portfolio Investment Protection "PIP" policy safeguards rental and lease cashflows for lenders and investors by providing comprehensive protection against tenant default, rental voids and counterparty risk for the full term of the lease or lending arrangement.
               </p>
-              <div className="mt-4">
-                <p className="text-base sm:text-xl text-gray-700 leading-relaxed mb-3">
-                  The policy is designed to operate across a wide range of property asset classes, including:
-                </p>
-                <div className="space-y-3 ml-2">
-                  <div className="flex items-center text-base sm:text-xl text-gray-700">
-                    <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-3 flex-shrink-0" />
-                    Social Housing
-                  </div>
-                  <div className="flex items-center text-base sm:text-xl text-gray-700">
-                    <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-3 flex-shrink-0" />
-                    Build to Rent
-                  </div>
-                  <div className="flex items-center text-base sm:text-xl text-gray-700">
-                    <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-3 flex-shrink-0" />
-                    Student Accommodation
-                  </div>
-                </div>
-              </div>
             </article>
           </AnimatedSection>
         </div>
