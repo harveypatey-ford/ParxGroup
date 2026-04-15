@@ -258,6 +258,9 @@ function PortfolioInvestorProtection() {
               </div>
               <p className="text-base sm:text-xl text-gray-700 leading-relaxed text-justify hyphens-auto">
                 The Portfolio Investment Protection "PIP" policy safeguards rental and lease cashflows for lenders and investors by providing comprehensive protection against tenant default, rental voids and counterparty risk for the full term of the lease or lending arrangement.
+
+                Where an insured event results in insufficient net rental income to meet scheduled lender or investor repayments, the policy responds by indemnifying that shortfall, ensuring continuity of those financial obligations for the duration of the policy term.
+                
               </p>
             </article>
           </AnimatedSection>
