@@ -39,99 +39,185 @@ function Privacy() {
           <div className="space-y-8">
             <div className="bg-neutral-50 p-4 sm:p-8 rounded-lg">
               <p className="text-neutral-600 text-base sm:text-lg">
-                This notice describes how Parx Group Limited, as a data controller, collects, uses, shares and retains the Personal Data You provide and informs You about Your choices regarding use, access and correction of Your Personal Data. Parx Group Limited is committed to ensuring that any Personal Data it receives is protected and handled in accordance with applicable data protection laws. In this Privacy Notice, "We", "Us" and "Our" refers to Parx Group Limited. "Parx" means the following companies: Parx Group Limited registered in England and Wales with company number 14768763.
+                This Privacy Notice is separate from and does not override any contract terms We may have with You, nor Your rights under applicable data protection legislation, including the UK General Data Protection Regulation, the Data Protection Act 2018, and the Data (Use and Access) Act 2025.
+              </p>
+              <p className="text-neutral-700 text-base sm:text-lg mt-4">
+                When We refer to &ldquo;You&rdquo; or &ldquo;Your&rdquo;, We mean any individual whose Personal Data We may collect or process, including:
+              </p>
+              <ul className="list-disc pl-4 sm:pl-6 text-neutral-700 text-base sm:text-lg mt-4 ml-4">
+                <li className="mb-2">Anyone seeking a quotation from Us or whose details are provided during a quotation process</li>
+                <li className="mb-2">Anyone placing an order for a product with Us or requesting services from Us</li>
+                <li className="mb-2">Policyholders and any individual named on or covered by a policy</li>
+                <li className="mb-2">Anyone who may benefit from, be involved in, or be affected by a policy or claim, including claimants and witnesses</li>
+              </ul>
+              <p className="text-neutral-700 text-base sm:text-lg mt-4">
+                Where products or services are arranged through a third party such as a solicitor, broker, lender, or other intermediary, that third party may act as an independent data controller and process Your Personal Data for their own purposes. You should refer to their privacy notice for further information.
               </p>
             </div>
 
             <div className="space-y-8">
               <section>
-                <p className="text-neutral-700 text-base sm:text-lg">
-                  This Privacy Policy is separate from and not intended to override the terms of any contract We may have with You or Your rights under data protection laws.
-                </p>
-
-                <p className="text-neutral-700 text-base sm:text-lg mt-4">
-                  When We say, "You" and "Your" in this notice, We mean anyone whose Personal Data We may collect, including:
-                </p>
-
-                <ul className="list-disc pl-4 sm:pl-6 text-neutral-700 text-base sm:text-lg mt-4 ml-4">
-                  <li className="mb-2">Anyone seeking a quote from Us or whose details are provided during the quotation process</li>
-                  <li className="mb-2">Anyone placing an order for a product with Us and/or requesting services from Us</li>
-                  <li className="mb-2">Policyholders and anyone named on or covered by the policy</li>
-                  <li className="mb-2">Anyone who may benefit from or be directly involved in the policy or a claim, including claimants and witnesses</li>
-                </ul>
-
-                <p className="text-neutral-700 text-base sm:text-lg mt-4">
-                  If You are ordering products from Parx through a third party such as a solicitor, broker or other intermediary, they may have their own reasons for processing Your Personal Data. Please contact them directly should You require further information about their uses of Your Personal Data.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Collection of data</h2>
-                <ul className="list-disc pl-4 sm:pl-6 text-neutral-700 text-base sm:text-lg ml-4 space-y-4">
-                  <li>Personal Data, means any information from which that person can be identified. It does not include data where the identity has been removed (anonymous data).</li>
-                  <li>Parx may collect a range of personal and business information supplied by You or third parties on Your behalf. Wherever We collect or use Personal Data, We will make sure We do this for a valid legal reason. This information may include the following: basic personal details such as Your name, address, telephone number, gender, marital status, financial details, identification checks and background information, credit history, credit score, sanctions check results, information received from various anti-fraud databases, additional information about Your order or account requirements, such as details of Your Business, and marketing and communications data which includes Your preferences in receiving marketing from Us and our third parties and Your communication preferences.</li>
-                  <li>Parx may also collect data about You, Your business or the property for which the order is placed from a number of different sources, including but not limited to the electoral roll, third party databases available, other insurance or property search firms, loss adjusters and/or other parties involved in the process of administrating a claim, as well as publicly available sources.</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Our uses of data</h2>
+                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Collection of Personal Data</h2>
                 <div className="space-y-4">
                   <p className="text-neutral-700 text-base sm:text-lg">
-                    Parx will only use Your Personal Data when the law allows us to. Most commonly, We use the Personal Data in the following circumstances:
+                    Personal Data means any information relating to an identified or identifiable individual. It does not include data that has been anonymised.
                   </p>
                   <p className="text-neutral-700 text-base sm:text-lg">
-                    Parx uses the Personal Data We collect to operate Our business and provide the products we offer. The information We collect may be used for (amongst other purposes) the following: to assess Your application for an account, quote or product; to evaluate the risk You present; to verify Your identity; to register You as a new customer; to administer Your order and deliver our services; to conduct statistical analysis for pricing purposes; to administer claims; to investigate and resolve complaints; to manage our business relationship with You, to enable You to partake in a prize draw or complete a survey; to administer and protect Our business and Our website (including troubleshooting, data analysis, testing, system maintenance, support, reporting and hosting of data; to make suggestions; to make suggestions and recommendations to You about Parx products or services that may be of interest to You.
+                    Parx may collect personal and business information directly from You, from intermediaries acting on Your behalf, or from third parties where permitted by law. We ensure that all Personal Data is collected and processed for a valid lawful basis.
+                  </p>
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    The Personal Data We collect may include:
+                  </p>
+                  <ul className="list-disc pl-4 sm:pl-6 text-neutral-700 text-base sm:text-lg ml-4 space-y-2">
+                    <li>Personal details such as name, address, email address, telephone number, gender and marital status</li>
+                    <li>Identification and verification information including identity checks, background information, sanctions screening results, and anti fraud database searches</li>
+                    <li>Financial information including credit history, credit score, payment details and banking information</li>
+                    <li>Business information including company details, ownership structure, and transactional data</li>
+                    <li>Policy, quotation, and claims information</li>
+                    <li>Technical and usage data relating to Our website and systems</li>
+                    <li>Marketing and communications preferences</li>
+                  </ul>
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    We may also collect information from sources such as publicly available registers, electoral roll data, insurers, lenders, loss adjusters, professional advisers, fraud prevention agencies, and other parties involved in insurance placement, administration, or claims handling.
                   </p>
                 </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Lawful Basis for Processing</h2>
+                <div className="space-y-4">
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    Parx only processes Personal Data where permitted by law. The lawful basis for processing depends on the purpose for which the data is used.
+                  </p>
+                </div>
+                <div className="mt-4 overflow-x-auto">
+                  <table className="w-full text-left border border-neutral-200 rounded-lg overflow-hidden">
+                    <thead className="bg-primary-900 text-white">
+                      <tr>
+                        <th className="px-3 sm:px-4 py-3 text-sm font-semibold align-top">Purpose of Processing</th>
+                        <th className="px-3 sm:px-4 py-3 text-sm font-semibold align-top">Types of Personal Data</th>
+                        <th className="px-3 sm:px-4 py-3 text-sm font-semibold align-top">Lawful Basis</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-neutral-200">
+                      {[
+                        ['Insurance quotations, arranging and administering insurance, claims, renewals and adjustments', 'Name, address, contact details, policy and claim data, business details, order and account data, risk information', 'Performance of a Contract'],
+                        ['Legal and regulatory compliance', 'Name, address, identification checks, credit checks, sanctions results, risk information, business details, fraud database results', 'Legal Obligation'],
+                        ['Financial crime and fraud prevention', 'Credit history, credit score, fraud check data, sanctions data, identification and financial details', 'Legal Obligation and or Legitimate Interests'],
+                        ['Business operations and administration', 'Name, address, contact details, technical logs, business information, order data, complaint and support data', 'Legitimate Interests'],
+                        ['Customer relationship management', 'Name, contact details, account and order history, complaints and communications', 'Performance of a Contract or Legitimate Interests'],
+                        ['Communication monitoring', 'Call recordings, call metadata including date, time and numbers', 'Legitimate Interests'],
+                        ['Marketing of Parx services', 'Name, contact details, marketing preferences, purchase and order history', 'Legitimate Interests and or Consent'],
+                        ['Website usage monitoring', 'IP address, browser type, operating system, pages visited, session duration', 'Legitimate Interests'],
+                        ['Payment processing and credit facilities', 'Name, address, bank details, card details, credit checks', 'Performance of a Contract and Legitimate Interests'],
+                        ['Internal administration', 'Name, contact details, account, policy and claims information', 'Legitimate Interests'],
+                        ['Processing data relating to other individuals', 'Names, contact details, relationship to policyholder or claimant', 'Legitimate Interests'],
+                      ].map(([purpose, data, basis], idx) => (
+                        <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-neutral-50'}>
+                          <td className="px-3 sm:px-4 py-3 text-sm text-neutral-700 align-top">{purpose}</td>
+                          <td className="px-3 sm:px-4 py-3 text-sm text-neutral-700 align-top">{data}</td>
+                          <td className="px-3 sm:px-4 py-3 text-sm text-neutral-700 align-top">{basis}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Use of Personal Data</h2>
+                <p className="text-neutral-700 text-base sm:text-lg">
+                  Parx uses Personal Data to operate its business and deliver insurance and risk transfer services. This includes assessing applications, evaluating risk, verifying identity, administering policies and claims, handling complaints, managing customer relationships, maintaining systems security, conducting analysis, and meeting regulatory obligations.
+                </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Marketing</h2>
+                <p className="text-neutral-700 text-base sm:text-lg">
+                  We may send marketing communications about Parx products and services where You have requested information, purchased services, or where We have a legitimate interest to do so and You have not opted out. Where consent is required, We will obtain it and You may withdraw consent at any time.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Data Retention</h2>
                 <div className="space-y-4">
                   <p className="text-neutral-700 text-base sm:text-lg">
-                    We strive to provide You choices regarding certain Personal Data uses, particularly around marketing and advertising.
+                    Parx retains Personal Data only for as long as necessary to fulfil the purposes for which it was collected, including legal, regulatory, accounting, and reporting requirements.
                   </p>
                   <p className="text-neutral-700 text-base sm:text-lg">
-                    Promotional offers from Us: We may use Your Personal Data to form a view on what we think you may want or need, or what may be of interest to You. This is how we decide which products, services and offers may be relevant for you (we call this marketing). You will receive marketing communications from Us if You have requested from Us or purchases products or services from Us and you have not opted out of receiving that marketing.
+                    Retention periods are determined by:
+                  </p>
+                  <ul className="list-disc pl-4 sm:pl-6 text-neutral-700 text-base sm:text-lg ml-4 space-y-2">
+                    <li>The nature of the product or service provided</li>
+                    <li>Regulatory and statutory retention requirements</li>
+                    <li>Limitation periods for legal claims</li>
+                    <li>Operational and audit requirements</li>
+                  </ul>
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    In most cases, insurance related records are retained for a minimum of six years after the end of the business relationship or policy term, or longer where required by law or regulatory guidance. Data is securely deleted or anonymised once it is no longer required.
                   </p>
                 </div>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Who to contact</h2>
+                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Data Subject Rights</h2>
                 <div className="space-y-4">
                   <p className="text-neutral-700 text-base sm:text-lg">
-                    If You wish to exercise any of Your rights or have any queries about how We use Your Personal Data, please contact Parx by email: Connect@Parxgroup.co.uk
+                    You have rights in relation to Your Personal Data, including:
+                  </p>
+                  <ul className="list-disc pl-4 sm:pl-6 text-neutral-700 text-base sm:text-lg ml-4 space-y-2">
+                    <li>The right to object to processing</li>
+                    <li>The right to request access to Your Personal Data</li>
+                    <li>The right to correct inaccurate or incomplete information</li>
+                    <li>The right to withdraw consent where processing is based on consent</li>
+                    <li>The right to request deletion of data that is no longer required</li>
+                    <li>The right to restrict processing in certain circumstances</li>
+                    <li>The right to complain about how Your Personal Data is handled</li>
+                  </ul>
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    Subject Access Requests can be made in any format, including by email, telephone, in writing, in person, or via social media. You do not need to use the term &ldquo;subject access request&rdquo;.
                   </p>
                   <p className="text-neutral-700 text-base sm:text-lg">
-                    We will consider Your request and either comply with it or explain why We are not able to. Please note, We may request evidence of Your identity to process Your request.
+                    Parx aims to respond within 30 days. We do not charge for Subject Access Requests, however where requests are manifestly unfounded, excessive, or repetitive, We reserve the right to charge a reasonable administrative fee or refuse the request in line with applicable law.
                   </p>
-                  <div className="mt-4">
-                    <p className="text-neutral-700 text-base sm:text-lg font-medium">Contact Information:</p>
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    If a request cannot be completed within 30 days, We will inform You and explain the reasons and expected timeframe.
+                  </p>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Contact Details</h2>
+                <div className="space-y-4">
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    To exercise Your rights or raise queries about this Privacy Notice, please contact:
+                  </p>
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    Email: <a href="mailto:Connect@parxgroup.co.uk" className="text-primary-600 hover:text-primary-700 font-medium">Connect@parxgroup.co.uk</a>
+                  </p>
+                  <p className="text-neutral-700 text-base sm:text-lg">
+                    If You are not satisfied with Our response, You have the right to complain to the Information Commissioner&rsquo;s Office:
+                  </p>
+                  <div className="mt-2 bg-neutral-50 rounded-lg p-4 sm:p-6">
+                    <p className="text-neutral-700 text-base sm:text-lg">
+                      <span className="font-medium">Writing:</span> Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF
+                    </p>
                     <p className="text-neutral-700 text-base sm:text-lg mt-2">
-                      Writing: Information Commissioner's Office, Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF
+                      <span className="font-medium">Telephone:</span> 0303 123 1113 or 01625 545 745
                     </p>
-                    <p className="text-neutral-700 text-base sm:text-lg">
-                      Telephone: 0303 123 1113 (local rate) or 01625 545 745 (National Rate)
-                    </p>
-                    <p className="text-neutral-700 text-base sm:text-lg">
-                      Website: https://ico.org.uk/concerns
+                    <p className="text-neutral-700 text-base sm:text-lg mt-2">
+                      <span className="font-medium">Website:</span>{' '}
+                      <a href="https://ico.org.uk/concerns" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-700 font-medium">https://ico.org.uk/concerns</a>
                     </p>
                   </div>
                 </div>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-neutral-900 border-b border-neutral-200 pb-2 mb-4">Changes to this Data Privacy Notice</h2>
-                <p className="text-neutral-700 text-base sm:text-lg">
-                  We may amend this Data Privacy Notice from time to time for example, to keep it up to date or to comply with legal requirements. Should any significant changes be made to the ways in which Parx processes Personal Data from those described at the time of collection, We will post a notice on Our website.
-                </p>
               </section>
             </div>
           </div>
         </AnimatedSection>
       </div>
+
+      <StatusDisclosure />
     </div>
   );
 }
