@@ -223,3 +223,6 @@ function Privacy() {
 }
 
 export default Privacy;
+
+
+export default Privacy;
