@@ -20,6 +20,6 @@ Set `published` to `true` only when the article is approved and `published_at` i
 - 17 published articles were imported from the Bolt Database CSV export provided on 8 November 2026.
 - Their HTML body, slugs, titles, imagery and publication metadata were preserved. Internal creator IDs and author email/telephone fields were not imported into the public repository.
 - Two unpublished drafts were deliberately excluded from the public repository and from the preview build.
-- The client portal login page remains as a visual placeholder, but it never requests credentials. Portal dashboards and old authentication were removed.
+- The client portal login page remains as a visual placeholder with email and password inputs. The form does not process, persist or transmit entered values. Portal dashboards and old authentication were removed.
 - The former in-site Insights admin editor is retired. Article updates are made through GitHub.
 - Once production is migrated and checked, consider retiring the old database separately. Its data has **not** been deleted or changed by this migration.
