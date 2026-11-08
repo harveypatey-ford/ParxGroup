@@ -1,4 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -6,30 +5,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function loadEnvVariables() {
-  const envPath = path.join(__dirname, '..', '.env');
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, 'utf-8');
-    const lines = envContent.split('\n');
-    lines.forEach(line => {
-      const [key, ...valueParts] = line.split('=');
-      if (key && valueParts.length > 0) {
-        const value = valueParts.join('=').trim();
-        process.env[key.trim()] = value;
-      }
-    });
-  }
-}
-
-loadEnvVariables();
-
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY;
-
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  console.log('Skipping social meta generation - Supabase environment variables not set');
-  process.exit(0);
-}
+const articlesDir = path.join(__dirname, '..', 'src', 'content', 'articles');
+const publishedArticles = () => fs.readdirSync(articlesDir)
+  .filter(file => file.endsWith('.json'))
+  .map(file => JSON.parse(fs.readFileSync(path.join(articlesDir, file), 'utf8')))
+  .filter(article => article.published && article.published_at);
 
 const escapeHtml = (text) => {
   if (!text) return '';
@@ -46,7 +26,7 @@ const escapeHtml = (text) => {
 const generateHtml = (article, builtIndexHtml) => {
   const title = escapeHtml(article.title);
   const excerpt = escapeHtml(article.excerpt || 'Read more on Parx Group');
-  const image = escapeHtml(article.featured_image);
+  const image = escapeHtml(new URL(article.featured_image, 'https://parxgroup.co.uk').href);
   const pageUrl = `https://parxgroup.co.uk/insights/${article.slug}`;
   const author = escapeHtml(article.author || 'Parx Group');
   const publishedDate = article.published_at ? new Date(article.published_at).toISOString() : '';
@@ -112,17 +92,7 @@ async function main() {
 
   const builtIndexHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
 
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  const { data: articles, error } = await supabase
-    .from('articles')
-    .select('*')
-    .eq('published', true);
-
-  if (error) {
-    console.error('Error fetching articles:', error);
-    process.exit(1);
-  }
+  const articles = publishedArticles();
 
   if (!articles || articles.length === 0) {
     console.log('No published articles found');
@@ -142,7 +112,9 @@ async function main() {
     }
 
     const html = generateHtml(article, builtIndexHtml);
-    const filePath = path.join(distDir, `${article.slug}.html`);
+    const articleDir = path.join(distDir, article.slug);
+    fs.mkdirSync(articleDir, { recursive: true });
+    const filePath = path.join(articleDir, 'index.html');
 
     fs.writeFileSync(filePath, html);
     console.log(`Generated: ${filePath}`);

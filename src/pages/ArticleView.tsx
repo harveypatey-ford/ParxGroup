@@ -1,52 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Share2, Copy, Check, ArrowLeft, Mail, Linkedin, ChevronDown, ChevronUp, Phone, ChevronRight } from 'lucide-react';
-import { supabase } from '../lib/supabase';
-import { Database } from '../types/database.types';
+import React, { useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { Share2, Copy, Check, ArrowLeft, Mail, ChevronDown, ChevronUp, Phone, ChevronRight } from 'lucide-react';
+import { findPublishedArticle } from '../content/articles';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 
-type Article = Database['public']['Tables']['articles']['Row'];
-
 const ArticleView = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const [article, setArticle] = useState<Article | null>(null);
-  const [loading, setLoading] = useState(true);
+  const article = findPublishedArticle(slug);
   const [copiedLink, setCopiedLink] = useState(false);
   const [authorExpanded, setAuthorExpanded] = useState(false);
-
-  useEffect(() => {
-    if (slug) {
-      fetchArticle();
-    }
-  }, [slug]);
-
-
-  const fetchArticle = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('articles')
-        .select('*')
-        .eq('slug', slug)
-        .eq('published', true)
-        .maybeSingle();
-
-      if (error) throw error;
-
-      if (!data) {
-        navigate('/insights');
-        return;
-      }
-
-      setArticle(data);
-    } catch (error) {
-      console.error('Error fetching article:', error);
-      navigate('/insights');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleShareLinkedIn = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -97,16 +60,14 @@ const ArticleView = () => {
     return url.replace(/https?:\/\/uk\.linkedin\.com/, 'https://www.linkedin.com');
   };
 
-  if (loading) {
+  if (!article) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-primary-50 to-white flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900"></div>
+      <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 px-6 text-center">
+        <h1 className="text-3xl font-semibold text-slate-900">Article not found</h1>
+        <p className="text-slate-600">This article is unavailable.</p>
+        <Link to="/insights" className="btn btn-primary">View all insights</Link>
       </div>
     );
-  }
-
-  if (!article) {
-    return null;
   }
 
   const articleSchema = {
@@ -173,10 +134,10 @@ const ArticleView = () => {
         title={`${article.title} | Parx Group Insights`}
         description={article.excerpt || article.summary || ''}
         canonical={`https://parxgroup.co.uk/insights/${article.slug}`}
-        ogImage={article.featured_image}
+        ogImage={new URL(article.featured_image, 'https://parxgroup.co.uk').href}
         ogType="article"
         article={{
-          publishedTime: article.published_at,
+          publishedTime: article.published_at || undefined,
           author: article.author || 'Parx Group'
         }}
       />

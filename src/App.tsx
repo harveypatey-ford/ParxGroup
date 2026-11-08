@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Shield, Users as Users2, Phone, Mail, MapPin, ChevronRight, ChevronDown, Award, Briefcase, Building, Menu, X, Home, TrendingUp, Linkedin, Layers, Star } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Shield, Users as Users2, Phone, Mail, MapPin, ChevronRight, ChevronDown, Building, Menu, X, Home, TrendingUp, Linkedin, Layers } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import { Development, AcquisitionDisposal, PortfolioInvestorProtection, Login, Dashboard, CreateCasefile, CreatePIPApplication, CreatePBSAApplication, RightsToLight, TitleInsurance, Services, Contact, AdminLogin, AdminDashboard, Terms, Privacy, KYC, TOBA, EnvironmentalInsurance, Insights, ArticleView, ManageInsights } from './pages';
+import { Development, AcquisitionDisposal, PortfolioInvestorProtection, Login, RightsToLight, TitleInsurance, Services, Contact, Terms, Privacy, EnvironmentalInsurance, Insights, ArticleView } from './pages';
 import AnimatedSection from './components/AnimatedSection';
-import StatusDisclosure from './components/StatusDisclosure';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
 import SEO from './components/SEO';
 import StructuredData, { organizationSchema, websiteSchema, siteNavigationSchema } from './components/StructuredData';
-import { supabase } from './lib/supabase';
+import { publishedArticles } from './content/articles';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -19,73 +17,11 @@ function ScrollToTop() {
   return null;
 }
 
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-50">
-        <div className="bg-white p-8 rounded-lg shadow-card">
-          <div className="flex flex-col items-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-            <p className="mt-4 text-neutral-600">Loading...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
-
-  return <>{children}</>;
-}
-
 function HomePage() {
-  const [recentArticles, setRecentArticles] = useState<any[]>([]);
+  const recentArticles = publishedArticles.filter(article => article.featured).slice(0, 3);
   const [displayedRows, setDisplayedRows] = useState(2);
   const articlesPerRow = 3;
   const articlesToShow = displayedRows * articlesPerRow;
-
-  useEffect(() => {
-    const cacheKey = 'parx_recent_articles';
-    const cachedData = localStorage.getItem(cacheKey);
-
-    if (cachedData) {
-      try {
-        setRecentArticles(JSON.parse(cachedData));
-      } catch (e) {
-        console.error('Error parsing cached articles:', e);
-      }
-    }
-
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => fetchRecentArticles(cacheKey), { timeout: 2000 });
-    } else {
-      setTimeout(() => fetchRecentArticles(cacheKey), 2000);
-    }
-  }, []);
-
-  const fetchRecentArticles = async (cacheKey: string) => {
-    try {
-      const { data, error } = await supabase
-        .from('articles')
-        .select('*')
-        .eq('published', true)
-        .eq('featured', true)
-        .order('published_at', { ascending: false })
-        .limit(3);
-
-      if (error) throw error;
-      if (data) {
-        setRecentArticles(data);
-        localStorage.setItem(cacheKey, JSON.stringify(data));
-      }
-    } catch (error) {
-      console.error('Error fetching articles:', error);
-    }
-  };
 
   const getCategoryColor = (category: string) => {
     const colors: { [key: string]: string } = {
@@ -458,7 +394,7 @@ function HomePage() {
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
-                          {new Date(article.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          {new Date(article.published_at!).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </span>
                         <span className="flex items-center gap-2">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -494,7 +430,7 @@ function HomePage() {
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
-                          {new Date(article.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          {new Date(article.published_at!).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </span>
                         <span className="flex items-center gap-2">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -580,12 +516,8 @@ function AppContent() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const isHomePage = location.pathname === '/';
-  const isArticlePage = location.pathname.startsWith('/insights/');
 
-  // Hide nav for client dashboard and admin pages
-  const clientPages = ['/dashboard', '/create-casefile', '/create-pip-application', '/create-pbsa-application', '/kyc', '/toba'];
-  const adminPages = ['/admin/login', '/admin/dashboard', '/admin/manage-insights', '/admin-login', '/admin-dashboard'];
-  const hideNav = clientPages.includes(location.pathname) || adminPages.includes(location.pathname);
+  const hideNav = false;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -769,24 +701,24 @@ function AppContent() {
               <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/create-casefile" element={<ProtectedRoute><CreateCasefile /></ProtectedRoute>} />
-              <Route path="/create-pip-application" element={<ProtectedRoute><CreatePIPApplication /></ProtectedRoute>} />
-              <Route path="/create-pbsa-application" element={<ProtectedRoute><CreatePBSAApplication /></ProtectedRoute>} />
-              <Route path="/rights-to-light" element={<ProtectedRoute><RightsToLight /></ProtectedRoute>} />
-              <Route path="/title-insurance" element={<ProtectedRoute><TitleInsurance /></ProtectedRoute>} />
-              <Route path="/environmental-insurance" element={<ProtectedRoute><EnvironmentalInsurance /></ProtectedRoute>} />
+              <Route path="/rights-to-light" element={<RightsToLight />} />
+              <Route path="/title-insurance" element={<TitleInsurance />} />
+              <Route path="/environmental-insurance" element={<EnvironmentalInsurance />} />
               <Route path="/insights" element={<Insights />} />
               <Route path="/insights/:slug" element={<ArticleView />} />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/admin/manage-insights" element={<ProtectedRoute><ManageInsights /></ProtectedRoute>} />
-              <Route path="/admin-login" element={<AdminLogin />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path="/dashboard" element={<Navigate to="/login" replace />} />
+              <Route path="/create-casefile" element={<Navigate to="/login" replace />} />
+              <Route path="/create-pip-application" element={<Navigate to="/login" replace />} />
+              <Route path="/create-pbsa-application" element={<Navigate to="/login" replace />} />
+              <Route path="/admin/login" element={<Navigate to="/insights" replace />} />
+              <Route path="/admin/dashboard" element={<Navigate to="/insights" replace />} />
+              <Route path="/admin/manage-insights" element={<Navigate to="/insights" replace />} />
+              <Route path="/admin-login" element={<Navigate to="/insights" replace />} />
+              <Route path="/admin-dashboard" element={<Navigate to="/insights" replace />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
-              <Route path="/kyc" element={<ProtectedRoute><KYC /></ProtectedRoute>} />
-              <Route path="/toba" element={<ProtectedRoute><TOBA /></ProtectedRoute>} />
+              <Route path="/kyc" element={<Navigate to="/login" replace />} />
+              <Route path="/toba" element={<Navigate to="/login" replace />} />
             </Routes>
           </div>
 
@@ -821,7 +753,6 @@ function AppContent() {
                     <li><Link to="/insights" className="text-primary-200 hover:text-white transition-colors">Insights & News</Link></li>
                     <li><Link to="/contact" className="text-primary-200 hover:text-white transition-colors">Contact</Link></li>
                     <li><Link to="/login" className="text-primary-200 hover:text-white transition-colors">Client Portal</Link></li>
-                    <li><Link to="/admin-login" className="text-primary-200 hover:text-white transition-colors">Admin Portal</Link></li>
                     <li><Link to="/terms" className="text-primary-200 hover:text-white transition-colors">Terms & Conditions</Link></li>
                     <li><Link to="/privacy" className="text-primary-200 hover:text-white transition-colors">Privacy Notice</Link></li>
                   </ul>
@@ -868,12 +799,10 @@ function AppContent() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <ScrollToTop />
-        <AppContent />
-      </Router>
-    </AuthProvider>
+    <Router>
+      <ScrollToTop />
+      <AppContent />
+    </Router>
   );
 }
 

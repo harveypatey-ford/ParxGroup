@@ -1,4 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -6,30 +5,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function loadEnvVariables() {
-  const envPath = path.join(__dirname, '..', '.env');
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, 'utf-8');
-    const lines = envContent.split('\n');
-    lines.forEach(line => {
-      const [key, ...valueParts] = line.split('=');
-      if (key && valueParts.length > 0) {
-        const value = valueParts.join('=').trim();
-        process.env[key.trim()] = value;
-      }
-    });
-  }
-}
-
-loadEnvVariables();
-
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY;
-
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  console.log('Skipping sitemap generation - Supabase environment variables not set');
-  process.exit(0);
-}
+const articlesDir = path.join(__dirname, '..', 'src', 'content', 'articles');
+const publishedArticles = () => fs.readdirSync(articlesDir)
+  .filter(file => file.endsWith('.json'))
+  .map(file => JSON.parse(fs.readFileSync(path.join(articlesDir, file), 'utf8')))
+  .filter(article => article.published && article.published_at);
 
 const baseUrl = 'https://parxgroup.co.uk';
 
@@ -61,17 +41,7 @@ function formatDate(date) {
 async function generateSitemap() {
   console.log('Generating sitemap.xml...');
 
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  const { data: articles, error } = await supabase
-    .from('articles')
-    .select('slug, updated_at, published_at')
-    .eq('published', true)
-    .order('published_at', { ascending: false });
-
-  if (error) {
-    console.error('Error fetching articles:', error);
-  }
+  const articles = publishedArticles();
 
   let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
   sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';

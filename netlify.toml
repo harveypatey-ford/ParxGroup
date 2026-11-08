@@ -1,10 +1,9 @@
 [build]
-command = "npx vite build"
+command = "npm run build"
 publish = "dist"
 
 [build.environment]
 NODE_VERSION = "20"
-SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_SUPABASE_URL"
 
 [[redirects]]
 from = "/*"
@@ -12,60 +11,8 @@ to = "/index.html"
 status = 200
 
 [[edge_functions]]
-function = "sitemap"
-path = "/sitemap.xml"
-
-[[edge_functions]]
 function = "robots"
 path = "/robots.txt"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/insights"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/insights/*"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/terms"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/privacy"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/services"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/portfolio-investment-protection"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/title-insurance"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/environmental-insurance"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/rights-to-light"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/development"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/acquisition-disposal"
-
-[[edge_functions]]
-function = "social-meta"
-path = "/contact"
 
 [[headers]]
 for = "/sitemap.xml"
