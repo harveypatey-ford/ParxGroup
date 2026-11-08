@@ -37,7 +37,7 @@ function HomePage() {
   return (
     <>
       <SEO
-        title="Parx Group - Real Estate Insurance and Funding Specialist"
+        title="Parx Group: Real Estate Insurance Specialist"
         description="Providing bespoke insurance-led risk transfer solutions that secure income, strengthen funding and safeguard long-term asset value."
         keywords="real estate insurance, property insurance UK, rental income protection, rent protection, rent guarantee, title insurance, environmental insurance, portfolio investment protection, PIP insurance, property development insurance, acquisition insurance, disposal insurance, rights to light insurance, real estate risk management, property investment protection, development insurance, property portfolio insurance"
         canonical="https://parxgroup.co.uk/"
