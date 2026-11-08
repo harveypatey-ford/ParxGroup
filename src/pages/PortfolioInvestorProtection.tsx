@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
-import { Shield, Users as Users2, Phone, Mail, MapPin, ChevronRight, ChevronLeft, Award, Briefcase, Building, Star, Menu, X, Lock, FileText, Eye, EyeOff, Clock, BarChart4, PoundSterling, Landmark, FileCheck, TrendingDown, TrendingUp, DollarSign, CheckCircle2, Calendar, LogOut, Play, ArrowRightLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Shield, Phone, Mail, Award, Building, X, Clock, BarChart4, PoundSterling, FileCheck, TrendingDown, TrendingUp, CheckCircle2, LogOut, Play, ArrowRightLeft } from 'lucide-react';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 import AnimatedSection from '../components/AnimatedSection';
 
 function PortfolioInvestorProtection() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [fundingStructure, setFundingStructure] = useState<'equity' | 'debt'>('equity');
+  const debtFundedStages = [
+    {
+      icon: ArrowRightLeft,
+      title: 'Gross Income',
+      description: 'Rental income is paid to the portfolio operator.'
+    },
+    {
+      icon: Building,
+      title: 'Portfolio Management',
+      description: 'The operator manages the portfolio and retains a portion of the income.'
+    },
+    {
+      icon: Building,
+      title: 'Borrower / Sponsor',
+      description: 'Net rental income is paid to the property-owning borrower.'
+    },
+    {
+      icon: PoundSterling,
+      title: 'Lender',
+      description: 'The borrower makes scheduled debt-service payments to the lender.'
+    }
+  ];
   const benefits = [
     {
       icon: TrendingDown,
@@ -278,6 +300,43 @@ function PortfolioInvestorProtection() {
         <div className="w-16 h-1 bg-primary-500"></div>
       </div>
 
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <span className="text-sm font-medium text-neutral-700">Funding structure</span>
+        <div
+          role="group"
+          aria-label="Choose a portfolio funding structure"
+          className="inline-flex self-start rounded-xl border border-neutral-200 bg-neutral-100 p-1"
+        >
+          <button
+            type="button"
+            aria-pressed={fundingStructure === 'equity'}
+            onClick={() => setFundingStructure('equity')}
+            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 ${
+              fundingStructure === 'equity'
+                ? 'bg-primary-700 text-white shadow-sm'
+                : 'text-neutral-700 hover:bg-white hover:text-primary-700'
+            }`}
+          >
+            Equity-Funded
+          </button>
+          <button
+            type="button"
+            aria-pressed={fundingStructure === 'debt'}
+            onClick={() => setFundingStructure('debt')}
+            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 ${
+              fundingStructure === 'debt'
+                ? 'bg-primary-700 text-white shadow-sm'
+                : 'text-neutral-700 hover:bg-white hover:text-primary-700'
+            }`}
+          >
+            Debt-Funded
+          </button>
+        </div>
+      </div>
+
+      {fundingStructure === 'equity' ? (
+        <>
+
       {/* Mobile Layout */}
       <div className="md:hidden space-y-4">
         {/* Stage 1 */}
@@ -520,6 +579,65 @@ function PortfolioInvestorProtection() {
           <div className="col-start-5 row-start-2"></div>
         </div>
       </div>
+        </>
+      ) : (
+        <>
+          {/* Mobile and tablet: stack cards to keep every description legible. */}
+          <div className="xl:hidden space-y-4">
+            {debtFundedStages.map(({ icon: Icon, title, description }, index) => (
+              <React.Fragment key={title}>
+                {index > 0 && (
+                  <div className="flex justify-center" aria-hidden="true">
+                    <div className="h-8 w-px bg-primary-300"></div>
+                  </div>
+                )}
+
+                {index === 3 && (
+                  <>
+                    <div className="rounded-xl border border-primary-300 bg-gradient-to-br from-primary-50 via-primary-100 to-primary-50 p-5 shadow-lg">
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-primary-700 p-2.5 shadow">
+                          <Shield className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="mb-2 text-base font-semibold text-neutral-900">Portfolio Investment Protection</h3>
+                          <p className="text-sm leading-relaxed text-neutral-700">
+                            The lender is the named insured. PIP protects against covered shortfalls in the borrower's scheduled debt-service payment.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex justify-center" aria-hidden="true">
+                      <div className="h-8 w-px bg-primary-300"></div>
+                    </div>
+                  </>
+                )}
+
+                <div className="rounded-xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-5 shadow-md">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-100 to-primary-200 p-2.5 shadow">
+                      <Icon className="h-5 w-5 text-primary-700" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-base font-semibold text-neutral-900">{title}</h3>
+                      <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
+                    </div>
+                  </div>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Desktop: use the approved vector diagram and preserve its exact styling. */}
+          <div className="hidden xl:block">
+            <img
+              src="/diagrams/pip-lender-structure.svg"
+              alt="Gross income passes to the portfolio operator, then to the borrower or sponsor, who makes debt-service payments to the lender. The lender is the named insured under PIP against covered debt-service shortfalls."
+              className="h-auto w-full"
+            />
+          </div>
+        </>
+      )}
     </AnimatedSection>
   </div>
 </section>

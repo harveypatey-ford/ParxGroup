@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="405" viewBox="40 125 1320 405" role="img" aria-labelledby="diagram-title diagram-description">
+  <title id="diagram-title">Debt-Funded Cashflow and Risk Transfer Structure</title>
+  <desc id="diagram-description">Gross Income flows to Portfolio Management, then to the Borrower or Sponsor, which services the Lender. The lender is the named insured under Portfolio Investment Protection, which protects against covered shortfalls in the borrower's scheduled debt-service payment.</desc>
+
+  <defs>
+    <linearGradient id="pip-fill" x1="0" y1="0" x2="1" y2="0.9">
+      <stop offset="0" stop-color="#d5f3e9"/>
+      <stop offset="0.58" stop-color="#e6f7f0"/>
+      <stop offset="1" stop-color="#f5fcf9"/>
+    </linearGradient>
+    <linearGradient id="icon-fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c9efe2"/>
+      <stop offset="1" stop-color="#a4dccc"/>
+    </linearGradient>
+    <filter id="soft-blur" x="-15%" y="-25%" width="130%" height="170%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="wide-blur" x="-15%" y="-25%" width="130%" height="170%">
+      <feGaussianBlur stdDeviation="11"/>
+    </filter>
+    <style>
+      .heading { font: 700 33px Arial, Helvetica, sans-serif; fill: #20272c; letter-spacing: -0.9px; }
+      .title { font: 700 17px Arial, Helvetica, sans-serif; fill: #30383d; }
+      .body { font: 400 15.5px Arial, Helvetica, sans-serif; fill: #67727a; }
+      .pip-title { font: 700 17px Arial, Helvetica, sans-serif; fill: #26353a; }
+      .pip-body { font: 400 15.5px Arial, Helvetica, sans-serif; fill: #536267; }
+      .connection { stroke: #7cbdab; stroke-width: 1.4; fill: none; }
+      .icon-stroke { stroke: #137d66; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="570" fill="#ffffff"/>
+  <text x="68" y="79" class="heading">Cashflow &amp; Risk Transfer Structure</text>
+  <rect x="68" y="91" width="80" height="5" rx="1.5" fill="#269b80"/>
+
+  <!-- Thin green lines match the existing Parx cashflow diagram. -->
+  <path d="M 362 224 H 397" class="connection"/>
+  <path d="M 691 224 H 726" class="connection"/>
+  <path d="M 1020 224 H 1055" class="connection"/>
+  <path d="M 1037.5 224 V 356" class="connection"/>
+
+  <!-- Gross income -->
+  <rect x="68" y="156" width="294" height="146" rx="12" fill="#456359" opacity="0.18" filter="url(#soft-blur)"/>
+  <rect x="68" y="151" width="294" height="146" rx="12" fill="white" stroke="#e9eeed"/>
+  <rect x="87" y="173" width="45" height="47" rx="9" fill="url(#icon-fill)"/>
+  <g transform="translate(96 185)" class="icon-stroke">
+    <path d="M 0 7 H 24 M 19 2 L 24 7 L 19 12"/>
+    <path d="M 24 22 H 0 M 5 17 L 0 22 L 5 27"/>
+  </g>
+  <text x="146" y="188" class="title">Gross Income</text>
+  <text x="146" y="219" class="body">
+    <tspan x="146" dy="0">Rental income is paid to</tspan>
+    <tspan x="146" dy="21">the portfolio operator.</tspan>
+  </text>
+
+  <!-- Portfolio operator -->
+  <rect x="397" y="156" width="294" height="146" rx="12" fill="#456359" opacity="0.18" filter="url(#soft-blur)"/>
+  <rect x="397" y="151" width="294" height="146" rx="12" fill="white" stroke="#e9eeed"/>
+  <rect x="416" y="173" width="45" height="47" rx="9" fill="url(#icon-fill)"/>
+  <g transform="translate(428 183)" class="icon-stroke">
+    <rect x="1" y="1" width="20" height="26" rx="2"/>
+    <path d="M 6 7 H 7 M 13 7 H 14 M 6 13 H 7 M 13 13 H 14 M 6 19 H 7 M 13 19 H 14 M 9 27 V 23 H 14 V 27"/>
+  </g>
+  <text x="475" y="188" class="title">Portfolio Management</text>
+  <text x="475" y="219" class="body">
+    <tspan x="475" dy="0">The operator manages the</tspan>
+    <tspan x="475" dy="21">portfolio and retains a</tspan>
+    <tspan x="475" dy="21">portion of the income.</tspan>
+  </text>
+
+  <!-- The property-owning borrower / sponsor -->
+  <rect x="726" y="156" width="294" height="146" rx="12" fill="#456359" opacity="0.18" filter="url(#soft-blur)"/>
+  <rect x="726" y="151" width="294" height="146" rx="12" fill="white" stroke="#e9eeed"/>
+  <rect x="745" y="173" width="45" height="47" rx="9" fill="url(#icon-fill)"/>
+  <g transform="translate(757 184)" class="icon-stroke">
+    <path d="M 2 26 V 5 L 12 0 L 22 5 V 26 Z"/>
+    <path d="M 8 9 H 9 M 15 9 H 16 M 8 15 H 9 M 15 15 H 16 M 9 26 V 20 H 16 V 26"/>
+  </g>
+  <text x="804" y="188" class="title">Borrower / Sponsor</text>
+  <text x="804" y="219" class="body">
+    <tspan x="804" dy="0">Net rental income is paid</tspan>
+    <tspan x="804" dy="21">to the property-owning</tspan>
+    <tspan x="804" dy="21">borrower.</tspan>
+  </text>
+
+  <!-- Debt funder -->
+  <rect x="1055" y="156" width="294" height="146" rx="12" fill="#456359" opacity="0.18" filter="url(#soft-blur)"/>
+  <rect x="1055" y="151" width="294" height="146" rx="12" fill="white" stroke="#e9eeed"/>
+  <rect x="1074" y="173" width="45" height="47" rx="9" fill="url(#icon-fill)"/>
+  <g transform="translate(1085 182)" class="icon-stroke">
+    <path d="M 4 12 C 4 6 8 2 14 2 C 19 2 22 5 22 9"/>
+    <path d="M 10 10 V 18 C 10 21 8 24 5 26 H 24"/>
+    <path d="M 4 15 H 17"/>
+  </g>
+  <text x="1133" y="188" class="title">Lender</text>
+  <text x="1133" y="219" class="body">
+    <tspan x="1133" dy="0">The borrower makes</tspan>
+    <tspan x="1133" dy="21">scheduled debt-service</tspan>
+    <tspan x="1133" dy="21">payments to the lender.</tspan>
+  </text>
+
+  <!-- PIP protects the borrower-to-lender cashflow, not the operating rent collection. -->
+  <rect x="772" y="355" width="530" height="158" rx="13" fill="#48ae91" opacity="0.23" filter="url(#wide-blur)"/>
+  <rect x="772" y="360" width="530" height="156" rx="13" fill="#456359" opacity="0.15" filter="url(#soft-blur)"/>
+  <rect x="772" y="356" width="530" height="156" rx="13" fill="url(#pip-fill)" stroke="#8acbbb" stroke-width="2.3"/>
+  <rect x="793" y="377" width="45" height="47" rx="9" fill="#197d68"/>
+  <g transform="translate(803 389)" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 12 0 L 21 5 V 13 C 21 20 16 24 12 26 C 8 24 3 20 3 13 V 5 Z"/>
+  </g>
+  <text x="855" y="393" class="pip-title">Portfolio Investment Protection</text>
+  <text x="855" y="427" class="pip-body">
+    <tspan x="855" dy="0">The lender is the named insured. PIP protects</tspan>
+    <tspan x="855" dy="23">against covered shortfalls in the borrower's</tspan>
+    <tspan x="855" dy="23">scheduled debt-service payment.</tspan>
+  </text>
+</svg>
