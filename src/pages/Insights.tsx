@@ -1,17 +1,13 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Filter, X } from 'lucide-react';
-import { supabase } from '../lib/supabase';
-import { Database } from '../types/database.types';
+import { publishedArticles, type Article } from '../content/articles';
 import AnimatedSection from '../components/AnimatedSection';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 
-type Article = Database['public']['Tables']['articles']['Row'];
-
 const Insights = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
+  const articles: Article[] = publishedArticles;
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [displayedRows, setDisplayedRows] = useState(2);
@@ -19,29 +15,8 @@ const Insights = () => {
   const articlesToShow = displayedRows * articlesPerRow;
 
   useEffect(() => {
-    fetchArticles();
-  }, []);
-
-  useEffect(() => {
     setDisplayedRows(2);
   }, [selectedCategory]);
-
-  const fetchArticles = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('articles')
-        .select('*')
-        .eq('published', true)
-        .order('published_at', { ascending: false });
-
-      if (error) throw error;
-      setArticles(data || []);
-    } catch (error) {
-      console.error('Error fetching articles:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getCategoryColor = (category: string) => {
     const colors: { [key: string]: string } = {
@@ -290,11 +265,7 @@ const Insights = () => {
           </div>
         )}
 
-        {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900"></div>
-          </div>
-        ) : filteredArticles.length === 0 ? (
+        {filteredArticles.length === 0 ? (
           <AnimatedSection>
             <div className="text-center py-20">
               <p className="text-slate-600 text-lg">
