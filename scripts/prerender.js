@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const routes = [
   {
     path: '/',
-    title: 'Parx Group - Real Estate Insurance Specialist',
+    title: 'Parx Group: Real Estate Insurance Specialist',
     description: 'Bespoke risk management strategies to protect and enhance real estate investments. Specialising in title insurance, environmental insurance, and property development protection.',
     h1: 'Real Estate Insurance Specialist',
     content: 'Protecting and enhancing real estate value through bespoke insurance-led risk transfer solutions.'
