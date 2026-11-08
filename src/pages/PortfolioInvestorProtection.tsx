@@ -301,7 +301,6 @@ function PortfolioInvestorProtection() {
       </div>
 
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <span className="text-sm font-medium text-neutral-700">Funding structure</span>
         <div
           role="group"
           aria-label="Choose a portfolio funding structure"
