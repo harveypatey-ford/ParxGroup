@@ -1,0 +1,20 @@
+# Parx Group
+
+> Parx Group is a UK real estate insurance specialist providing bespoke insurance-led risk transfer solutions for property investors, lenders, funders and developers.
+
+Parx Group's website describes its insurance services and publishes insights on property investment and risk. Portfolio Investment Protection is an insurance solution designed to protect contracted income or debt service obligations, subject to the policy's terms and structure.
+
+## Main pages
+
+- [Parx Group homepage](https://parxgroup.co.uk/): Overview of the business and its real estate insurance services.
+- [Insurance services](https://parxgroup.co.uk/services/): Overview of Parx Group's insurance solutions.
+- [Portfolio Investment Protection](https://parxgroup.co.uk/portfolio-investment-protection/): Explanation of the product, structure and intended benefits.
+- [Development](https://parxgroup.co.uk/development/): Insurance solutions for property development risks.
+- [Acquisition and disposal](https://parxgroup.co.uk/acquisition-disposal/): Insurance solutions for property transactions.
+- [Insights](https://parxgroup.co.uk/insights/): Published articles and analysis on real estate insurance and investment.
+- [Contact](https://parxgroup.co.uk/contact/): How to contact Parx Group.
+
+## Website information
+
+- [Privacy notice](https://parxgroup.co.uk/privacy/): How the website handles personal information.
+- [Terms and conditions](https://parxgroup.co.uk/terms/): Website terms of use.
