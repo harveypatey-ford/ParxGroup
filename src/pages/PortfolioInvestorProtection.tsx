@@ -300,11 +300,11 @@ function PortfolioInvestorProtection() {
         <div className="w-16 h-1 bg-primary-500"></div>
       </div>
 
-      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <div className="mb-8 flex justify-center">
         <div
           role="group"
           aria-label="Choose a portfolio funding structure"
-          className="inline-flex self-start rounded-xl border border-neutral-200 bg-neutral-100 p-1"
+          className="inline-flex rounded-xl border border-neutral-200 bg-neutral-100 p-1"
         >
           <button
             type="button"
