@@ -37,12 +37,12 @@ const routes = [
   {
     path: '/portfolio-investment-protection',
     title: 'Portfolio Investment Protection | Rental Income Protection for Lenders and Investors | Parx Group',
-    description: 'Portfolio Investment Protection (PIP) is an insurance policy that protects the net rental income lenders and institutional investors rely on, subject to underwriting and policy terms.',
+    description: 'Portfolio Investment Protection (PIP) is an insurance policy that protects the income lenders and institutional investors rely on, subject to underwriting and policy terms.',
     h1: 'Portfolio Investment Protection',
-    content: 'Insured net rental income for institutional lenders and investors in long income real estate, supported by insurers rated A- or better.',
+    content: 'Insured income for institutional lenders and investors in long income real estate, supported by insurers rated A- or better.',
     additionalHeading: 'Product Summary',
     additionalParagraphs: [
-      'Portfolio Investment Protection (PIP) is an insurance policy that protects the net rental income a lender or investor expects to receive from a real estate portfolio. It is designed to respond where tenant default, sustained voids or the failure of a counterparty leave net income across the portfolio short of the insured amount. Cover runs for the term of the lease or lending arrangement, up to a maximum of 25 years.',
+      'Portfolio Investment Protection (PIP) is an insurance policy that protects the income a lender or investor expects to receive from a real estate portfolio. It is designed to respond where tenant default, sustained voids or the failure of a counterparty leave income across the portfolio short of the insured amount. Cover runs for the term of the lease or lending arrangement, up to a maximum of 25 years.',
       'PIP is a policy of indemnity. Cover is tested across the portfolio as a whole and responds once an agreed first loss layer has been used. It is subject to the terms, conditions, exclusions and limit of indemnity of the policy, and is underwritten by insurers rated A- or better.',
       'Each policy is structured around the transaction it supports and the requirements of the capital behind it, so the detail varies with the portfolio, the funding structure and the insurer.'
     ]
