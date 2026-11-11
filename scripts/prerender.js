@@ -36,10 +36,16 @@ const routes = [
   },
   {
     path: '/portfolio-investment-protection',
-    title: 'Rental Income Protection Insurance | Portfolio Investment Protection',
-    description: 'We structure insurance-led risk transfer solutions that protect income, strengthen funding terms and enhance long-term asset value.',
-    h1: 'Rental Income Protection Insurance',
-    content: 'Secure your property investment portfolio returns with comprehensive rental income insurance.'
+    title: 'Portfolio Investment Protection | Rental Income Protection for Lenders and Investors | Parx Group',
+    description: 'Portfolio Investment Protection (PIP) is an insurance policy that protects the net rental income lenders and institutional investors rely on, subject to underwriting and policy terms.',
+    h1: 'Portfolio Investment Protection',
+    content: 'Insured net rental income for institutional lenders and investors in long income real estate, supported by insurers rated A- or better.',
+    additionalHeading: 'Product Summary',
+    additionalParagraphs: [
+      'Portfolio Investment Protection (PIP) is an insurance policy that protects the net rental income a lender or investor expects to receive from a real estate portfolio. It is designed to respond where tenant default, sustained voids or the failure of a counterparty leave net income across the portfolio short of the insured amount. Cover runs for the term of the lease or lending arrangement, up to a maximum of 25 years.',
+      'PIP is a policy of indemnity. Cover is tested across the portfolio as a whole and responds once an agreed first loss layer has been used. It is subject to the terms, conditions, exclusions and limit of indemnity of the policy, and is underwritten by insurers rated A- or better.',
+      'Each policy is structured around the transaction it supports and the requirements of the capital behind it, so the detail varies with the portfolio, the funding structure and the insurer.'
+    ]
   },
   {
     path: '/insights',
@@ -150,6 +156,14 @@ function replaceMetaTag(html, property, attrType, newContent) {
 routes.forEach(route => {
   let html = baseHtml;
   const fullUrl = route.path === '/' ? 'https://parxgroup.co.uk/' : `https://parxgroup.co.uk${route.path}`;
+  const additionalHeading = route.additionalHeading ? `<h2>${route.additionalHeading}</h2>` : '';
+  const additionalCopy = (route.additionalParagraphs || []).map(paragraph => `<p>${paragraph}</p>`).join('\n      ');
+  const javascriptPrompt = route.path === '/portfolio-investment-protection' ? '' : '<p>Please enable JavaScript to view the full site.</p>';
+
+  if (route.path === '/portfolio-investment-protection') {
+    html = html.replace(/<!-- SEO fallback for non-JS crawlers -->[\s\S]*?<\/noscript>/, '');
+    html = html.replace(/<!-- SEO fallback for JS-enabled but React failing -->[\s\S]*?<!-- React mount point -->/, '<!-- React mount point -->');
+  }
 
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${route.title}</title>`);
 
@@ -170,12 +184,16 @@ routes.forEach(route => {
       <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
         <h1>${route.h1}</h1>
         <p>${route.content}</p>
-        <p>Please enable JavaScript to view the full site.</p>
+        ${additionalHeading}
+        ${additionalCopy}
+        ${javascriptPrompt}
       </div>
     </noscript>
     <div id="prerender-data" style="display: none;">
       <h1>${route.h1}</h1>
       <p>${route.content}</p>
+      ${additionalHeading}
+      ${additionalCopy}
     </div>`;
 
   html = html.replace(
