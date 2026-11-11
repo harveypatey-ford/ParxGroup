@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowDown, ArrowRight, ArrowRightLeft, Building, FileCheck, Landmark, PoundSterling, Shield, Wallet } from 'lucide-react';
 
 type FundingStructure = 'equity' | 'debt';
 
@@ -7,139 +6,207 @@ interface PIPStructureDiagramProps {
   fundingStructure: FundingStructure;
 }
 
-const incomeStages = {
-  equity: [
-    { icon: ArrowRightLeft, title: 'Gross Income', description: 'Rental income is paid to the portfolio operator.' },
-    { icon: Building, title: 'Portfolio Management', description: 'The operator manages the portfolio and retains an agreed portion of the income.' },
-    { icon: PoundSterling, title: 'Investor', description: 'The remaining net income is payable to the investor. The investor is the insured.' }
-  ],
-  debt: [
-    { icon: ArrowRightLeft, title: 'Gross Income', description: 'Rental income is paid to the portfolio operator.' },
-    { icon: Building, title: 'Portfolio Management', description: 'The operator manages the portfolio and retains an agreed portion of the income.' },
-    { icon: Building, title: 'Borrower or Sponsor', description: 'Net rental income is paid to the borrower that owns the properties.' },
-    { icon: Landmark, title: 'Lender', description: 'The borrower makes scheduled debt service payments to the lender. The lender is the named insured.' }
-  ]
+interface Party {
+  title: string;
+  description: string;
+}
+
+interface Structure {
+  /** One sentence summary of the diagram, read out by screen readers. */
+  summary: string;
+  /** The parties rental income passes through, in order, before it reaches the insured. */
+  incomeFlow: Party[];
+  /** The lender or investor: the last card in the income row. */
+  insured: Party;
+  reserve: Party;
+  policy: Party;
+  /** Large screens: one column for each party in the income row, with a narrow column for each arrow between them. */
+  gridColumns: string;
+  /** Large screens: where each part of the shortfall path sits on that grid. */
+  placement: {
+    label: string;
+    lineToInsured: string;
+    reserve: string;
+    link: string;
+    policy: string;
+  };
+}
+
+const GROSS_INCOME: Party = {
+  title: 'Gross Income',
+  description: 'Rental income is paid to the portfolio operator.'
 };
 
-const shortfallSteps = {
-  equity: [
-    { title: 'First Loss Reserve', description: 'The first loss layer. A ring fenced cash reserve absorbs the first part of any shortfall, before the policy responds.' },
-    { title: 'Portfolio Investment Protection', description: 'Once the reserve has been used, the policy can indemnify covered shortfalls, up to 100% of the net rent payable to the investor, for the policy term. The indemnity is provided by insurers rated A- or better.' }
-  ],
-  debt: [
-    { title: 'Debt Service Reserve', description: 'The first loss layer. A ring fenced cash reserve absorbs the first part of any shortfall, before the policy responds.' },
-    { title: 'Portfolio Investment Protection', description: "Once the reserve has been used, the policy can indemnify covered shortfalls in the borrower's scheduled debt service payments, for the policy term. The indemnity is provided by insurers rated A- or better." }
-  ]
+const PORTFOLIO_MANAGEMENT: Party = {
+  title: 'Portfolio Management',
+  description: 'The operator manages the portfolio and retains an agreed portion of the income.'
 };
 
-const operatingAgreementText = 'Sets out reporting, monitoring and how the cover operates in practice, through the policy term.';
+const RESERVE_DESCRIPTION =
+  'The first loss layer. A ring fenced cash reserve absorbs the first part of any shortfall, before the policy responds.';
+
+const OPERATING_AGREEMENT_DESCRIPTION =
+  'Sets out reporting, monitoring and how the cover operates in practice, through the policy term.';
+
+const STRUCTURES: Record<FundingStructure, Structure> = {
+  equity: {
+    summary: 'Equity funded: a shortfall is met by the reserve first, then by the policy.',
+    incomeFlow: [GROSS_INCOME, PORTFOLIO_MANAGEMENT],
+    insured: {
+      title: 'Investor',
+      description: 'The remaining income is payable to the investor. The investor is the insured.'
+    },
+    reserve: { title: 'First Loss Reserve', description: RESERVE_DESCRIPTION },
+    policy: {
+      title: 'Portfolio Investment Protection',
+      description:
+        'Once the reserve has been used, the policy can indemnify covered shortfalls, up to 100% of the income payable to the investor, for the policy term. The indemnity is provided by insurers rated A- or better.'
+    },
+    gridColumns: 'lg:grid-cols-[minmax(0,1fr)_3rem_minmax(0,1fr)_3rem_minmax(0,1fr)]',
+    /* Five columns. The investor is in column 5, so the reserve sits beneath it and the policy to its left. */
+    placement: {
+      label: 'lg:col-start-1 lg:col-span-3 lg:row-start-2',
+      lineToInsured: 'lg:col-start-5 lg:row-start-2',
+      reserve: 'lg:col-start-5 lg:row-start-3',
+      link: 'lg:col-start-4 lg:row-start-3',
+      policy: 'lg:col-start-1 lg:col-span-3 lg:row-start-3'
+    }
+  },
+  debt: {
+    summary: 'Debt funded: a shortfall is met by the reserve first, then by the policy.',
+    incomeFlow: [
+      GROSS_INCOME,
+      PORTFOLIO_MANAGEMENT,
+      {
+        title: 'Borrower or Sponsor',
+        description: 'Income is paid to the borrower that owns the properties.'
+      }
+    ],
+    insured: {
+      title: 'Lender',
+      description:
+        'The borrower makes scheduled debt service payments to the lender. The lender is the named insured.'
+    },
+    reserve: { title: 'Debt Service Reserve', description: RESERVE_DESCRIPTION },
+    policy: {
+      title: 'Portfolio Investment Protection',
+      description:
+        "Once the reserve has been used, the policy can indemnify covered shortfalls in the borrower's scheduled debt service payments, for the policy term. The indemnity is provided by insurers rated A- or better."
+    },
+    gridColumns:
+      'lg:grid-cols-[minmax(0,1fr)_2.5rem_minmax(0,1fr)_2.5rem_minmax(0,1fr)_2.5rem_minmax(0,1fr)]',
+    /* Seven columns. The lender is in column 7, so the reserve ends beneath it and the policy sits to its left. */
+    placement: {
+      label: 'lg:col-start-1 lg:col-span-5 lg:row-start-2',
+      lineToInsured: 'lg:col-start-7 lg:row-start-2',
+      reserve: 'lg:col-start-5 lg:col-span-3 lg:row-start-3',
+      link: 'lg:col-start-4 lg:row-start-3',
+      policy: 'lg:col-start-1 lg:col-span-3 lg:row-start-3'
+    }
+  }
+};
+
+const DASHED_LINE = 'border-dashed border-primary-600';
+
+type CardTone = 'plain' | 'insured' | 'reserve' | 'policy';
+
+/* The reserve and the policy are solid green so they stand out: the reserve mid green, the policy the darkest. */
+const CARD_TONES: Record<CardTone, { card: string; title: string; text: string }> = {
+  plain: { card: 'border-neutral-200 bg-neutral-50', title: 'text-neutral-900', text: 'text-neutral-700' },
+  insured: { card: 'border-primary-300 bg-primary-50', title: 'text-primary-900', text: 'text-neutral-800' },
+  reserve: { card: 'border-primary-600 bg-primary-600', title: 'text-white', text: 'text-white' },
+  policy: { card: 'border-primary-900 bg-primary-900', title: 'text-white', text: 'text-primary-100' }
+};
+
+function Card({ party, tone = 'plain', className = '' }: { party: Party; tone?: CardTone; className?: string }) {
+  const colours = CARD_TONES[tone];
+  return (
+    <div className={'rounded-xl border p-5 ' + colours.card + ' ' + className}>
+      <h3 className={'text-base font-semibold ' + colours.title}>{party.title}</h3>
+      <p className={'mt-2 text-sm leading-relaxed ' + colours.text}>{party.description}</p>
+    </div>
+  );
+}
+
+/**
+ * A solid arrow between two cards in the income row, drawn with borders so it needs no coordinates.
+ * It points down between stacked cards and right between cards in a row.
+ */
+function Arrow() {
+  return (
+    <div aria-hidden="true" className="flex flex-col items-center lg:flex-row">
+      <span className="h-5 w-0 border-l-2 border-solid border-primary-600 lg:h-0 lg:w-auto lg:flex-1 lg:border-l-0 lg:border-t-2"></span>
+      <span className="-mt-2 mb-1 h-2 w-2 rotate-45 border-b-2 border-r-2 border-primary-600 lg:-ml-2 lg:mb-0 lg:mr-1 lg:mt-0 lg:border-b-0 lg:border-t-2"></span>
+    </div>
+  );
+}
+
+/** Names a group of cards and doubles as the key to the solid and dashed lines. */
+function LaneLabel({ dashed = false, className = '', children }: { dashed?: boolean; className?: string; children: React.ReactNode }) {
+  return (
+    <p className={'flex items-center gap-3 text-sm font-semibold text-neutral-900 ' + className}>
+      <span
+        aria-hidden="true"
+        className={'w-8 border-t-2 border-primary-600 ' + (dashed ? 'border-dashed' : 'border-solid')}
+      ></span>
+      {children}
+    </p>
+  );
+}
 
 export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDiagramProps) {
-  const stages = incomeStages[fundingStructure];
-  const protections = shortfallSteps[fundingStructure];
+  const { summary, incomeFlow, insured, reserve, policy, gridColumns, placement } = STRUCTURES[fundingStructure];
 
   return (
-    <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5 sm:p-7 lg:p-9 shadow-sm">
-      {/* The income path is read first, left to right on desktop and top to bottom on smaller screens. */}
-      <div className="hidden lg:flex items-stretch gap-2 xl:gap-3">
-        {stages.map(({ icon: Icon, title, description }, index) => {
-          const isInsured = index === stages.length - 1;
-          return (
-            <React.Fragment key={title}>
-              {index > 0 && (
-                <div className="flex w-6 xl:w-8 shrink-0 items-center justify-center" aria-hidden="true">
-                  <ArrowRight className="h-5 w-5 text-primary-500" strokeWidth={1.5} />
-                </div>
-              )}
-              <div className={'flex min-w-0 flex-1 flex-col rounded-2xl border p-5 xl:p-6 shadow-sm ' + (isInsured ? 'border-primary-300 bg-primary-50' : 'border-neutral-200 bg-white')}>
-                <div className={'mb-5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ' + (isInsured ? 'bg-primary-700' : 'bg-primary-100')}>
-                  <Icon className={'h-5 w-5 ' + (isInsured ? 'text-white' : 'text-primary-700')} />
-                </div>
-                <h3 className="mb-3 text-base font-semibold text-neutral-900">{title}</h3>
-                <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
-              </div>
+    <figure className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
+      <figcaption className="sr-only">{summary}</figcaption>
+
+      <div className="p-5 sm:p-8">
+        <LaneLabel>When income is received</LaneLabel>
+
+        {/*
+          One grid holds the whole diagram, so every box and line stays in step at any screen size.
+          Small screens: a single column, read from top to bottom.
+          Large screens: income runs left to right along the first row and ends at the insured party. The
+          reserve sits directly beneath the insured party, with the policy behind it, so the reserve is
+          between the policy and the insured party: it is used first, and the policy can respond after it.
+          The only arrowhead on the dashed path points into the insured party.
+        */}
+        <div className={'mt-4 grid grid-cols-1 gap-y-3 lg:gap-y-0 ' + gridColumns}>
+          {incomeFlow.map((party) => (
+            <React.Fragment key={party.title}>
+              <Card party={party} />
+              <Arrow />
             </React.Fragment>
-          );
-        })}
-      </div>
+          ))}
+          <Card party={insured} tone="insured" />
 
-      <div className="lg:hidden">
-        {stages.map(({ icon: Icon, title, description }, index) => {
-          const isInsured = index === stages.length - 1;
-          return (
-            <React.Fragment key={title}>
-              {index > 0 && (
-                <div className="flex justify-center py-2" aria-hidden="true">
-                  <ArrowDown className="h-5 w-5 text-primary-500" strokeWidth={1.5} />
-                </div>
-              )}
-              <div className={'flex items-start gap-4 rounded-2xl border p-5 shadow-sm ' + (isInsured ? 'border-primary-300 bg-primary-50' : 'border-neutral-200 bg-white')}>
-                <div className={'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ' + (isInsured ? 'bg-primary-700' : 'bg-primary-100')}>
-                  <Icon className={'h-5 w-5 ' + (isInsured ? 'text-white' : 'text-primary-700')} />
-                </div>
-                <div>
-                  <h3 className="mb-2 text-base font-semibold text-neutral-900">{title}</h3>
-                  <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
-                </div>
-              </div>
-            </React.Fragment>
-          );
-        })}
-      </div>
-
-      {/* Each protection is connected back to the last income card. There is no link between protections. */}
-      <div className="relative hidden h-24 lg:block" aria-hidden="true">
-        <svg viewBox="0 0 1200 96" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
-          <path
-            d={fundingStructure === 'debt' ? 'M 1060 0 V 28 H 300 V 96 M 1060 28 H 900 V 96' : 'M 1010 0 V 28 H 300 V 96 M 1010 28 H 900 V 96'}
-            fill="none"
-            stroke="#75bfa9"
-            strokeWidth="1.5"
-            vectorEffect="non-scaling-stroke"
-          />
-          <circle cx={fundingStructure === 'debt' ? 1060 : 1010} cy="28" r="4" fill="#1e7d69" />
-          <circle cx="300" cy="92" r="3" fill="#1e7d69" />
-          <circle cx="900" cy="92" r="3" fill="#1e7d69" />
-        </svg>
-        <span className="absolute bottom-3 left-0 rounded-lg bg-neutral-50 pr-3 text-sm font-semibold text-primary-800">If income falls short</span>
-      </div>
-      <div className="flex flex-col items-center gap-2 py-5 lg:hidden">
-        <div className="h-5 w-px bg-primary-400" aria-hidden="true"></div>
-        <div className="h-2 w-2 rounded-full bg-primary-600" aria-hidden="true"></div>
-        <span className="mt-1 text-sm font-semibold text-primary-800">If income falls short</span>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-7">
-        {protections.map(({ title, description }, index) => {
-          const isPolicy = index === 1;
-          const Icon = isPolicy ? Shield : Wallet;
-          return (
-            <div
-              key={title}
-              className={'flex h-full flex-col rounded-2xl border p-6 sm:p-7 ' + (isPolicy ? 'border-primary-300 bg-gradient-to-br from-primary-50 to-white shadow-[0_12px_30px_rgba(30,125,105,0.10)]' : 'border-neutral-200 bg-white shadow-sm')}
-            >
-              <div className="mb-5 flex items-center justify-between">
-                <span className={'flex h-11 w-11 items-center justify-center rounded-xl text-base font-bold ' + (isPolicy ? 'bg-primary-700 text-white' : 'bg-primary-100 text-primary-800')}>{index + 1}</span>
-                <Icon className={'h-6 w-6 ' + (isPolicy ? 'text-primary-700' : 'text-primary-500')} strokeWidth={1.8} />
-              </div>
-              <h3 className="mb-3 text-lg font-semibold text-neutral-900">{title}</h3>
-              <p className="text-sm sm:text-base leading-relaxed text-neutral-600">{description}</p>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="mt-6 rounded-2xl bg-primary-900 p-6 sm:p-7 text-white">
-        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15">
-            <FileCheck className="h-6 w-6 text-white" />
+          {/* From the reserve up to the insured party */}
+          <div aria-hidden="true" className={'flex flex-col items-center lg:h-16 ' + placement.lineToInsured}>
+            <span className="mt-1 h-2 w-2 shrink-0 rotate-45 border-l-2 border-t-2 border-primary-600"></span>
+            <span className={'-mt-2 h-6 w-0 border-l-2 lg:h-auto lg:flex-1 ' + DASHED_LINE}></span>
           </div>
-          <div>
-            <h3 className="mb-2 text-lg font-semibold text-white">Operating Agreement</h3>
-            <p className="text-sm sm:text-base leading-relaxed text-primary-100">{operatingAgreementText}</p>
+
+          <LaneLabel dashed className={'lg:self-end lg:pb-3 ' + placement.label}>
+            If income falls short
+          </LaneLabel>
+
+          <Card party={reserve} tone="reserve" className={placement.reserve} />
+
+          {/* The policy stands behind the reserve. A plain link, with no arrowhead, because nothing is paid into the reserve. */}
+          <div aria-hidden="true" className={'flex flex-col items-center lg:flex-row ' + placement.link}>
+            <span className={'h-5 w-0 border-l-2 lg:h-0 lg:w-auto lg:flex-1 lg:border-l-0 lg:border-t-2 ' + DASHED_LINE}></span>
           </div>
+
+          <Card party={policy} tone="policy" className={placement.policy} />
         </div>
       </div>
-    </div>
+
+      {/* The Operating Agreement applies to the whole structure, so it runs along the foot of the diagram. */}
+      <div className="border-t border-neutral-200 bg-neutral-50 px-5 py-4 sm:px-8 sm:py-5 md:grid md:grid-cols-[13rem_minmax(0,1fr)] md:gap-x-6">
+        <h3 className="text-base font-semibold text-neutral-900">Operating Agreement</h3>
+        <p className="mt-1 text-sm leading-relaxed text-neutral-700 md:mt-0">{OPERATING_AGREEMENT_DESCRIPTION}</p>
+      </div>
+    </figure>
   );
 }
