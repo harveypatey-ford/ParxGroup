@@ -34,7 +34,7 @@ const PRODUCT_SUMMARY =
 const AUDIENCES = [
   { name: 'Lenders', description: 'funding income producing portfolios, including banks, debt funds and institutional lenders.' },
   { name: 'Institutional investors', description: 'holding leased real estate for the long term, including insurers, annuity providers and pension funds, and investors in forward funded and income strip structures.' },
-  { name: 'Borrowers and sponsors', description: 'raising finance against portfolio income.' },
+  { name: 'Borrowers', description: 'raising finance against portfolio income.' },
   { name: 'Advisers', description: 'structuring transactions for clients, including debt advisers and solicitors.' }
 ];
 
@@ -52,7 +52,7 @@ const FUNDING_OPTIONS: { value: FundingStructure; label: string }[] = [
 
 const BENEFIT_GROUPS = [
   {
-    audience: 'For borrowers and sponsors',
+    audience: 'For borrowers',
     benefits: [
       { icon: TrendingDown, title: 'Lower Cost of Capital', text: 'Where income is insured, lenders may be able to offer keener margins.' },
       { icon: TrendingUp, title: 'Scope for Higher Leverage', text: 'Insurance backing can support the case for increased leverage or a lower equity requirement.' },
@@ -71,7 +71,8 @@ const BENEFIT_GROUPS = [
     audience: 'For institutional investors',
     benefits: [
       { icon: BarChart4, title: 'More Predictable Income', text: 'Protection against covered shortfalls can make long dated income more predictable for liability matching and investment planning.' },
-      { icon: ArrowRightLeft, title: 'Support for Valuation and Exit', text: 'Insured income may support keener yields and stronger pricing on sale, including for forward funded and income strip structures.' }
+      { icon: ArrowRightLeft, title: 'Support for Valuation and Exit', text: 'Insured income may support keener yields and stronger pricing on sale, including for forward funded and income strip structures.' },
+        { icon: PoundSterling, title: 'Capital Efficiency', text: 'Insured income may support more efficient capital allocation, subject to each investor’s own risk assessment and applicable requirements.' }
     ]
   }
 ];
