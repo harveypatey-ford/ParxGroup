@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Phone, Mail, Award, Building, Clock, BarChart4, PoundSterling, FileCheck, TrendingDown, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { Shield, Phone, Mail, Award, Building, Clock, BarChart4, PoundSterling, FileCheck, TrendingDown, TrendingUp, CheckCircle2, ArrowUpRight } from 'lucide-react';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 import AnimatedSection from '../components/AnimatedSection';
@@ -393,7 +393,7 @@ function PortfolioInvestorProtection() {
                   {relatedReading.map(({ title, path }) => (
                     <Link to={path} key={path} className="group flex items-start justify-between gap-4 py-4 first:pt-0 last:pb-0 text-primary-700 hover:text-primary-800 font-semibold transition-colors">
                       <span className="leading-relaxed">{title}</span>
-                      <span aria-hidden="true" className="mt-1 shrink-0 text-primary-500 group-hover:translate-x-1 transition-transform">↗</span>
+                      <ArrowUpRight aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-primary-500 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </Link>
                   ))}
                 </div>
