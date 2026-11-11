@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRightLeft, Building, FileCheck, Landmark, PoundSterling, Shield, Wallet } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowRightLeft, Building, FileCheck, Landmark, PoundSterling, Shield, Wallet } from 'lucide-react';
 
 type FundingStructure = 'equity' | 'debt';
 
@@ -36,104 +36,108 @@ const operatingAgreementText = 'Sets out reporting, monitoring and how the cover
 
 export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDiagramProps) {
   const stages = incomeStages[fundingStructure];
-  const shortfall = shortfallSteps[fundingStructure];
+  const protections = shortfallSteps[fundingStructure];
 
   return (
-    <div>
-      {/* Preserve the existing cashflow card styling; the reserve and policy branch from the insured party. */}
-      <div className="hidden xl:flex items-stretch gap-4">
-        {stages.map(({ icon: Icon, title, description }, index) => (
-          <React.Fragment key={title}>
-            {index > 0 && (
-              <div className="flex w-8 shrink-0 items-center" aria-hidden="true">
-                <div className="h-px w-full bg-primary-300" />
-              </div>
-            )}
-            <div className="min-w-0 flex-1 rounded-xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-5 shadow-md">
-              <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-100 to-primary-200 p-2.5 shadow">
-                  <Icon className="h-5 w-5 text-primary-700" />
+    <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5 sm:p-7 lg:p-9 shadow-sm">
+      {/* The income path is read first, left to right on desktop and top to bottom on smaller screens. */}
+      <div className="hidden lg:flex items-stretch gap-2 xl:gap-3">
+        {stages.map(({ icon: Icon, title, description }, index) => {
+          const isInsured = index === stages.length - 1;
+          return (
+            <React.Fragment key={title}>
+              {index > 0 && (
+                <div className="flex w-6 xl:w-8 shrink-0 items-center justify-center" aria-hidden="true">
+                  <ArrowRight className="h-5 w-5 text-primary-500" strokeWidth={1.5} />
                 </div>
-                <div className="min-w-0">
-                  <h3 className="mb-2 text-base font-semibold text-neutral-900">{title}</h3>
-                  <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
+              )}
+              <div className={'flex min-w-0 flex-1 flex-col rounded-2xl border p-5 xl:p-6 shadow-sm ' + (isInsured ? 'border-primary-300 bg-primary-50' : 'border-neutral-200 bg-white')}>
+                <div className={'mb-5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ' + (isInsured ? 'bg-primary-700' : 'bg-primary-100')}>
+                  <Icon className={'h-5 w-5 ' + (isInsured ? 'text-white' : 'text-primary-700')} />
                 </div>
+                <h3 className="mb-3 text-base font-semibold text-neutral-900">{title}</h3>
+                <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
               </div>
-            </div>
-          </React.Fragment>
-        ))}
+            </React.Fragment>
+          );
+        })}
       </div>
 
-      <div className="space-y-4 xl:hidden">
-        {stages.map(({ icon: Icon, title, description }, index) => (
-          <React.Fragment key={title}>
-            {index > 0 && (
-              <div className="flex justify-center" aria-hidden="true"><div className="h-6 w-px bg-primary-300" /></div>
-            )}
-            <div className="rounded-xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-5 shadow-md">
-              <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-100 to-primary-200 p-2.5 shadow">
-                  <Icon className="h-5 w-5 text-primary-700" />
+      <div className="lg:hidden">
+        {stages.map(({ icon: Icon, title, description }, index) => {
+          const isInsured = index === stages.length - 1;
+          return (
+            <React.Fragment key={title}>
+              {index > 0 && (
+                <div className="flex justify-center py-2" aria-hidden="true">
+                  <ArrowDown className="h-5 w-5 text-primary-500" strokeWidth={1.5} />
+                </div>
+              )}
+              <div className={'flex items-start gap-4 rounded-2xl border p-5 shadow-sm ' + (isInsured ? 'border-primary-300 bg-primary-50' : 'border-neutral-200 bg-white')}>
+                <div className={'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ' + (isInsured ? 'bg-primary-700' : 'bg-primary-100')}>
+                  <Icon className={'h-5 w-5 ' + (isInsured ? 'text-white' : 'text-primary-700')} />
                 </div>
                 <div>
                   <h3 className="mb-2 text-base font-semibold text-neutral-900">{title}</h3>
                   <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
                 </div>
               </div>
-            </div>
-          </React.Fragment>
-        ))}
+            </React.Fragment>
+          );
+        })}
       </div>
 
-      {/* Both numbered protections connect to the last income card, not to each other. */}
-      <div className="relative hidden h-20 xl:block">
-        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
+      {/* Each protection is connected back to the last income card. There is no link between protections. */}
+      <div className="relative hidden h-24 lg:block" aria-hidden="true">
+        <svg viewBox="0 0 1200 96" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
           <path
-            d={`M ${fundingStructure === 'debt' ? 1050 : 1000} 0 V 26 H 300 V 80 M ${fundingStructure === 'debt' ? 1050 : 1000} 26 H 900 V 80`}
+            d={fundingStructure === 'debt' ? 'M 1060 0 V 28 H 300 V 96 M 1060 28 H 900 V 96' : 'M 1010 0 V 28 H 300 V 96 M 1010 28 H 900 V 96'}
             fill="none"
-            stroke="#7ecfba"
+            stroke="#75bfa9"
             strokeWidth="1.5"
             vectorEffect="non-scaling-stroke"
           />
+          <circle cx={fundingStructure === 'debt' ? 1060 : 1010} cy="28" r="4" fill="#1e7d69" />
+          <circle cx="300" cy="92" r="3" fill="#1e7d69" />
+          <circle cx="900" cy="92" r="3" fill="#1e7d69" />
         </svg>
-        <span className="absolute bottom-2 left-5 rounded-md bg-white px-3 py-1 text-sm font-semibold text-primary-800">If income falls short</span>
+        <span className="absolute bottom-3 left-0 rounded-lg bg-neutral-50 pr-3 text-sm font-semibold text-primary-800">If income falls short</span>
       </div>
-      <div className="mt-5 flex flex-col items-center xl:hidden">
-        <div className="h-6 w-px bg-primary-300" aria-hidden="true" />
-        <div className="mb-4 text-sm font-semibold text-primary-800">If income falls short</div>
+      <div className="flex flex-col items-center gap-2 py-5 lg:hidden">
+        <div className="h-5 w-px bg-primary-400" aria-hidden="true"></div>
+        <div className="h-2 w-2 rounded-full bg-primary-600" aria-hidden="true"></div>
+        <span className="mt-1 text-sm font-semibold text-primary-800">If income falls short</span>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 xl:grid-cols-2 xl:gap-8">
-        {shortfall.map(({ title, description }, index) => {
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-7">
+        {protections.map(({ title, description }, index) => {
           const isPolicy = index === 1;
           const Icon = isPolicy ? Shield : Wallet;
           return (
             <div
               key={title}
-              className={`rounded-xl border p-5 shadow-lg ${isPolicy ? 'border-primary-300 bg-gradient-to-br from-primary-50 via-primary-100 to-primary-50' : 'border-neutral-200 bg-gradient-to-br from-white to-neutral-50'}`}
+              className={'flex h-full flex-col rounded-2xl border p-6 sm:p-7 ' + (isPolicy ? 'border-primary-300 bg-gradient-to-br from-primary-50 to-white shadow-[0_12px_30px_rgba(30,125,105,0.10)]' : 'border-neutral-200 bg-white shadow-sm')}
             >
-              <div className="flex items-start gap-3">
-                <div className={`relative flex h-11 w-11 shrink-0 items-center justify-center rounded-lg p-2.5 shadow ${isPolicy ? 'bg-gradient-to-br from-primary-600 to-primary-700' : 'bg-gradient-to-br from-primary-100 to-primary-200'}`}>
-                  <Icon className={`h-5 w-5 ${isPolicy ? 'text-white' : 'text-primary-700'}`} />
-                  <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary-700 text-xs font-bold text-white">{index + 1}</span>
-                </div>
-                <div>
-                  <h3 className="mb-2 text-base font-semibold text-neutral-900">{title}</h3>
-                  <p className="text-sm leading-relaxed text-neutral-700">{description}</p>
-                </div>
+              <div className="mb-5 flex items-center justify-between">
+                <span className={'flex h-11 w-11 items-center justify-center rounded-xl text-base font-bold ' + (isPolicy ? 'bg-primary-700 text-white' : 'bg-primary-100 text-primary-800')}>{index + 1}</span>
+                <Icon className={'h-6 w-6 ' + (isPolicy ? 'text-primary-700' : 'text-primary-500')} strokeWidth={1.8} />
               </div>
+              <h3 className="mb-3 text-lg font-semibold text-neutral-900">{title}</h3>
+              <p className="text-sm sm:text-base leading-relaxed text-neutral-600">{description}</p>
             </div>
           );
         })}
       </div>
 
-      <div className="mt-6 flex items-start gap-3 rounded-xl border border-primary-200 bg-gradient-to-r from-primary-50 to-white p-5 shadow-md">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-100 to-primary-200 p-2.5 shadow">
-          <FileCheck className="h-5 w-5 text-primary-700" />
-        </div>
-        <div>
-          <h3 className="mb-2 text-base font-semibold text-neutral-900">Operating Agreement</h3>
-          <p className="text-sm leading-relaxed text-neutral-600">{operatingAgreementText}</p>
+      <div className="mt-6 rounded-2xl bg-primary-900 p-6 sm:p-7 text-white">
+        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15">
+            <FileCheck className="h-6 w-6 text-white" />
+          </div>
+          <div>
+            <h3 className="mb-2 text-lg font-semibold text-white">Operating Agreement</h3>
+            <p className="text-sm sm:text-base leading-relaxed text-primary-100">{operatingAgreementText}</p>
+          </div>
         </div>
       </div>
     </div>
