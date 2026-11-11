@@ -78,7 +78,7 @@ const STRUCTURES: Record<FundingStructure, Structure> = {
       GROSS_INCOME,
       PORTFOLIO_MANAGEMENT,
       {
-        title: 'Borrower or Sponsor',
+        title: 'Borrower',
         description: 'Income is paid to the borrower that owns the properties.'
       }
     ],
