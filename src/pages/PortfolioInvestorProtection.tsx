@@ -164,21 +164,27 @@ function PortfolioInvestorProtection() {
       <section className="section bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection delay={0.3} distance={30} duration={0.5} direction="up">
-            <article className="prose prose-lg max-w-none">
-              <div className="mb-8 text-left">
-                <h2 className="text-3xl font-bold text-neutral-900 mb-2">Product Summary</h2>
-                <div className="w-20 h-1 bg-primary-500 mb-6"></div>
-              </div>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed text-justify hyphens-auto">
+            <div className="mb-8 sm:mb-10">
+              <h2 className="text-3xl font-bold text-neutral-900 mb-2">Product Summary</h2>
+              <div className="w-20 h-1 bg-primary-500"></div>
+            </div>
+            <div className="rounded-2xl border border-neutral-200 border-l-4 border-l-primary-500 bg-white p-6 sm:p-8 lg:p-10 shadow-sm">
+              <p className="max-w-6xl text-lg sm:text-xl text-neutral-800 leading-relaxed">
                 Portfolio Investment Protection (PIP) is an insurance policy that protects the net rental income a lender or investor expects to receive from a real estate portfolio. It is designed to respond where tenant default, sustained voids or the failure of a counterparty leave net income across the portfolio short of the insured amount. Cover runs for the term of the lease or lending arrangement, up to a maximum of 25 years.
               </p>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed text-justify hyphens-auto">
-                PIP is a policy of indemnity. Cover is tested across the portfolio as a whole and responds once an agreed first loss layer has been used. It is subject to the terms, conditions, exclusions and limit of indemnity of the policy, and is underwritten by insurers rated A- or better.
-              </p>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed text-justify hyphens-auto">
-                Each policy is structured around the transaction it supports and the requirements of the capital behind it, so the detail varies with the portfolio, the funding structure and the insurer.
-              </p>
-            </article>
+            </div>
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm">
+                <p className="text-base text-neutral-600 leading-relaxed">
+                  PIP is a policy of indemnity. Cover is tested across the portfolio as a whole and responds once an agreed first loss layer has been used. It is subject to the terms, conditions, exclusions and limit of indemnity of the policy, and is underwritten by insurers rated A- or better.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm">
+                <p className="text-base text-neutral-600 leading-relaxed">
+                  Each policy is structured around the transaction it supports and the requirements of the capital behind it, so the detail varies with the portfolio, the funding structure and the insurer.
+                </p>
+              </div>
+            </div>
           </AnimatedSection>
         </div>
       </section>
@@ -187,22 +193,19 @@ function PortfolioInvestorProtection() {
       <section className="section bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection delay={0.2} distance={30} duration={0.5} direction="up">
-            <div className="mb-8 text-left">
+            <div className="mb-8 sm:mb-10">
               <h2 className="text-3xl font-bold text-neutral-900 mb-2">Who It Is For</h2>
               <div className="w-20 h-1 bg-primary-500 mb-6"></div>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed">PIP is arranged for professional and institutional parties to real estate transactions:</p>
+              <p className="max-w-4xl text-base sm:text-xl text-gray-700 leading-relaxed">PIP is arranged for professional and institutional parties to real estate transactions:</p>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-6">
               {audiences.map(({ icon: Icon, label, description }) => (
-                <div key={label} className="card p-4 sm:p-6 lg:p-8 h-full flex flex-col">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 mr-3 sm:mr-4 lg:mr-5">
-                      <div className="p-3 bg-primary-50 rounded-lg w-fit"><Icon className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600" /></div>
-                    </div>
-                    <p className="text-neutral-600 text-sm sm:text-base">
-                      <strong className="text-neutral-900">{label}</strong> {description}
-                    </p>
+                <div key={label} className="flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-6 lg:p-7 shadow-sm">
+                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50">
+                    <Icon className="h-7 w-7 text-primary-700" />
                   </div>
+                  <h3 className="mb-3 text-lg font-semibold text-neutral-900">{label}</h3>
+                  <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">{description}</p>
                 </div>
               ))}
             </div>
@@ -214,47 +217,74 @@ function PortfolioInvestorProtection() {
       <section className="section bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection delay={0.2} distance={30} duration={0.5} direction="up">
-            <div className="mb-8 text-left">
+            <div className="mb-8 sm:mb-10">
               <h2 className="text-3xl font-bold text-neutral-900 mb-2">How the Cover Works</h2>
-              <div className="w-20 h-1 bg-primary-500 mb-6"></div>
+              <div className="w-20 h-1 bg-primary-500"></div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-              {coverSteps.map(({ icon: Icon, title, description }) => (
-                <div key={title} className="card p-4 sm:p-6 lg:p-8 h-full flex flex-col">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 mr-3 sm:mr-4 lg:mr-5">
-                      <div className="p-3 bg-primary-50 rounded-lg w-fit"><Icon className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600" /></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+              {coverSteps.slice(0, 2).map(({ icon: Icon, title, description }, index) => (
+                <div key={title} className="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm">
+                  <div className="mb-5 flex items-center justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50">
+                      <Icon className="h-7 w-7 text-primary-700" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 mb-2">{title}</h3>
-                      <p className="text-neutral-600 text-sm sm:text-base">{description}</p>
-                    </div>
+                    <span className="text-sm font-semibold tabular-nums text-primary-600">0{index + 1}</span>
                   </div>
+                  <h3 className="mb-3 text-lg sm:text-xl font-semibold text-neutral-900">{title}</h3>
+                  <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">{description}</p>
                 </div>
               ))}
+            </div>
+            <div className="mt-5 lg:mt-6 rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm">
+              <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-7">
+                <div className="flex w-full shrink-0 items-center justify-between sm:w-auto sm:flex-col sm:items-start sm:gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50">
+                    <Building className="h-7 w-7 text-primary-700" />
+                  </div>
+                  <span className="text-sm font-semibold tabular-nums text-primary-600">03</span>
+                </div>
+                <div>
+                  <h3 className="mb-3 text-lg sm:text-xl font-semibold text-neutral-900">{coverSteps[2].title}</h3>
+                  <p className="max-w-5xl text-sm sm:text-base text-neutral-600 leading-relaxed">{coverSteps[2].description}</p>
+                </div>
+              </div>
+            </div>
+            <div className="mt-5 lg:mt-6 rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm">
+              <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-7">
+                <div className="flex w-full shrink-0 items-center justify-between sm:w-auto sm:flex-col sm:items-start sm:gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50">
+                    <FileCheck className="h-7 w-7 text-primary-700" />
+                  </div>
+                  <span className="text-sm font-semibold tabular-nums text-primary-600">04</span>
+                </div>
+                <div>
+                  <h3 className="mb-3 text-lg sm:text-xl font-semibold text-neutral-900">{coverSteps[3].title}</h3>
+                  <p className="max-w-5xl text-sm sm:text-base text-neutral-600 leading-relaxed">{coverSteps[3].description}</p>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-{/* Deal Structure Section */}
-      <section className="section bg-white py-10">
+      {/* Deal Structure Section */}
+      <section className="section bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection delay={0.4} distance={32} duration={0.55} direction="right">
-            <div className="mb-6">
-              <h2 id="deal-structure" className="text-3xl font-bold text-neutral-900 mb-1">Cashflow & Risk Transfer Structure</h2>
-              <div className="w-16 h-1 bg-primary-500 mb-6"></div>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed">How income flows, and where the policy sits, depends on how the portfolio is funded.</p>
+          <AnimatedSection delay={0.3} distance={24} duration={0.5} direction="up">
+            <div className="mb-8 sm:mb-10">
+              <h2 id="deal-structure" className="text-3xl font-bold text-neutral-900 mb-2">Cashflow & Risk Transfer Structure</h2>
+              <div className="w-20 h-1 bg-primary-500 mb-6"></div>
+              <p className="max-w-4xl text-base sm:text-xl text-gray-700 leading-relaxed">How income flows, and where the policy sits, depends on how the portfolio is funded.</p>
             </div>
-            <div className="mb-8 flex justify-center">
-              <div role="group" aria-label="Choose a portfolio funding structure" className="inline-flex rounded-xl border border-neutral-200 bg-neutral-100 p-1">
+            <div className="mb-8 sm:mb-10 flex justify-center">
+              <div role="group" aria-label="Choose a portfolio funding structure" className="inline-flex rounded-full border border-neutral-200 bg-neutral-100 p-1.5 shadow-sm">
                 <button
                   type="button"
                   aria-pressed={fundingStructure === 'equity'}
                   onClick={() => setFundingStructure('equity')}
                   className={fundingStructure === 'equity'
-                    ? 'rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 bg-primary-700 text-white shadow-sm'
-                    : 'rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 text-neutral-700 hover:bg-white hover:text-primary-700'}
+                    ? 'rounded-full px-5 sm:px-7 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 bg-primary-700 text-white shadow-sm'
+                    : 'rounded-full px-5 sm:px-7 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 text-neutral-700 hover:bg-white hover:text-primary-700'}
                 >
                   Equity-Funded
                 </button>
@@ -263,8 +293,8 @@ function PortfolioInvestorProtection() {
                   aria-pressed={fundingStructure === 'debt'}
                   onClick={() => setFundingStructure('debt')}
                   className={fundingStructure === 'debt'
-                    ? 'rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 bg-primary-700 text-white shadow-sm'
-                    : 'rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 text-neutral-700 hover:bg-white hover:text-primary-700'}
+                    ? 'rounded-full px-5 sm:px-7 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 bg-primary-700 text-white shadow-sm'
+                    : 'rounded-full px-5 sm:px-7 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 text-neutral-700 hover:bg-white hover:text-primary-700'}
                 >
                   Debt-Funded
                 </button>
@@ -279,31 +309,32 @@ function PortfolioInvestorProtection() {
       <section className="section bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection delay={0.2} distance={30} duration={0.5} direction="up">
-            <div className="mb-8 sm:mb-10 text-left">
+            <div className="mb-8 sm:mb-10">
               <h2 id="key-benefits" className="text-3xl font-bold text-neutral-900 mb-2">Key Benefits</h2>
               <div className="w-20 h-1 bg-primary-500 mb-6"></div>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed">Insured net rental income can change how a portfolio is assessed by lenders, valuers and purchasers.</p>
+              <p className="max-w-4xl text-base sm:text-xl text-gray-700 leading-relaxed">Insured net rental income can change how a portfolio is assessed by lenders, valuers and purchasers.</p>
             </div>
-            {benefitGroups.map(({ label, benefits }) => (
-              <div key={label} className="mb-10 last:mb-0">
-                <h3 className="text-xl font-semibold text-neutral-900 mb-5">{label}</h3>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                  {benefits.map(({ icon: Icon, title, description }) => (
-                    <div key={title} className="card p-4 sm:p-6 lg:p-8 h-full flex flex-col">
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mr-3 sm:mr-4 lg:mr-5">
-                          <div className="p-3 bg-primary-50 rounded-lg w-fit"><Icon className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600" /></div>
+            <div className="space-y-10 lg:space-y-12">
+              {benefitGroups.map(({ label, benefits }) => (
+                <div key={label}>
+                  <div className="mb-5 flex items-center gap-5">
+                    <h3 className="shrink-0 text-lg sm:text-xl font-semibold text-neutral-900">{label}</h3>
+                    <div className="h-px flex-1 bg-primary-200"></div>
+                  </div>
+                  <div className={benefits.length === 3 ? 'grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6' : 'grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6'}>
+                    {benefits.map(({ icon: Icon, title, description }) => (
+                      <div key={title} className="flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-6 lg:p-7 shadow-sm">
+                        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50">
+                          <Icon className="h-7 w-7 text-primary-700" />
                         </div>
-                        <div className="flex-1">
-                          <h4 className="text-lg sm:text-xl font-semibold text-neutral-900 mb-2">{title}</h4>
-                          <p className="text-neutral-600 text-sm sm:text-base">{description}</p>
-                        </div>
+                        <h4 className="mb-3 text-lg font-semibold text-neutral-900">{title}</h4>
+                        <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">{description}</p>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </AnimatedSection>
         </div>
       </section>
@@ -311,22 +342,23 @@ function PortfolioInvestorProtection() {
       {/* Policy Features Section */}
       <section className="section bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection delay={0.3} distance={30} duration={0.5} direction="left">
-            <div className="mb-8 sm:mb-10 text-left">
+          <AnimatedSection delay={0.3} distance={30} duration={0.5} direction="up">
+            <div className="mb-8 sm:mb-10">
               <h2 id="policy-coverage" className="text-3xl font-bold text-neutral-900 mb-2">Policy Features</h2>
-              <div className="w-20 h-1 bg-primary-500 mb-6"></div>
+              <div className="w-20 h-1 bg-primary-500"></div>
             </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
-                {policyFeatures.map(({ icon: Icon, label, text }) => (
-                  <div key={label} className="flex items-start">
-                    <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-2 sm:mr-3 flex-shrink-0 mt-1" />
-                    <p className="text-sm sm:text-base text-gray-700">
-                      <strong>{label}:</strong> {text}
-                    </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+              {policyFeatures.map(({ icon: Icon, label, text }) => (
+                <div key={label} className="flex h-full items-start gap-5 rounded-2xl border border-neutral-200 bg-white p-6 lg:p-7 shadow-sm">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50">
+                    <Icon className="h-6 w-6 text-primary-700" />
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <h3 className="mb-2 text-lg font-semibold text-neutral-900">{label}</h3>
+                    <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">{text}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </AnimatedSection>
         </div>
@@ -336,30 +368,35 @@ function PortfolioInvestorProtection() {
       <section className="section bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection delay={0.2} distance={30} duration={0.5} direction="up">
-            <div className="mb-8 text-left">
+            <div className="mb-8 sm:mb-10">
               <h2 className="text-3xl font-bold text-neutral-900 mb-2">Sectors</h2>
-              <div className="w-20 h-1 bg-primary-500 mb-6"></div>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed">PIP can be structured for portfolios in:</p>
+              <div className="w-20 h-1 bg-primary-500"></div>
             </div>
-            <div className="card p-4 sm:p-6 lg:p-8">
-              <ul className="space-y-3">
-                {sectorNames.map(name => (
-                  <li key={name} className="flex items-start gap-3 text-neutral-700">
-                    <CheckCircle2 className="h-5 w-5 shrink-0 text-primary-600 mt-0.5" />
-                    <span>{name}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 text-neutral-600 text-sm sm:text-base">Other use classes can be considered, subject to insurer approval.</p>
-            </div>
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold text-neutral-900 mb-5">Related reading</h3>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {relatedReading.map(({ title, path }) => (
-                  <Link to={path} key={path} className="card p-4 sm:p-6 text-primary-700 hover:text-primary-800 font-semibold transition-colors">
-                    {title}
-                  </Link>
-                ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm">
+                <p className="mb-6 text-base sm:text-lg font-medium text-neutral-900">PIP can be structured for portfolios in:</p>
+                <ul className="space-y-4">
+                  {sectorNames.map(name => (
+                    <li key={name} className="flex items-start gap-4 border-b border-neutral-100 pb-4 last:border-0 last:pb-0">
+                      <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary-50">
+                        <CheckCircle2 className="h-4 w-4 text-primary-700" />
+                      </div>
+                      <span className="text-base text-neutral-700 leading-relaxed">{name}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-auto pt-8 text-sm sm:text-base text-neutral-600 leading-relaxed">Other use classes can be considered, subject to insurer approval.</p>
+              </div>
+              <div className="flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm">
+                <h3 className="mb-5 text-lg sm:text-xl font-semibold text-neutral-900">Related reading</h3>
+                <div className="divide-y divide-neutral-100">
+                  {relatedReading.map(({ title, path }) => (
+                    <Link to={path} key={path} className="group flex items-start justify-between gap-4 py-4 first:pt-0 last:pb-0 text-primary-700 hover:text-primary-800 font-semibold transition-colors">
+                      <span className="leading-relaxed">{title}</span>
+                      <span aria-hidden="true" className="mt-1 shrink-0 text-primary-500 group-hover:translate-x-1 transition-transform">↗</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </AnimatedSection>
@@ -453,8 +490,8 @@ function PortfolioInvestorProtection() {
       </section>
 
       {/* Important Information, directly above the shared footer */}
-      <section className="bg-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs sm:text-sm leading-relaxed text-neutral-500 space-y-4">
+      <section className="bg-neutral-50 border-t border-neutral-200 py-8 sm:py-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-xs sm:text-sm leading-relaxed text-neutral-500 space-y-4">
           <h2 className="text-sm font-semibold text-neutral-700">Important Information</h2>
           <p>This page gives general information about Portfolio Investment Protection for professional and institutional audiences. It is not an offer of insurance, and it is not advice or a personal recommendation. Cover is subject to underwriting and insurer approval, and to the terms, conditions, exclusions and limits of the policy issued for each transaction.</p>
           <p>References to funding, valuation or pricing describe how insured income may be viewed by lenders, valuers and investors. They are not forecasts or guarantees, and outcomes depend on each party's own assessment. Nothing on this page is a statement about regulatory eligibility or capital treatment.</p>
