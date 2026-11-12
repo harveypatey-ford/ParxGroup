@@ -82,6 +82,8 @@ const STRUCTURES: Record<FundingStructure, Structure> = {
   }
 };
 
+const FUNDING_ORDER: FundingStructure[] = ['equity', 'debt'];
+
 /*
   Large screens: the reserve and the policy sit in the same places for both structures, on the equity
   grid: the reserve across the first three columns and the policy in the last column, under the insured
@@ -153,7 +155,7 @@ function LaneLabel({ dashed = false, className = '', children }: { dashed?: bool
 }
 
 export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDiagramProps) {
-  const { summary, incomeFlow, insured, reserve, policy, gridColumns } = STRUCTURES[fundingStructure];
+  const { summary, reserve, policy } = STRUCTURES[fundingStructure];
 
   return (
     <figure className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
@@ -164,16 +166,34 @@ export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDi
 
         {/*
           The income row. Small screens: a single column, read from top to bottom. Large screens: income
-          runs left to right and ends at the insured party.
+          runs left to right and ends at the insured party. Both structures' rows are laid in the same
+          place and only the chosen one is shown, so the area is always as tall as the taller row and
+          nothing below it moves when the structure changes.
         */}
-        <div className={'mt-4 grid grid-cols-1 gap-y-3 lg:gap-y-0 ' + gridColumns}>
-          {incomeFlow.map((party) => (
-            <React.Fragment key={party.title}>
-              <Card party={party} />
-              <Arrow />
-            </React.Fragment>
-          ))}
-          <Card party={insured} tone="insured" />
+        <div className="mt-4 lg:grid">
+          {FUNDING_ORDER.map((key) => {
+            const { incomeFlow, insured, gridColumns } = STRUCTURES[key];
+            const shown = key === fundingStructure;
+            return (
+              <div
+                key={key}
+                aria-hidden={shown ? undefined : true}
+                className={
+                  'grid-cols-1 gap-y-3 lg:col-start-1 lg:row-start-1 lg:gap-y-0 ' +
+                  gridColumns +
+                  (shown ? ' grid' : ' hidden lg:invisible lg:grid')
+                }
+              >
+                {incomeFlow.map((party) => (
+                  <React.Fragment key={party.title}>
+                    <Card party={party} />
+                    <Arrow />
+                  </React.Fragment>
+                ))}
+                <Card party={insured} tone="insured" />
+              </div>
+            );
+          })}
         </div>
 
         {/*
