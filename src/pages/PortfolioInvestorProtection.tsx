@@ -1,236 +1,239 @@
-import React, { useState } from 'react';
-import { Shield, Phone, Mail, Award, Building, X, Clock, BarChart4, PoundSterling, FileCheck, TrendingDown, TrendingUp, CheckCircle2, LogOut, Play, ArrowRightLeft } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  ArrowRightLeft,
+  Award,
+  BarChart4,
+  ChevronDown,
+  FileCheck,
+  Layers,
+  Mail,
+  Phone,
+  PoundSterling,
+  TrendingDown,
+  TrendingUp
+} from 'lucide-react';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 import AnimatedSection from '../components/AnimatedSection';
+import PIPStructureDiagram from '../components/PIPStructureDiagram';
+
+type FundingStructure = 'equity' | 'debt';
+
+/* -------------------------------------------------------------------------------------------------
+ * Page copy
+ * All wording lives here, separate from the layout below, so it can be updated in one place.
+ * ----------------------------------------------------------------------------------------------- */
+
+const HERO_SUBHEADING =
+  'Insured income for institutional lenders and investors in long income real estate, supported by insurers rated A- or better.';
+
+const PRODUCT_SUMMARY =
+  'Portfolio Investment Protection (PIP) is an insurance policy that protects the income a lender or investor expects to receive from a real estate portfolio. It is designed to respond where tenant default, sustained voids or the failure of a counterparty leave income across the portfolio short of the insured amount. Cover runs for the term of the lease or lending arrangement, up to a maximum of 25 years.';
+
+/* Each entry reads as one sentence: the name, then the description. */
+const AUDIENCES = [
+  { name: 'Lenders', description: 'funding income producing portfolios, including banks, debt funds and institutional lenders.' },
+  { name: 'Institutional investors', description: 'holding leased real estate for the long term, including insurers, annuity providers and pension funds, and investors in forward funded and income strip structures.' },
+  { name: 'Borrowers', description: 'raising finance against portfolio income.' },
+  { name: 'Advisers', description: 'structuring transactions for clients, including debt advisers and solicitors.' }
+];
+
+const COVER_POINTS = [
+  { title: 'What Is Insured', text: 'The income payable to the insured lender or investor. The policy can indemnify up to 100% of that income for the policy term, above the first loss layer.' },
+  { title: 'A Funded First Loss Layer', text: "Before the policy responds, the first loss layer must be used. This is a ring fenced cash reserve funded at the outset. It absorbs short term disruption and keeps the parties' interests aligned." },
+  { title: 'Cover Is Tested at Portfolio Level', text: 'Income is measured across the whole portfolio. A vacancy in one unit, or a weak period in one asset, does not give rise to a claim on its own. A claim needs income across the portfolio to fall below the insured level. The policy is designed to respond to structural income failure, such as the failure of a counterparty or a sustained fall in income, and not to routine movements in occupancy.' },
+  { title: 'Oversight Through the Term', text: 'The policy is accompanied by an Operating Agreement, which sets out how the portfolio is reported on and monitored and how the cover operates in practice.' }
+];
+
+const FUNDING_OPTIONS: { value: FundingStructure; label: string }[] = [
+  { value: 'equity', label: 'Equity-Funded' },
+  { value: 'debt', label: 'Debt-Funded' }
+];
+
+const BENEFIT_GROUPS = [
+  {
+    audience: 'For borrowers',
+    benefits: [
+      { icon: TrendingDown, title: 'Lower Cost of Capital', text: 'Where income is insured, lenders may be able to offer keener margins.' },
+      { icon: TrendingUp, title: 'Scope for Higher Leverage', text: 'Insurance backing can support the case for increased leverage or a lower equity requirement.' },
+      { icon: PoundSterling, title: 'Access to Institutional Capital', text: 'Long dated, insured income may broaden the range of lenders and investors able to fund a portfolio, including annuity and pension capital.' }
+    ]
+  },
+  {
+    audience: 'For lenders',
+    benefits: [
+      { icon: Award, title: 'Insurer Covenant Rated A- or Better', text: 'Insured income is supported by the covenant of insurers rated A- or better, in addition to the underlying tenant or operator.' },
+      { icon: Layers, title: 'Layered Protection', text: 'A funded Debt Service Reserve absorbs early disruption, and the policy can respond to covered shortfalls beyond it.' },
+      { icon: FileCheck, title: 'Oversight Through the Loan Term', text: 'The Operating Agreement provides structured reporting on the portfolio and its income.' }
+    ]
+  },
+  {
+    audience: 'For institutional investors',
+    benefits: [
+      { icon: BarChart4, title: 'More Predictable Income', text: 'Protection against covered shortfalls can make long dated income more predictable for liability matching and investment planning.' },
+      { icon: ArrowRightLeft, title: 'Support for Valuation and Exit', text: 'Insured income may support keener yields and stronger pricing on sale, including for forward funded and income strip structures.' },
+        { icon: PoundSterling, title: 'Capital Efficiency', text: 'Insured income may support more efficient capital allocation, subject to each investor’s own risk assessment and applicable requirements.' }
+    ]
+  }
+];
+
+const POLICY_FEATURES = [
+  { label: 'Insurer Security', text: 'Underwritten by insurers rated A- or better.' },
+  { label: 'Cover', text: 'Up to 100% of income payable to the lender or investor, above the first loss layer.' },
+  { label: 'First Loss Layer', text: 'A funded reserve, sized for each transaction: a Debt Service Reserve in debt funded structures and a First Loss Reserve in equity funded structures.' },
+  { label: 'Policy Term', text: 'Aligned with the term of the lease or lending agreement, up to a maximum of 25 years, subject to insurer approval.' },
+  { label: 'Limit of Indemnity', text: 'Set by reference to the total insured income over the policy term.' },
+  { label: 'Indexation', text: 'The limit of indemnity can be index linked, so that cover keeps pace with indexed rent, subject to an agreed cap.' },
+  { label: 'Operating Agreement', text: 'Sets out reporting, monitoring and how the cover operates in practice.' },
+  { label: 'Premium', text: 'A single premium paid at inception, with an annual management fee thereafter.' }
+];
+
+const IMPORTANT_INFORMATION = [
+  'This page gives general information about Portfolio Investment Protection for professional and institutional audiences. It is not an offer of insurance, and it is not advice or a personal recommendation. Cover is subject to underwriting and insurer approval, and to the terms, conditions, exclusions and limits of the policy issued for each transaction.',
+  "References to funding, valuation or pricing describe how insured income may be viewed by lenders, valuers and investors. They are not forecasts or guarantees, and outcomes depend on each party's own assessment. Nothing on this page is a statement about regulatory eligibility or capital treatment."
+];
+
+/* -------------------------------------------------------------------------------------------------
+ * Structured data
+ * ----------------------------------------------------------------------------------------------- */
+
+const financialProductSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialProduct',
+  name: 'Portfolio Investment Protection',
+  alternateName: ['PIP Insurance'],
+  description: 'Portfolio Investment Protection (PIP) is an insurance policy that protects the income a lender or investor expects to receive from a real estate portfolio.',
+  provider: {
+    '@type': 'Organization',
+    name: 'Parx Group',
+    url: 'https://parxgroup.co.uk',
+    telephone: '+44-20-3370-7909',
+    email: 'connect@parxgroup.co.uk'
+  },
+  category: 'Insurance',
+  feesAndCommissionsSpecification: 'A single premium paid at inception, with an annual management fee thereafter.',
+  termsOfService: 'Aligned with the term of the lease or lending agreement, up to a maximum of 25 years, subject to insurer approval.',
+  audience: {
+    '@type': 'Audience',
+    audienceType: 'professional and institutional audiences'
+  },
+  /* A bespoke, underwritten policy has no stock status, so the region is given as the area served. */
+  areaServed: { '@type': 'Country', name: 'United Kingdom' }
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Portfolio Investment Protection',
+  name: 'Portfolio Investment Protection',
+  alternateName: 'PIP Insurance',
+  description: 'Portfolio Investment Protection (PIP) is an insurance policy that protects the income lenders and institutional investors rely on, subject to underwriting and policy terms.',
+  provider: { '@type': 'Organization', name: 'Parx Group', url: 'https://parxgroup.co.uk' },
+  areaServed: { '@type': 'Country', name: 'United Kingdom' }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://parxgroup.co.uk' },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://parxgroup.co.uk/services' },
+    { '@type': 'ListItem', position: 3, name: 'Portfolio Investment Protection', item: 'https://parxgroup.co.uk/portfolio-investment-protection' }
+  ]
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Layout building blocks
+ * ----------------------------------------------------------------------------------------------- */
+
+const CONTAINER = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8';
+
+/* Twelve column grid shared by every section, so headings and text line up down the page. */
+const SECTION_GRID = 'lg:grid lg:grid-cols-12 lg:gap-x-8 xl:gap-x-12';
+
+const BODY_TEXT = 'text-base leading-relaxed text-neutral-700 sm:text-lg sm:leading-relaxed';
+const LEAD_TEXT = 'text-xl leading-relaxed text-neutral-900 sm:text-2xl sm:leading-relaxed';
+
+/* A row with its label on the left and its text on the right. Stacks on small screens. */
+const LABELLED_ROW = 'sm:grid sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-x-6';
+
+const TOGGLE_BUTTON =
+  'rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+
+/* The site's section heading: title with a short green bar beneath it. White text on the dark green band. */
+function SectionHeading({ id, onDark = false, children }: { id?: string; onDark?: boolean; children: React.ReactNode }) {
+  return (
+    <>
+      <h2 id={id} className={'scroll-mt-24 text-3xl font-bold mb-2 ' + (onDark ? 'text-white' : 'text-neutral-900')}>
+        {children}
+      </h2>
+      <div aria-hidden="true" className="w-20 h-1 bg-primary-500"></div>
+    </>
+  );
+}
+
+/* A section with its heading in a left hand column and its content to the right on large screens. */
+function SplitSection({ title, titleId, className, children }: { title: string; titleId?: string; className: string; children: React.ReactNode }) {
+  return (
+    <section className={'section ' + className}>
+      <div className={CONTAINER}>
+        <AnimatedSection delay={0.1} distance={24} duration={0.5} direction="up">
+          <div className={SECTION_GRID}>
+            <div className="mb-8 sm:mb-10 lg:col-span-4 lg:mb-0">
+              <div className="lg:sticky lg:top-28">
+                <SectionHeading id={titleId}>{title}</SectionHeading>
+              </div>
+            </div>
+            <div className="lg:col-span-8">{children}</div>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Page
+ * ----------------------------------------------------------------------------------------------- */
 
 function PortfolioInvestorProtection() {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [fundingStructure, setFundingStructure] = useState<'equity' | 'debt'>('equity');
-  const debtFundedStages = [
-    {
-      icon: ArrowRightLeft,
-      title: 'Gross Income',
-      description: 'Rental income is paid to the portfolio operator.'
-    },
-    {
-      icon: Building,
-      title: 'Portfolio Management',
-      description: 'The operator manages the portfolio and retains a portion of the income.'
-    },
-    {
-      icon: Building,
-      title: 'Borrower / Sponsor',
-      description: 'Net rental income is paid to the property-owning borrower.'
-    },
-    {
-      icon: PoundSterling,
-      title: 'Lender',
-      description: 'The borrower makes scheduled debt-service payments to the lender.'
-    }
-  ];
-  const benefits = [
-    {
-      icon: TrendingDown,
-      title: "Lower Cost of Capital for Property Investors",
-      description: "Property funders and lenders provide finance at reduced margins when future rental cashflow is de-risked through PIP insurance."
-    },
-    {
-      icon: TrendingUp,
-      title: "Higher LTV Ratios for Portfolio Lending",
-      description: "Insurance backing can justify increased leverage or reduced equity requirements for property portfolio investments."
-    },
-    {
-      icon: BarChart4,
-      title: "Income Certainty Drives Higher Valuations",
-      description: "Property portfolios with guaranteed rental income command stronger yields and capitalisation rates in the real estate market."
-    },
-    {
-      icon: Award,
-      title: "A-Rated Covenant Protection",
-      description: "Purchasers can underwrite based on guaranteed cashflows rather than tenant or market risk as the insurer's A-rated covenant effectively substitutes the tenant's covenant, giving property funders institutional-grade security."
-    },
-    {
-      icon: CheckCircle2,
-      title: "Predictable Rental Revenue Streams",
-      description: "Supporting long term property investment plans, compliance with regulatory stress testing, and sustainability commitments for real estate portfolios."
-    },
-    {
-      icon: LogOut,
-      title: "Strengthens Portfolio Exit Strategy",
-      description: "Enhanced exit opportunities and pricing for forward-funded or income-strip property investment structures."
-    }
-  ];
+  const [fundingStructure, setFundingStructure] = useState<FundingStructure>('equity');
+  const heroVideo = useRef<HTMLVideoElement>(null);
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "FinancialProduct",
-    "name": "Portfolio Investment Protection Insurance",
-    "alternateName": ["PIP Insurance", "Rental Income Protection Insurance", "Portfolio Lending Protection"],
-    "description": "Portfolio Investment Protection (PIP) insurance protects portfolio lenders and investors net rental income against tenant defaults, rental voids and counterparty risks for the duration of lease or lending agreements.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Parx Group",
-      "url": "https://parxgroup.co.uk",
-      "telephone": "+44-20-3370-7909",
-      "email": "connect@parxgroup.co.uk"
-    },
-    "category": "Insurance",
-    "feesAndCommissionsSpecification": "Single premium paid upfront with annual management fee",
-    "termsOfService": "Policy term aligned with lease or lending agreement duration",
-    "audience": {
-      "@type": "Audience",
-      "audienceType": "Property Investors, Portfolio Lenders, Property Funders, Real Estate Investment Funds"
-    },
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "eligibleRegion": {
-        "@type": "Country",
-        "name": "United Kingdom"
-      }
+  /* Visitors who have asked their device to reduce motion see a still frame instead of the looping video. */
+  useEffect(() => {
+    const video = heroVideo.current;
+    if (!video || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    const holdOnFirstFrame = () => video.pause();
+    if (video.paused) {
+      video.addEventListener('playing', holdOnFirstFrame, { once: true });
+    } else {
+      holdOnFirstFrame();
     }
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://parxgroup.co.uk"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Services",
-        "item": "https://parxgroup.co.uk/services"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Portfolio Investment Protection",
-        "item": "https://parxgroup.co.uk/portfolio-investment-protection"
-      }
-    ]
-  };
-
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Portfolio Investment Protection Insurance",
-    "name": "Portfolio Investment Protection",
-    "alternateName": "PIP Insurance",
-    "description": "Comprehensive rental income protection for property investors and lenders. Protects against tenant defaults, rental voids and counterparty risks with A-rated insurer backing.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Parx Group",
-      "url": "https://parxgroup.co.uk"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "United Kingdom"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Portfolio Investment Protection Benefits",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Lower Cost of Capital",
-            "description": "Reduced financing costs for property investors through de-risked rental cashflows"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Higher LTV Ratios",
-            "description": "Increased leverage opportunities for portfolio lending with insurance backing"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "A-Rated Covenant Protection",
-            "description": "Institutional-grade security from A-rated insurers substituting tenant covenant risk"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Rental Income Guarantee",
-            "description": "100% protection of net rental income for the full policy term"
-          }
-        }
-      ]
-    }
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is Portfolio Investment Protection insurance?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Portfolio Investment Protection (PIP) insurance protects a portfolio lenders or investors net rental income. The policy covers rental or lease cashflows and provides protection against defaults, voids and counterparty risks for the duration of the lease or lending agreement."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What are the key benefits of PIP insurance?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Key benefits include lower cost of capital, higher LTV ratios, income certainty driving higher valuations, A-rated covenant protection, predictable revenue streams, and strengthened exit opportunities with forward-funded or income-strip structures."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What types of properties does PIP insurance cover?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The policy can be used for a range of tenant types including social housing, student accommodation, and other use classes as may be agreed with the insurer."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How is PIP insurance premium structured?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A single premium is paid upfront together with an annual management fee thereafter. The policy is underwritten by an A-rated insurer."
-        }
-      }
-    ]
-  };
+    return () => video.removeEventListener('playing', holdOnFirstFrame);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Portfolio Investment Protection Insurance | Rental Income Protection for Property Investors"
-        description="We structure insurance-led risk transfer solutions that protect income, strengthen funding terms and enhance long-term asset value."
-        keywords="portfolio investment protection, PIP insurance, rental income protection, rent protection, rent guarantee, property investment insurance, tenant default insurance, portfolio lending protection, real estate investment protection, rental income guarantee, property portfolio insurance, investor protection insurance, lease income insurance, rental cashflow protection, property lender insurance, A-rated covenant protection, LTV ratio insurance, social housing insurance, PBSA insurance, build to rent insurance, property funders insurance"
+        title="Portfolio Investment Protection | Rental Income Protection for Lenders and Investors | Parx Group"
+        description="Portfolio Investment Protection (PIP) is an insurance policy that protects the income lenders and institutional investors rely on, subject to underwriting and policy terms."
+        keywords="portfolio investment protection, PIP insurance, income, institutional lenders and investors, first loss reserve, debt service reserve, operating agreement"
         canonical="https://parxgroup.co.uk/portfolio-investment-protection"
       />
-      <StructuredData data={structuredData} />
+      <StructuredData data={financialProductSchema} />
       <StructuredData data={serviceSchema} />
       <StructuredData data={breadcrumbSchema} />
-      <StructuredData data={faqSchema} />
-      {/* Hero Section */}
-      <header className="relative bg-white -mt-20">
+
+      {/* Hero. The dark green background and poster keep the menu readable while the video loads. */}
+      <header className="relative bg-primary-900 -mt-20">
         <div className="absolute inset-0 overflow-hidden">
           <video
+            ref={heroVideo}
             className="w-full h-full object-cover"
             src="/pip_hero_4_-_trim.webm"
-            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='white'/%3E%3C/svg%3E"
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%2307302c'/%3E%3C/svg%3E"
             autoPlay
             loop
             muted
@@ -244,515 +247,140 @@ function PortfolioInvestorProtection() {
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-5xl">
               Portfolio Investment Protection
             </h1>
-            <p className="mt-6 text-xl text-white max-w-3xl">
-              Secure your property investment portfolio returns with comprehensive rental income insurance.
-            </p>
+            <p className="mt-6 text-xl text-white max-w-3xl">{HERO_SUBHEADING}</p>
+            {/* Optional: a shortcut to the contact details at the foot of the page. Delete this link to remove it. */}
+            <a
+              href="#get-in-touch"
+              className="mt-8 inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 font-medium text-primary-600 transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Get In Touch
+              <ChevronDown aria-hidden="true" className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </header>
 
-      {/* Explainer Video Section */}
-      <section className="py-4 bg-gradient-to-r from-primary-600 via-primary-700 to-primary-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <p className="text-white text-base sm:text-lg font-medium text-center">
-              Watch our comprehensive overview of Portfolio Investment Protection:
-            </p>
-            <button
-              onClick={() => setIsVideoModalOpen(true)}
-              className="inline-flex items-center px-5 py-2 bg-white/90 hover:bg-white text-primary-700 font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 group border border-white/50 flex-shrink-0"
-            >
-              <Play className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-              <span className="text-base">Explainer Video</span>
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* Product Summary */}
+      <SplitSection title="Product Summary" className="bg-white">
+        <p className={LEAD_TEXT}>{PRODUCT_SUMMARY}</p>
+      </SplitSection>
 
-      {/* Product Summary Section */}
+      {/* Who It Is For */}
+      <SplitSection title="Who It Is For" className="bg-neutral-50">
+        <ul role="list" className="divide-y divide-neutral-300">
+          {AUDIENCES.map(({ name, description }) => (
+            <li key={name} className={'py-5 first:pt-0 last:pb-0 ' + BODY_TEXT + ' ' + LABELLED_ROW}>
+              <strong className="font-semibold text-neutral-900">{name}</strong>{' '}
+              <span>{description}</span>
+            </li>
+          ))}
+        </ul>
+      </SplitSection>
+
+      {/* How the Cover Works */}
+      <SplitSection title="How the Cover Works" className="bg-white">
+        <div className="divide-y divide-neutral-200">
+          {COVER_POINTS.map(({ title, text }) => (
+            <div key={title} className={'py-6 first:pt-0 last:pb-0 ' + LABELLED_ROW}>
+              <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
+              <p className="mt-2 text-base leading-relaxed text-neutral-700 sm:mt-0">{text}</p>
+            </div>
+          ))}
+        </div>
+      </SplitSection>
+
+      {/* Cashflow & Risk Transfer Structure */}
       <section className="section bg-neutral-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection delay={0.3} distance={30} duration={0.5} direction="up">
-            <article className="prose prose-lg max-w-none">
-              <div className="mb-8 text-left">
-                <h2 className="text-3xl font-bold text-neutral-900 mb-2">Product Summary</h2>
-                <div className="w-20 h-1 bg-primary-500 mb-6"></div>
+        <div className={CONTAINER}>
+          <AnimatedSection delay={0.1} distance={24} duration={0.5} direction="up">
+            <div className="mb-8 sm:flex sm:items-end sm:justify-between sm:gap-x-8">
+              <div>
+                <SectionHeading id="deal-structure">Cashflow &amp; Risk Transfer Structure</SectionHeading>
               </div>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed text-justify hyphens-auto">
-                The Portfolio Investment Protection "PIP" policy safeguards rental and lease cashflows for lenders and investors by providing comprehensive protection against tenant default, rental voids and counterparty risk for the full term of the lease or lending arrangement.
-              </p>
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed text-justify hyphens-auto">
-                Where an insured event results in insufficient net rental income to meet scheduled lender or investor repayments, the policy responds by indemnifying that shortfall, ensuring continuity of those financial obligations for the duration of the policy term.
-              </p>
-            </article>
-          </AnimatedSection>
-        </div>
-      </section>
-
-{/* Deal Structure Section */}
-<section className="section bg-white py-10">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <AnimatedSection delay={0.4} distance={32} duration={0.55} direction="right">
-      <div className="mb-6">
-        <h2 id="deal-structure" className="text-3xl font-bold text-neutral-900 mb-1">
-          Cashflow & Risk Transfer Structure
-        </h2>
-        <div className="w-16 h-1 bg-primary-500"></div>
-      </div>
-
-      <div className="mb-8 flex justify-center">
-        <div
-          role="group"
-          aria-label="Choose a portfolio funding structure"
-          className="inline-flex rounded-xl border border-neutral-200 bg-neutral-100 p-1"
-        >
-          <button
-            type="button"
-            aria-pressed={fundingStructure === 'equity'}
-            onClick={() => setFundingStructure('equity')}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 ${
-              fundingStructure === 'equity'
-                ? 'bg-primary-700 text-white shadow-sm'
-                : 'text-neutral-700 hover:bg-white hover:text-primary-700'
-            }`}
-          >
-            Equity-Funded
-          </button>
-          <button
-            type="button"
-            aria-pressed={fundingStructure === 'debt'}
-            onClick={() => setFundingStructure('debt')}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 ${
-              fundingStructure === 'debt'
-                ? 'bg-primary-700 text-white shadow-sm'
-                : 'text-neutral-700 hover:bg-white hover:text-primary-700'
-            }`}
-          >
-            Debt-Funded
-          </button>
-        </div>
-      </div>
-
-      {fundingStructure === 'equity' ? (
-        <>
-
-      {/* Mobile Layout */}
-      <div className="md:hidden space-y-4">
-        {/* Stage 1 */}
-        <div className="bg-gradient-to-br from-white to-neutral-50 rounded-xl shadow-md p-5 border border-neutral-200">
-          <div className="flex items-start gap-3">
-            <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg p-2.5 w-11 h-11 flex items-center justify-center shadow">
-              <ArrowRightLeft className="h-5 w-5 text-primary-700" />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold text-neutral-900 mb-2">
-                Gross Income
-              </h3>
-              <p className="text-sm text-neutral-600 leading-relaxed">
-                Rental income is paid to the portfolio operator.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Arrow down */}
-        <div className="flex justify-center">
-          <div className="w-px h-8 bg-primary-300"></div>
-        </div>
-
-        {/* Stage 2 */}
-        <div className="bg-gradient-to-br from-white to-neutral-50 rounded-xl shadow-md p-5 border border-neutral-200">
-          <div className="flex items-start gap-3">
-            <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg p-2.5 w-11 h-11 flex items-center justify-center shadow">
-              <Building className="h-5 w-5 text-primary-700" />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold text-neutral-900 mb-2">
-                Portfolio Management
-              </h3>
-              <p className="text-sm text-neutral-600 leading-relaxed">
-                The operator manages the portfolio and retains a portion of the income.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Arrow down */}
-        <div className="flex justify-center">
-          <div className="w-px h-8 bg-primary-300"></div>
-        </div>
-
-        {/* PIP Box */}
-        <div className="bg-gradient-to-br from-primary-50 via-primary-100 to-primary-50 rounded-xl shadow-lg p-5 border border-primary-300">
-          <div className="flex items-start gap-3">
-            <div className="bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg p-2.5 w-11 h-11 flex items-center justify-center shadow">
-              <Shield className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold text-neutral-900 mb-2">
-                Portfolio Investment Protection
-              </h3>
-              <p className="text-sm text-neutral-700 leading-relaxed">
-                The policy indemnifies up to 100% of net rent payable to the lender or investor for the duration of the lease or financing arrangement.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Arrow down */}
-        <div className="flex justify-center">
-          <div className="w-px h-8 bg-primary-300"></div>
-        </div>
-
-        {/* Stage 3 */}
-        <div className="bg-gradient-to-br from-white to-neutral-50 rounded-xl shadow-md p-5 border border-neutral-200">
-          <div className="flex items-start gap-3">
-            <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg p-2.5 w-11 h-11 flex items-center justify-center shadow">
-              <PoundSterling className="h-5 w-5 text-primary-700" />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold text-neutral-900 mb-2">
-                Net Income
-              </h3>
-              <p className="text-sm text-neutral-600 leading-relaxed">
-                The remaining net income is payable to the portfolio lender or investor.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Desktop Layout */}
-      <div className="relative hidden md:block">
-        <div
-          className="
-            grid
-            grid-cols-[minmax(0,1fr)_56px_minmax(0,1fr)_56px_minmax(0,1fr)]
-            grid-rows-[auto_150px]
-            gap-x-5
-            gap-y-3
-            items-stretch
-          "
-        >
-          {/* Stage 1 */}
-          <div className="flex justify-center">
-            <div className="w-[340px] bg-gradient-to-br from-white to-neutral-50 rounded-xl shadow-md p-5 relative border border-neutral-200">
-              <div className="flex items-start gap-3">
-                <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg p-2.5 w-11 h-11 flex items-center justify-center shadow">
-                  <ArrowRightLeft className="h-5 w-5 text-primary-700" />
-                </div>
-                <div>
-                  <h3 className="text-base font-semibold text-neutral-900 mb-2">
-                    Gross Income
-                  </h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">
-                    Rental income is paid to the portfolio operator.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Horizontal line 1 */}
-          <div className="flex items-center justify-center" aria-hidden="true">
-            <div className="w-full h-px bg-primary-300"></div>
-          </div>
-
-          {/* Stage 2 */}
-          <div className="flex justify-center">
-            <div className="w-[340px] bg-gradient-to-br from-white to-neutral-50 rounded-xl shadow-md p-5 relative border border-neutral-200">
-              <div className="flex items-start gap-3">
-                <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg p-2.5 w-11 h-11 flex items-center justify-center shadow">
-                  <Building className="h-5 w-5 text-primary-700" />
-                </div>
-                <div>
-                  <h3 className="text-base font-semibold text-neutral-900 mb-2">
-                    Portfolio Management
-                  </h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">
-                    The operator manages the portfolio and retains a portion of the income.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Horizontal line 2 + vertical drop */}
-          <div className="relative flex items-center justify-center" aria-hidden="true">
-            {/* Base horizontal */}
-            <div className="w-full h-px bg-primary-300"></div>
-
-            {/* Horizontal glow */}
-            <div
-              className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[3px]"
-              style={{
-                background:
-                  'radial-gradient(ellipse at 50% 50%, rgba(30,125,105,0.6) 0%, rgba(30,125,105,0.25) 45%, rgba(30,125,105,0) 75%)',
-                opacity: 0.7,
-                filter: 'blur(0.6px)'
-              }}
-            />
-
-            {/* Base vertical line */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-1/2 w-px bg-primary-300 z-10 h-[156px]" />
-
-            {/* Vertical glow (same centre pixel, not a second line) */}
-            <div
-              className="absolute left-1/2 -translate-x-1/2 top-1/2 w-px z-20 h-[156px]"
-              style={{
-                background: 'rgba(30,125,105,0.85)',
-                opacity: 0.55,
-                filter: 'blur(0.35px)',
-                boxShadow:
-                  '0 0 10px rgba(30,125,105,0.45), 0 0 22px rgba(30,125,105,0.25)'
-              }}
-            />
-          </div>
-
-          {/* Stage 3 */}
-          <div className="flex justify-center">
-            <div className="w-[340px] bg-gradient-to-br from-white to-neutral-50 rounded-xl shadow-md p-5 relative border border-neutral-200">
-              <div className="flex items-start gap-3">
-                <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg p-2.5 w-11 h-11 flex items-center justify-center shadow">
-                  <PoundSterling className="h-5 w-5 text-primary-700" />
-                </div>
-                <div>
-                  <h3 className="text-base font-semibold text-neutral-900 mb-2">
-                    Net Income
-                  </h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">
-                    The remaining net income is payable to the portfolio lender or investor.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* PIP row */}
-          <div className="col-start-4 row-start-2 flex justify-center">
-            <div className="relative mt-3">
               <div
-                className="
-                  bg-gradient-to-br
-                  from-primary-50
-                  via-primary-100
-                  to-primary-50
-                  rounded-xl
-                  shadow-lg
-                  p-5
-                  border
-                  border-primary-300
-                  w-[460px]
-                  max-w-[50vw]
-                  relative
-                  z-20
-                "
-                style={{
-                  boxShadow:
-                    '0 0 0 2px rgba(30,125,105,0.35), 0 0 28px rgba(30,125,105,0.35)'
-                }}
+                role="group"
+                aria-label="Choose a portfolio funding structure"
+                className="mt-6 inline-flex rounded-xl border border-neutral-300 bg-white p-1 sm:mt-0 sm:shrink-0"
               >
-                <div className="flex items-start gap-3">
-                  <div className="bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg p-2.5 w-11 h-11 flex items-center justify-center shadow">
-                    <Shield className="h-5 w-5 text-white" />
-                  </div>
-
-                  <div>
-                    <h3 className="text-base font-semibold text-neutral-900 mb-2">
-                      Portfolio Investment Protection
-                    </h3>
-
-                    <p className="text-sm text-neutral-700 leading-relaxed">
-                      The policy indemnifies up to 100% of net rent payable to the lender or investor for the duration of the lease or financing arrangement.
-                    </p>
-                  </div>
-                </div>
+                {FUNDING_OPTIONS.map(({ value, label }) => (
+                  <button
+                    key={value}
+                    type="button"
+                    aria-pressed={fundingStructure === value}
+                    onClick={() => setFundingStructure(value)}
+                    className={
+                      TOGGLE_BUTTON +
+                      (fundingStructure === value
+                        ? ' bg-primary-700 text-white shadow-sm'
+                        : ' text-neutral-700 hover:bg-neutral-100 hover:text-primary-700')
+                    }
+                  >
+                    {label}
+                  </button>
+                ))}
               </div>
             </div>
-          </div>
-
-          {/* Grid fillers */}
-          <div className="col-start-1 row-start-2"></div>
-          <div className="col-start-2 row-start-2"></div>
-          <div className="col-start-3 row-start-2"></div>
-          <div className="col-start-5 row-start-2"></div>
-        </div>
-      </div>
-        </>
-      ) : (
-        <>
-          {/* Mobile and tablet: stack cards to keep every description legible. */}
-          <div className="xl:hidden space-y-4">
-            {debtFundedStages.map(({ icon: Icon, title, description }, index) => (
-              <React.Fragment key={title}>
-                {index > 0 && (
-                  <div className="flex justify-center" aria-hidden="true">
-                    <div className="h-8 w-px bg-primary-300"></div>
-                  </div>
-                )}
-
-                {index === 3 && (
-                  <>
-                    <div className="rounded-xl border border-primary-300 bg-gradient-to-br from-primary-50 via-primary-100 to-primary-50 p-5 shadow-lg">
-                      <div className="flex items-start gap-3">
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-primary-700 p-2.5 shadow">
-                          <Shield className="h-5 w-5 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="mb-2 text-base font-semibold text-neutral-900">Portfolio Investment Protection</h3>
-                          <p className="text-sm leading-relaxed text-neutral-700">
-                            The lender is the named insured. PIP protects against covered shortfalls in the borrower's scheduled debt-service payment.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-center" aria-hidden="true">
-                      <div className="h-8 w-px bg-primary-300"></div>
-                    </div>
-                  </>
-                )}
-
-                <div className="rounded-xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-5 shadow-md">
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-100 to-primary-200 p-2.5 shadow">
-                      <Icon className="h-5 w-5 text-primary-700" />
-                    </div>
-                    <div>
-                      <h3 className="mb-2 text-base font-semibold text-neutral-900">{title}</h3>
-                      <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
-                    </div>
-                  </div>
-                </div>
-              </React.Fragment>
-            ))}
-          </div>
-
-          {/* Desktop: use the approved vector diagram and preserve its exact styling. */}
-          <div className="hidden xl:block">
-            <img
-              src="/diagrams/pip-lender-structure.svg"
-              alt="Gross income passes to the portfolio operator, then to the borrower or sponsor, who makes debt-service payments to the lender. The lender is the named insured under PIP against covered debt-service shortfalls."
-              className="h-auto w-full"
-            />
-          </div>
-        </>
-      )}
-    </AnimatedSection>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Key Benefits Section */}
-      <section className="section bg-neutral-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection delay={0.2} distance={30} duration={0.5} direction="up">
-            <div className="mb-8 sm:mb-10 text-left">
-              <h2 id="key-benefits" className="text-3xl font-bold text-neutral-900 mb-2">Key Benefits</h2>
-              <div className="w-20 h-1 bg-primary-500 mb-6"></div>
-            </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <AnimatedSection key={index} delay={0.1 * index} direction="up" distance={30} duration={0.5}>
-                  <div className="card p-4 sm:p-6 lg:p-8 h-full flex flex-col">
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 mr-3 sm:mr-4 lg:mr-5">
-                        <div className="p-3 bg-primary-50 rounded-lg w-fit">
-                          <Icon className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600" />
-                        </div>
-                      </div>
-
-                      <div className="flex-1">
-                        <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 mb-2">
-                          {benefit.title}
-                        </h3>
-                        <p className="text-neutral-600 text-sm sm:text-base">
-                          {benefit.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
+            <PIPStructureDiagram fundingStructure={fundingStructure} />
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Policy Coverage Section */}
-      <section className="section bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection delay={0.3} distance={30} duration={0.5} direction="left">
-            <div className="mb-8 sm:mb-10 text-left">
-              <h2 id="policy-coverage" className="text-3xl font-bold text-neutral-900 mb-2">Policy Coverage</h2>
-              <div className="w-20 h-1 bg-primary-500 mb-6"></div>
+      {/*
+        Key Benefits: one card for each audience, on the dark green band.
+        Widest screens: three cards side by side. Smaller desktops: the cards stack and each one sets its
+        benefits out in a row. Tablets and phones: the cards stack and the benefits run down the card.
+      */}
+      <section className="section bg-primary-900">
+        <div className={CONTAINER}>
+          <AnimatedSection delay={0.1} distance={24} duration={0.5} direction="up">
+            <div className="mb-8 sm:mb-10">
+              <SectionHeading id="key-benefits" onDark>
+                Key Benefits
+              </SectionHeading>
             </div>
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-primary-600 p-3 sm:p-4">
-              <h3 className="text-base sm:text-xl font-semibold text-white">Comprehensive Rental Income Protection</h3>
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-3 xl:gap-6">
+              {BENEFIT_GROUPS.map(({ audience, benefits }) => (
+                <div key={audience} className="rounded-2xl bg-white p-6 sm:p-8">
+                  <h3 className="text-xl font-semibold text-neutral-900">{audience}</h3>
+                  <div aria-hidden="true" className="mt-3 h-1 w-10 bg-primary-500"></div>
+                  <ul role="list" className="mt-7 grid gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-1 xl:gap-6">
+                    {benefits.map(({ icon: Icon, title, text }) => (
+                      <li key={title} className="flex gap-4 lg:flex-col lg:gap-3 xl:flex-row xl:gap-4">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-50">
+                          <Icon aria-hidden="true" className="h-5 w-5 text-primary-600" />
+                        </span>
+                        <div className="min-w-0">
+                          <h4 className="text-base font-semibold text-neutral-900">{title}</h4>
+                          <p className="mt-1 text-base leading-relaxed text-neutral-700">{text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-            <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
-              <div className="flex items-start">
-                <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-2 sm:mr-3 flex-shrink-0 mt-1" />
-                <p className="text-sm sm:text-base text-gray-700">
-                  <strong>A-Rated Insurer:</strong> The portfolio investment protection product is underwritten by an A-rated insurance company providing institutional-grade security
-                </p>
-              </div>
-              <div className="flex items-start">
-                <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-2 sm:mr-3 flex-shrink-0 mt-1" />
-                <p className="text-sm sm:text-base text-gray-700">
-                  <strong>Flexible Policy Term:</strong> Policy duration is aligned with the term of the lease or lending agreement (subject to insurer approval)
-                </p>
-              </div>
-              <div className="flex items-start">
-                <FileCheck className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-2 sm:mr-3 flex-shrink-0 mt-1" />
-                <p className="text-sm sm:text-base text-gray-700">
-                  <strong>Comprehensive Indemnity Limit:</strong> Limit of indemnity represents the total net rental income for the duration of the policy term
-                </p>
-              </div>
-              <div className="flex items-start">
-                <BarChart4 className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-2 sm:mr-3 flex-shrink-0 mt-1" />
-                <p className="text-sm sm:text-base text-gray-700">
-                  <strong>Inflation Protection:</strong> Limit of indemnity can be inflation linked to protect against rising costs
-                </p>
-              </div>
-              <div className="flex items-start">
-                <PoundSterling className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 mr-2 sm:mr-3 flex-shrink-0 mt-1" />
-                <p className="text-sm sm:text-base text-gray-700">
-                  <strong>Simple Premium Structure:</strong> Single premium paid upfront together with an annual management fee thereafter
-                </p>
-              </div>
-            </div>
-          </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="section bg-neutral-50">
+      {/* Policy Features. The heading keeps its original id, policy-coverage, so existing links to it still work. */}
+      <SplitSection title="Policy Features" titleId="policy-coverage" className="bg-white">
+        <dl className="divide-y divide-neutral-200 overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50">
+          {POLICY_FEATURES.map(({ label, text }) => (
+            <div key={label} className="px-5 py-4 sm:grid sm:grid-cols-[11.5rem_minmax(0,1fr)] sm:gap-x-6 sm:px-6 sm:py-5">
+              <dt className="text-base font-semibold text-neutral-900">{label}</dt>
+              <dd className="mt-1 text-base leading-relaxed text-neutral-700 sm:mt-0">{text}</dd>
+            </div>
+          ))}
+        </dl>
+      </SplitSection>
+
+      {/*
+        Contact. The site's existing block with the agreed wording. Changes from the live version, so the
+        card is no longer cut off at its right hand edge on tablets: the text column can shrink (min-w-0),
+        the email address wraps (break-words) and the name is one size smaller between 640px and 768px.
+      */}
+      <section id="get-in-touch" className="section bg-neutral-50 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Decorative Divider */}
           <div className="mb-8 sm:mb-12">
@@ -761,7 +389,7 @@ function PortfolioInvestorProtection() {
               <div className="px-6 sm:px-8">
                 <div className="flex items-center gap-3">
                   <div className="h-2 w-2 rounded-full bg-primary-500"></div>
-                  <span className="text-lg sm:text-xl font-semibold text-gray-700 tracking-wide">Get In Touch</span>
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-700 tracking-wide">Get In Touch</h2>
                   <div className="h-2 w-2 rounded-full bg-primary-500"></div>
                 </div>
               </div>
@@ -777,13 +405,13 @@ function PortfolioInvestorProtection() {
 
               <div className="relative flex flex-col sm:flex-row items-center sm:items-stretch gap-0">
                 {/* Image Section */}
-                <div className="flex-shrink-0 w-full sm:w-auto p-4 sm:p-0 flex justify-center sm:block">
-                  <div className="relative w-40 sm:w-72 md:w-80">
+                <div className="flex-shrink-0 w-full sm:w-72 md:w-80 p-4 sm:p-0 flex justify-center sm:block sm:self-stretch">
+                  <div className="relative w-40 sm:w-full sm:h-full">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary-600/20 to-primary-800/20 rounded-xl sm:rounded-br-3xl sm:rounded-br-none sm:rounded-r-none sm:rounded-l-none sm:rounded-tl-none"></div>
                     <img
                       src="/harvey_patey-ford_800x940_webp.webp"
                       alt="Harvey Patey-Ford"
-                      className="w-full h-auto relative z-10 rounded-xl sm:rounded-none shadow-lg sm:shadow-none"
+                      className="w-full h-auto relative z-10 rounded-xl sm:absolute sm:inset-0 sm:h-full sm:object-cover sm:object-top sm:rounded-none shadow-lg sm:shadow-none"
                       loading="eager"
                       decoding="sync"
                     />
@@ -792,13 +420,13 @@ function PortfolioInvestorProtection() {
                 </div>
 
                 {/* Content Section */}
-                <div className="flex-1 px-4 pt-2 pb-4 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center min-h-full w-full">
+                <div className="flex-1 min-w-0 px-4 pt-2 pb-4 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center min-h-full w-full">
                   <div className="mb-4 sm:mb-6 md:mb-8 text-center sm:text-left">
-                    <h3 className="text-xl sm:text-3xl md:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 tracking-tight">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 tracking-tight">
                       Harvey Patey-Ford
                     </h3>
                     <p className="text-sm sm:text-base md:text-lg text-gray-600 font-medium">
-                      Long Income Specialist
+                      CEO
                     </p>
                   </div>
 
@@ -812,7 +440,7 @@ function PortfolioInvestorProtection() {
                       </div>
                       <div>
                         <div className="text-xs text-primary-700 font-medium mb-0.5">Phone</div>
-                        <div className="text-sm sm:text-base font-semibold text-gray-900">+44 (0) 751 44 666 77</div>
+                        <div className="text-sm sm:text-base font-semibold text-gray-900">+44 (0) 7514 466677</div>
                       </div>
                     </a>
 
@@ -825,7 +453,7 @@ function PortfolioInvestorProtection() {
                       </div>
                       <div className="min-w-0 overflow-hidden">
                         <div className="text-xs text-gray-600 group-hover:text-primary-700 font-medium mb-0.5 transition-colors duration-300">Email</div>
-                        <div className="text-sm sm:text-base font-semibold text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis">Harvey.Patey-Ford@ParxGroup.co.uk</div>
+                        <div className="text-sm sm:text-base font-semibold text-gray-900 break-words">Harvey.Patey-Ford@ParxGroup.co.uk</div>
                       </div>
                     </a>
                   </div>
@@ -836,38 +464,19 @@ function PortfolioInvestorProtection() {
         </div>
       </section>
 
-      {/* Video Modal */}
-      {isVideoModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={() => setIsVideoModalOpen(false)}
-        >
-          <div
-            className="relative w-full max-w-5xl bg-white rounded-lg shadow-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setIsVideoModalOpen(false)}
-              className="absolute top-4 right-4 z-10 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 group"
-              aria-label="Close video"
-            >
-              <X className="h-6 w-6 text-gray-700 group-hover:text-gray-900" />
-            </button>
-
-            <div className="aspect-video bg-black">
-              <video
-                className="w-full h-full"
-                controls
-                autoPlay
-                preload="none"
-                src={isVideoModalOpen ? "/portfolio_investment_portection.mp4" : undefined}
-              >
-                Your browser does not support the video tag.
-              </video>
+      {/* Important Information, directly above the shared footer */}
+      <section className="border-t border-neutral-200 bg-neutral-50 py-10 sm:py-12">
+        <div className={CONTAINER}>
+          <div className={SECTION_GRID}>
+            <h2 className="mb-3 text-base font-semibold text-neutral-900 lg:col-span-4 lg:mb-0">Important Information</h2>
+            <div className="max-w-3xl space-y-4 text-sm leading-relaxed text-neutral-700 lg:col-span-8">
+              {IMPORTANT_INFORMATION.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
           </div>
         </div>
-      )}
+      </section>
     </div>
   );
 }

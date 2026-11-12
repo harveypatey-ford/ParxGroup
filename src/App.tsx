@@ -788,7 +788,7 @@ function AppContent() {
                   © {new Date().getFullYear()} Parx Group. All rights reserved.
                 </p>
                 <p className="text-center text-primary-400 text-xs sm:text-sm mt-3 sm:mt-4 max-w-4xl mx-auto px-4 leading-relaxed">
-                  Parx is a trading name of Parx Group Limited, registered in England & Wales with registered number 14768763, which is an Appointed Representative of CLS Property Insight Limited who are authorised and regulated by the Financial Conduct Authority (FRN 718255). Registered office: Preston Park House, South Road, Brighton, East Sussex, BN1 6SB | Parx Group 2025 ©
+                  Parx is a trading name of Parx Group Limited, registered in England and Wales with registered number 14768763. Parx Group Limited is an Appointed Representative of CLS Property Insight Limited, which is authorised and regulated by the Financial Conduct Authority (FRN 718255). Registered office: 2nd Floor, Preston Park House, South Road, Brighton, East Sussex, BN1 6SB.
                 </p>
               </div>
             </div>
