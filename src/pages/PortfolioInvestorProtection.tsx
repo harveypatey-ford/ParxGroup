@@ -88,8 +88,6 @@ const POLICY_FEATURES = [
   { label: 'Premium', text: 'A single premium paid at inception, with an annual management fee thereafter.' }
 ];
 
-const CONTACT_INTRO = 'To discuss a transaction or request indicative terms:';
-
 const IMPORTANT_INFORMATION = [
   'This page gives general information about Portfolio Investment Protection for professional and institutional audiences. It is not an offer of insurance, and it is not advice or a personal recommendation. Cover is subject to underwriting and insurer approval, and to the terms, conditions, exclusions and limits of the policy issued for each transaction.',
   "References to funding, valuation or pricing describe how insured income may be viewed by lenders, valuers and investors. They are not forecasts or guarantees, and outcomes depend on each party's own assessment. Nothing on this page is a statement about regulatory eligibility or capital treatment."
@@ -428,7 +426,6 @@ function PortfolioInvestorProtection() {
                 {/* Content Section */}
                 <div className="flex-1 min-w-0 px-4 pt-2 pb-4 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center min-h-full w-full">
                   <div className="mb-4 sm:mb-6 md:mb-8 text-center sm:text-left">
-                    <p className="text-sm sm:text-base text-gray-700 mb-3">{CONTACT_INTRO}</p>
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 tracking-tight">
                       Harvey Patey-Ford
                     </h3>
@@ -460,7 +457,7 @@ function PortfolioInvestorProtection() {
                       </div>
                       <div className="min-w-0 overflow-hidden">
                         <div className="text-xs text-gray-600 group-hover:text-primary-700 font-medium mb-0.5 transition-colors duration-300">Email</div>
-                        <div className="text-sm sm:text-base font-semibold text-gray-900 break-words">harvey.patey-ford@parxgroup.co.uk</div>
+                        <div className="text-sm sm:text-base font-semibold text-gray-900 break-words">Harvey.Patey-Ford@ParxGroup.co.uk</div>
                       </div>
                     </a>
                   </div>
