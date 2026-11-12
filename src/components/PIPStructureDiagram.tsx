@@ -85,11 +85,11 @@ const STRUCTURES: Record<FundingStructure, Structure> = {
 const FUNDING_ORDER: FundingStructure[] = ['equity', 'debt'];
 
 /*
-  Large screens: the reserve and the policy sit in the same places for both structures, on the equity
-  grid: the reserve across the first three columns and the policy in the last column, under the insured
-  party. Switching structure changes only the income row above them.
+  Large screens: the reserve and the policy sit in the same places for both structures, side by side
+  beneath the income row: the reserve on the left, two fifths of the width, and the policy on the right,
+  three fifths, which suits its longer description. Switching structure changes only the income row.
 */
-const SHORTFALL_GRID = 'lg:grid-cols-[minmax(0,1fr)_3rem_minmax(0,1fr)_3rem_minmax(0,1fr)]';
+const SHORTFALL_GRID = 'lg:grid-cols-[minmax(0,2fr)_3rem_minmax(0,3fr)]';
 
 const DASHED_LINE = 'border-dashed border-primary-600';
 
@@ -197,13 +197,17 @@ export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDi
         </div>
 
         {/*
-          Between the income row and the shortfall row. Large screens: the reserve and the policy each have
-          their own dashed connector, with its own arrowhead, into the insured party, and nothing links them
-          to each other. The connectors arrive at fixed points, so they stay put when the structure changes.
-          The lender's card (debt funded) is the narrower insured card: the last quarter of the row once the
-          three 2.5rem arrow gaps are taken out, (100% - 7.5rem) / 4. The reserve's connector enters 30% of
-          the way across that card, at 82.5% + 1.3125rem, and the policy's 70% of the way across, at
-          92.5% + 0.5625rem. The investor's card (equity funded) is wider and contains both points.
+          Between the income row and the shortfall row. Large screens: one dashed line comes down from the
+          insured party and branches to the reserve and to the policy, so each connects to the insured party
+          and nothing runs from one to the other. Every point is fixed, so nothing moves when the structure
+          changes:
+          - The line leaves the insured party at the middle of the lender's card (debt funded), the narrower
+            insured card, which spans the last quarter of the row once the three 2.5rem arrow gaps are taken
+            out: 100% - (100% - 7.5rem) / 8 = 87.5% + 0.9375rem. The investor's card (equity funded) is
+            wider and contains that point.
+          - The reserve's branch drops three quarters of the way across the reserve card, clear of the label:
+            0.75 x 0.4 x (100% - 3rem) = 30% - 0.9rem.
+          - The policy's branch drops at the middle of the policy card: 70% + 0.9rem.
         */}
         <div className="relative mt-3 lg:mt-0 lg:h-16">
           {/* Small screens: a dashed connector from the shortfall group up to the insured party. */}
@@ -213,14 +217,14 @@ export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDi
           </div>
 
           <div aria-hidden="true" className="absolute inset-0 hidden lg:block">
-            {/* The reserve's connector: up from the reserve card, across, then up into the insured party. */}
-            <span className={'absolute bottom-0 left-1/2 top-1/2 border-l-2 ' + DASHED_LINE}></span>
-            <span className={'absolute left-1/2 right-[calc(17.5%_-_1.3125rem_-_2px)] top-1/2 border-t-2 ' + DASHED_LINE}></span>
-            <span className={'absolute bottom-1/2 left-[calc(82.5%_+_1.3125rem)] top-1 border-l-2 ' + DASHED_LINE}></span>
-            <UpArrowhead className="left-[calc(82.5%_+_1.3125rem)]" />
-            {/* The policy's connector: straight up from the policy card into the insured party. */}
-            <span className={'absolute bottom-0 left-[calc(92.5%_+_0.5625rem)] top-1 border-l-2 ' + DASHED_LINE}></span>
-            <UpArrowhead className="left-[calc(92.5%_+_0.5625rem)]" />
+            {/* Down from the insured party to the branching line */}
+            <span className={'absolute bottom-1/2 left-[calc(87.5%_+_0.9375rem)] top-1 border-l-2 ' + DASHED_LINE}></span>
+            <UpArrowhead className="left-[calc(87.5%_+_0.9375rem)]" />
+            {/* The branching line */}
+            <span className={'absolute left-[calc(30%_-_0.9rem)] right-[calc(12.5%_-_0.9375rem_-_2px)] top-1/2 border-t-2 ' + DASHED_LINE}></span>
+            {/* Down to the reserve, and down to the policy */}
+            <span className={'absolute bottom-0 left-[calc(30%_-_0.9rem)] top-1/2 border-l-2 ' + DASHED_LINE}></span>
+            <span className={'absolute bottom-0 left-[calc(70%_+_0.9rem)] top-1/2 border-l-2 ' + DASHED_LINE}></span>
           </div>
 
           <LaneLabel dashed className="mt-3 lg:absolute lg:bottom-3 lg:left-0 lg:mt-0">
@@ -230,8 +234,8 @@ export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDi
 
         {/* The shortfall row: the reserve first, then the policy, numbered in the order they respond. */}
         <div className={'mt-3 grid grid-cols-1 gap-y-3 lg:mt-0 lg:gap-y-0 ' + SHORTFALL_GRID}>
-          <Card party={reserve} tone="reserve" step={1} className="lg:col-span-3" />
-          <Card party={policy} tone="policy" step={2} className="lg:col-start-5" />
+          <Card party={reserve} tone="reserve" step={1} />
+          <Card party={policy} tone="policy" step={2} className="lg:col-start-3" />
         </div>
       </div>
 
