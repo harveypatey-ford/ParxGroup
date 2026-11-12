@@ -22,18 +22,6 @@ interface Structure {
   policy: Party;
   /** Large screens: one column for each party in the income row, with a narrow column for each arrow between them. */
   gridColumns: string;
-  /** Large screens: where each part of the shortfall path sits on that grid. */
-  placement: {
-    label: string;
-    /** Where the policy's connector leaves the top of the policy card and turns towards the insured party. */
-    policyRise: string;
-    /** The gap column the policy's connector crosses on its way to the insured party. */
-    policyRun: string;
-    /** Directly beneath the insured party, where both connectors arrive. */
-    insuredJoin: string;
-    reserve: string;
-    policy: string;
-  };
 }
 
 const GROSS_INCOME: Party = {
@@ -66,19 +54,7 @@ const STRUCTURES: Record<FundingStructure, Structure> = {
       description:
         'Once the reserve has been used, the policy can indemnify covered shortfalls, up to 100% of the income payable to the investor, for the policy term. The indemnity is provided by insurers rated A- or better.'
     },
-    gridColumns: 'lg:grid-cols-[minmax(0,1fr)_3rem_minmax(0,1fr)_3rem_minmax(0,1fr)]',
-    /*
-      Five columns. The investor is in column 5, with the reserve directly beneath it. The policy sits to the
-      left, across columns 1 to 3, and its connector crosses the gap in column 4 to reach the investor.
-    */
-    placement: {
-      label: 'lg:col-start-1 lg:col-span-2 lg:row-start-2',
-      policyRise: 'lg:col-start-3 lg:row-start-2',
-      policyRun: 'lg:col-start-4 lg:row-start-2',
-      insuredJoin: 'lg:col-start-5 lg:row-start-2',
-      reserve: 'lg:col-start-5 lg:row-start-3',
-      policy: 'lg:col-start-1 lg:col-span-3 lg:row-start-3'
-    }
+    gridColumns: 'lg:grid-cols-[minmax(0,1fr)_3rem_minmax(0,1fr)_3rem_minmax(0,1fr)]'
   },
   debt: {
     summary: 'Debt funded: a shortfall is met by the reserve first, then by the policy.',
@@ -102,21 +78,16 @@ const STRUCTURES: Record<FundingStructure, Structure> = {
         "Once the reserve has been used, the policy can indemnify covered shortfalls in the borrower's scheduled debt service payments, for the policy term. The indemnity is provided by insurers rated A- or better."
     },
     gridColumns:
-      'lg:grid-cols-[minmax(0,1fr)_2.5rem_minmax(0,1fr)_2.5rem_minmax(0,1fr)_2.5rem_minmax(0,1fr)]',
-    /*
-      Seven columns. The lender is in column 7, with the reserve directly beneath it. The policy sits to the
-      left, across columns 1 to 5, and its connector crosses the gap in column 6 to reach the lender.
-    */
-    placement: {
-      label: 'lg:col-start-1 lg:col-span-3 lg:row-start-2',
-      policyRise: 'lg:col-start-5 lg:row-start-2',
-      policyRun: 'lg:col-start-6 lg:row-start-2',
-      insuredJoin: 'lg:col-start-7 lg:row-start-2',
-      reserve: 'lg:col-start-7 lg:row-start-3',
-      policy: 'lg:col-start-1 lg:col-span-5 lg:row-start-3'
-    }
+      'lg:grid-cols-[minmax(0,1fr)_2.5rem_minmax(0,1fr)_2.5rem_minmax(0,1fr)_2.5rem_minmax(0,1fr)]'
   }
 };
+
+/*
+  Large screens: the reserve and the policy sit in the same places for both structures, on the equity
+  grid: the reserve across the first three columns and the policy in the last column, under the insured
+  party. Switching structure changes only the income row above them.
+*/
+const SHORTFALL_GRID = 'lg:grid-cols-[minmax(0,1fr)_3rem_minmax(0,1fr)_3rem_minmax(0,1fr)]';
 
 const DASHED_LINE = 'border-dashed border-primary-600';
 
@@ -182,7 +153,7 @@ function LaneLabel({ dashed = false, className = '', children }: { dashed?: bool
 }
 
 export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDiagramProps) {
-  const { summary, incomeFlow, insured, reserve, policy, gridColumns, placement } = STRUCTURES[fundingStructure];
+  const { summary, incomeFlow, insured, reserve, policy, gridColumns } = STRUCTURES[fundingStructure];
 
   return (
     <figure className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
@@ -192,13 +163,8 @@ export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDi
         <LaneLabel>When income is received</LaneLabel>
 
         {/*
-          One grid holds the whole diagram, so every box and line stays in step at any screen size.
-          Small screens: a single column, read from top to bottom. The reserve and the policy follow the
-          insured party in the order they respond, numbered 1 and 2.
-          Large screens: income runs left to right along the first row and ends at the insured party. The
-          reserve and the policy sit on the row beneath. Each has its own dashed connector, with its own
-          arrowhead, into the insured party, and nothing links the reserve and the policy to each other.
-          The numbers show the order: the reserve is used first, and the policy can respond after it.
+          The income row. Small screens: a single column, read from top to bottom. Large screens: income
+          runs left to right and ends at the insured party.
         */}
         <div className={'mt-4 grid grid-cols-1 gap-y-3 lg:gap-y-0 ' + gridColumns}>
           {incomeFlow.map((party) => (
@@ -208,42 +174,44 @@ export default function PIPStructureDiagram({ fundingStructure }: PIPStructureDi
             </React.Fragment>
           ))}
           <Card party={insured} tone="insured" />
+        </div>
 
+        {/*
+          Between the income row and the shortfall row. Large screens: the reserve and the policy each have
+          their own dashed connector, with its own arrowhead, into the insured party, and nothing links them
+          to each other. The connectors arrive at fixed points, so they stay put when the structure changes.
+          The lender's card (debt funded) is the narrower insured card: the last quarter of the row once the
+          three 2.5rem arrow gaps are taken out, (100% - 7.5rem) / 4. The reserve's connector enters 30% of
+          the way across that card, at 82.5% + 1.3125rem, and the policy's 70% of the way across, at
+          92.5% + 0.5625rem. The investor's card (equity funded) is wider and contains both points.
+        */}
+        <div className="relative mt-3 lg:mt-0 lg:h-16">
           {/* Small screens: a dashed connector from the shortfall group up to the insured party. */}
           <div aria-hidden="true" className="flex flex-col items-center lg:hidden">
             <span className="mt-1 h-2 w-2 shrink-0 rotate-45 border-l-2 border-t-2 border-primary-600"></span>
             <span className={'-mt-2 h-6 w-0 border-l-2 ' + DASHED_LINE}></span>
           </div>
 
-          {/* Large screens: the policy's connector leaves the top of the policy card and turns right. */}
-          <div aria-hidden="true" className={'relative hidden h-16 lg:block ' + placement.policyRise}>
+          <div aria-hidden="true" className="absolute inset-0 hidden lg:block">
+            {/* The reserve's connector: up from the reserve card, across, then up into the insured party. */}
             <span className={'absolute bottom-0 left-1/2 top-1/2 border-l-2 ' + DASHED_LINE}></span>
-            <span className={'absolute left-1/2 right-0 top-1/2 border-t-2 ' + DASHED_LINE}></span>
+            <span className={'absolute left-1/2 right-[calc(17.5%_-_1.3125rem_-_2px)] top-1/2 border-t-2 ' + DASHED_LINE}></span>
+            <span className={'absolute bottom-1/2 left-[calc(82.5%_+_1.3125rem)] top-1 border-l-2 ' + DASHED_LINE}></span>
+            <UpArrowhead className="left-[calc(82.5%_+_1.3125rem)]" />
+            {/* The policy's connector: straight up from the policy card into the insured party. */}
+            <span className={'absolute bottom-0 left-[calc(92.5%_+_0.5625rem)] top-1 border-l-2 ' + DASHED_LINE}></span>
+            <UpArrowhead className="left-[calc(92.5%_+_0.5625rem)]" />
           </div>
 
-          {/* Large screens: the policy's connector crosses the gap between the policy and the reserve. */}
-          <div aria-hidden="true" className={'relative hidden h-16 lg:block ' + placement.policyRun}>
-            <span className={'absolute inset-x-0 top-1/2 border-t-2 ' + DASHED_LINE}></span>
-          </div>
-
-          {/*
-            Large screens: beneath the insured party, the two connectors arrive separately. The policy's
-            enters on the left; the reserve's rises straight up from the reserve on the right.
-          */}
-          <div aria-hidden="true" className={'relative hidden h-16 lg:block ' + placement.insuredJoin}>
-            <span className={'absolute left-0 right-[calc(70%_-_2px)] top-1/2 border-t-2 ' + DASHED_LINE}></span>
-            <span className={'absolute bottom-1/2 left-[30%] top-1 border-l-2 ' + DASHED_LINE}></span>
-            <UpArrowhead className="left-[30%]" />
-            <span className={'absolute bottom-0 left-[70%] top-1 border-l-2 ' + DASHED_LINE}></span>
-            <UpArrowhead className="left-[70%]" />
-          </div>
-
-          <LaneLabel dashed className={'lg:self-end lg:pb-3 ' + placement.label}>
+          <LaneLabel dashed className="mt-3 lg:absolute lg:bottom-3 lg:left-0 lg:mt-0">
             If income falls short
           </LaneLabel>
+        </div>
 
-          <Card party={reserve} tone="reserve" step={1} className={placement.reserve} />
-          <Card party={policy} tone="policy" step={2} className={placement.policy} />
+        {/* The shortfall row: the reserve first, then the policy, numbered in the order they respond. */}
+        <div className={'mt-3 grid grid-cols-1 gap-y-3 lg:mt-0 lg:gap-y-0 ' + SHORTFALL_GRID}>
+          <Card party={reserve} tone="reserve" step={1} className="lg:col-span-3" />
+          <Card party={policy} tone="policy" step={2} className="lg:col-start-5" />
         </div>
       </div>
 
