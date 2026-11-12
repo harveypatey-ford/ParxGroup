@@ -117,12 +117,8 @@ const financialProductSchema = {
     '@type': 'Audience',
     audienceType: 'professional and institutional audiences'
   },
-  /* Carried over from the current page. Still to be decided: whether "InStock" suits a bespoke product. */
-  offers: {
-    '@type': 'Offer',
-    availability: 'https://schema.org/InStock',
-    eligibleRegion: { '@type': 'Country', name: 'United Kingdom' }
-  }
+  /* A bespoke, underwritten policy has no stock status, so the region is given as the area served. */
+  areaServed: { '@type': 'Country', name: 'United Kingdom' }
 };
 
 const serviceSchema = {
