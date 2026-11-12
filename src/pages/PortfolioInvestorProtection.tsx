@@ -411,13 +411,13 @@ function PortfolioInvestorProtection() {
 
               <div className="relative flex flex-col sm:flex-row items-center sm:items-stretch gap-0">
                 {/* Image Section */}
-                <div className="flex-shrink-0 w-full sm:w-auto p-4 sm:p-0 flex justify-center sm:block">
-                  <div className="relative w-40 sm:w-72 md:w-80">
+                <div className="flex-shrink-0 w-full sm:w-72 md:w-80 p-4 sm:p-0 flex justify-center sm:block sm:self-stretch">
+                  <div className="relative w-40 sm:w-full sm:h-full">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary-600/20 to-primary-800/20 rounded-xl sm:rounded-br-3xl sm:rounded-br-none sm:rounded-r-none sm:rounded-l-none sm:rounded-tl-none"></div>
                     <img
                       src="/harvey_patey-ford_800x940_webp.webp"
                       alt="Harvey Patey-Ford"
-                      className="w-full h-auto relative z-10 rounded-xl sm:rounded-none shadow-lg sm:shadow-none"
+                      className="w-full h-auto relative z-10 rounded-xl sm:absolute sm:inset-0 sm:h-full sm:object-cover sm:object-top sm:rounded-none shadow-lg sm:shadow-none"
                       loading="eager"
                       decoding="sync"
                     />
