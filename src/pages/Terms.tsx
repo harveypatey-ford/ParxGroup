@@ -133,7 +133,7 @@ function Terms() {
                 <div className="text-neutral-700 space-y-2">
                   <p>This site is provided and owned by Parx Group Limited.</p>
                   <p>Parx Group is registered in England No. 14768763.</p>
-                  <p>Registered office: Preston Park House, South Road, Brighton, East Sussex, BN1 6SB.</p>
+                  <p>Registered office: 2nd Floor, Preston Park House, South Road, Brighton, East Sussex, BN1 6SB.</p>
                   <p>These Terms of Use apply to your use of every part of this website. Separate terms and conditions will apply to any websites accessible via a hypertext link from this website.</p>
                 </div>
               </section>
